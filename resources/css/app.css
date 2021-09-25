@@ -1,7 +1,0 @@
-@import '~bootstrap/dist/css/bootstrap.min.css';
-@import '~leaflet/dist/leaflet.css';
-
-html,body, #map{
-    height: 100%;
-    width: 100%;
-}
