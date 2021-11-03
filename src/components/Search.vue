@@ -27,6 +27,7 @@
             name="regions"
             id=""
             v-model="selected"
+            @change='onChange($event)'
           >
             >
             <option disabled value="">
@@ -35,7 +36,7 @@
             <option
               v-for="(item, index) in city"
               :key="index"
-              :value="item.name"
+              :value="item.id"
             >
               {{ item.name }}
             </option>
@@ -73,49 +74,66 @@
             </div>
           </div>
         </div>
-        <span>{{ selected }}</span>
+        <span>{{ zoneName }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+
+var axios = require('axios');
+
 export default {
   name: "Search",
   data() {
     return {
       selected: "",
       city: [
-        { id: "0", name: "Yaoundé" },
-        { id: "1", name: "Douala" },
-        { id: "2", name: "Maroua" },
-        { id: "3", name: "Garoua" },
-        { id: "4", name: "Ngaoundere" },
-        { id: "5", name: "Baffoussam" },
-        { id: "6", name: "Buea" },
-        { id: "7", name: "Bamenda" },
-        { id: "8", name: "Bertoua" },
-        { id: "9", name: "Ebolowa" },
+        { id: 'X-1', name: "Yaoundé" },
+        { id: 'X-22', name: "Douala" }
       ],
     };
   },
   methods: {
+    loadDatas() {
+      var data = new FormData();
+      data.append('region', 'X-22');
+
+      var config = {
+        method: 'post',
+        url: 'https://alert.eneo.cm/ajaxOutage.php',
+        headers: { 
+          'Cookie': 'PHPSESSID=e0a06f16b4839b9ec4d87d7fc14e7f50; _ga=GA1.2.152048199.1635952363; _gid=GA1.2.551582278.1635952363; _gat_gtag_UA_145904416_1=1', 
+          ...data.getHeaders()
+        },
+        data : data
+      };
+
+      axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    },
+    onChange(event) {
+      this.$emit('zoneChanged', event.target.value)
+    },
     selectOption: function () {
+      alert("Hello")
       if (this.city.id == "1") {
         console.log("Hello", this.city.id, this.selected);
         return (this.selected = "Yaounde");
       }
     },
   },
-  async created() {
-    const data = await axios
-      .post("https://alert.eneo.cm", {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      })
-      .then((response) => response);
-    console.log("DATA", data);
-  },
+  computed: {
+    zoneName: function() {
+      const result = this.city.filter((i) => i.id == this.selected)
+      return (result.length > 0) ? result[0].name : null 
+    }
+  }
 };
 </script>
