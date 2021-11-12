@@ -78,6 +78,7 @@ export default {
   },
   methods: {
     onZoneChanged(value) {
+      this.selectedZone = value;
       this.loadDatas(value)
     },
     loadDatas(code) {
@@ -113,7 +114,6 @@ export default {
         this.isRequesting = false;
       })
       .catch(function (error) {
-        this.isRequesting = false;
         console.log(error);
       });
 
