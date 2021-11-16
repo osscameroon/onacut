@@ -30,7 +30,7 @@ export const Home = () => {
                 myTextColor="text-ind"
               />
             </div>
-            <MyDrawer />
+            <MyDrawer justify="start" />
           </div>
         </div>
       </div>

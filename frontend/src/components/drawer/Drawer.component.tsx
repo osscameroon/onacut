@@ -3,15 +3,17 @@ import { ITEMS } from "../../assets/data/Items.data";
 import Drawer from "react-modern-drawer";
 import menu from "../../assets/img/menu.png";
 
-export const MyDrawer = () => {
+export const MyDrawer = (props: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
   };
   return (
-    <div className="site__drawer p-2 flex items-center justify-center">
+    <div
+      className={`site__drawer p-2 flex items-center justify-${props.justify}`}
+    >
       <button className="flex items-center" onClick={toggleDrawer}>
-        <img className="w-8 h-auto mt-2 md:mt-4 ml-16 md:ml-40" src={menu} />
+        <img className={`w-8 h-auto mt-2 md:mt-4 md:ml-40`} src={menu} />
       </button>
       <Drawer
         size={350}
