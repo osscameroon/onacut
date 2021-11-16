@@ -4,23 +4,23 @@ import { City } from "../../components/city/City.component";
 import { MyDrawer } from "../../components/drawer/Drawer.component";
 import { MyText } from "../../components/myText/MyText.component";
 import { LANGUAGE } from "../../constants/language";
-import { RegionService } from "../../services/regions.service";
+// import { RegionService } from "../../services/regions.service";
 
 export const List = () => {
-  const [data, setData] = useState([]);
-  const [region, setRegion] = useState([]);
-  const [loader, setLoader] = useState(false);
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await RegionService.regions(`1`);
-      console.log(result);
-      // const result = await RegionService.regions(`${regionId}`);
-      setLoader(true);
-      setRegion(await result.data);
-      await result;
-    };
-    fetchData();
-  }, []);
+  // const [data, setData] = useState([]);
+  // const [region, setRegion] = useState([]);
+  // const [loader, setLoader] = useState(false);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const result = await RegionService.regions(`1`);
+  //     console.log(result);
+  //     const result = await RegionService.regions(`${regionId}`);
+  //     setLoader(true);
+  //     setRegion(await result.data);
+  //     await result;
+  //   };
+  //   fetchData();
+  // }, []);
   return (
     <div className="site__list bg-cover w-auto h-screen bg-hero ">
       <div className="px-4 md:px-20 pt-5 md:pt-0">
