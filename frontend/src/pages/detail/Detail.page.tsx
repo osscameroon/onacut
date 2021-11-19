@@ -10,7 +10,9 @@ import { useParams } from "react-router";
 export const Detail = () => {
   const v: any = useRecoilValue(dataState);
   let params: any = useParams();
+
   console.log("VALUE DE RECOIL:::::", v, "params:::", params);
+
   if (typeof v.map((i: any) => i) !== "undefined") {
     const title: any = Array.from(v)[0];
     return (
@@ -27,8 +29,9 @@ export const Detail = () => {
                   myTextColor="text-ind"
                 />
               </div>
-              {v.map((i: any) => (
+              {v.map((i: any, index: any) => (
                 <CityDetail
+                  key={index}
                   ville={i?.ville}
                   observations={i?.observations}
                   calendar={i?.prog_date}

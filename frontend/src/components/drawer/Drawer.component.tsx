@@ -25,6 +25,7 @@ export const MyDrawer = (props: any) => {
         <div className="p-4 md:p-10">
           {ITEMS.map((i: any) => (
             <div
+              key={i?.name}
               style={{ borderColor: "#cecece" }}
               className="drawer__item border-b items-center flex pt-6 md:pt-10 pb-4"
             >

@@ -8,12 +8,7 @@ import { LANGUAGE } from "../../constants/language";
 import fetchData from "../../scripts/alerts.json";
 
 const printByRegion = (name: any): any => {
-  return fetchData.map((i) => {
-    if (i.region === name) {
-      console.log("VALEUR SPECIFIQUE A UNE REGION", i);
-      return i;
-    }
-  });
+  return fetchData.filter(data => data.region === name);
 };
 
 export const List = () => {
@@ -42,8 +37,9 @@ export const List = () => {
             <div className="site__list-items pt-8 md:pt-24  ">
               {uniqueRegion.map((i: any) => (
                 <City
+                  key={i.region}
                   myClick={() =>
-                    setD((d) => (d = printByRegion(`${i?.region}`)))
+                    setD((d) => (d = printByRegion(i?.region)))
                   }
                   region={i?.region}
                   myMb="border-b"
