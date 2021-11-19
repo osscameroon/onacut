@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useRecoilState } from "recoil";
 import { dataState } from "../../atoms/data";
 import { City } from "../../components/city/City.component";
@@ -6,6 +6,15 @@ import { MyDrawer } from "../../components/drawer/Drawer.component";
 import { MyText } from "../../components/myText/MyText.component";
 import { LANGUAGE } from "../../constants/language";
 import fetchData from "../../scripts/alerts.json";
+
+const printByRegion = (name: any): any => {
+  return fetchData.map((i) => {
+    if (i.region === name) {
+      console.log("VALEUR SPECIFIQUE A UNE REGION", i);
+      return i;
+    }
+  });
+};
 
 export const List = () => {
   const [d, setD] = useRecoilState(dataState);
@@ -16,14 +25,8 @@ export const List = () => {
       })
     )
   ).map((id) => {
-    setD((d) => fetchData);
     return fetchData.find((a) => a.region === id);
   });
-
-  console.log(
-    "REGION::::",
-    uniqueRegion.map((i: any) => i.region)
-  );
 
   return (
     <div className="site__list bg-cover w-auto h-screen bg-hero ">
@@ -39,9 +42,11 @@ export const List = () => {
             <div className="site__list-items pt-8 md:pt-24  ">
               {uniqueRegion.map((i: any) => (
                 <City
+                  myClick={() =>
+                    setD((d) => (d = printByRegion(`${i?.region}`)))
+                  }
                   region={i?.region}
                   myMb="border-b"
-                  full={i}
                   country={i?.region}
                   total={i?.length}
                 />

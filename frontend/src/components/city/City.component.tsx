@@ -10,9 +10,9 @@ export const City = (props: any) => {
         style={{ borderColor: "#cecece" }}
         className={`site__country-item pb-2 mb-4 md:mb-8 flex  justify-between ${props.myMb} items-center`}
       >
-        <div className="site__country-blogOne flex">
+        <div onClick={props.myClick} className="site__country-blogOne flex">
           <img src={lighting} className="w-6 h-6 mr-4" alt="" />
-          <Link to={`/details/${props.region}`}>
+          <Link onClick={props.myClick} to={`/details/${props.region}`}>
             <MyText
               variant="normal"
               myText={props.country}
