@@ -8,7 +8,7 @@ import { LANGUAGE } from "../../constants/language";
 import fetchData from "../../scripts/alerts.json";
 
 const printByRegion = (name: any): any => {
-  return fetchData.filter(data => data.region === name);
+  return fetchData.filter((data) => data.region === name);
 };
 
 export const List = () => {
@@ -38,12 +38,11 @@ export const List = () => {
               {uniqueRegion.map((i: any) => (
                 <City
                   key={i.region}
-                  myClick={() =>
-                    setD((d) => (d = printByRegion(i?.region)))
-                  }
+                  myClick={() => setD((d) => (d = printByRegion(i?.region)))}
                   region={i?.region}
                   myMb="border-b"
                   country={i?.region}
+                  quartier={i?.quartier}
                   total={i?.length}
                 />
               ))}

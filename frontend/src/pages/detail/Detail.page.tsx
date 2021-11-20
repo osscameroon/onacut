@@ -35,6 +35,7 @@ export const Detail = () => {
                   ville={i?.ville}
                   observations={i?.observations}
                   calendar={i?.prog_date}
+                  quartier={i?.quartier}
                   debut={i?.prog_heure_debut}
                   fin={i?.prog_heure_fin}
                 />
