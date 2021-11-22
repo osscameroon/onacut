@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { dataState } from "../../atoms/data";
 import { CityDetail } from "../../components/cityDetail/CityDetail.component";
@@ -9,7 +9,25 @@ import { Search } from "../../components/search/Search.component";
 import { LANGUAGE } from "../../constants/language";
 
 export const Detail = () => {
+  const { search } = window.location;
+  const query = new URLSearchParams(search).get("s");
+  const [searchQuery, setSearchQuery] = useState(query || "");
   const alerts: any = useRecoilValue(dataState);
+
+  console.log("ALERTTT:::::", alerts);
+
+  const filteCities = (cities: any, query: any) => {
+    if (!query) {
+      return cities;
+    }
+
+    return cities.filter((region: any) => {
+      const cityName = region.quartier.toLowerCase();
+      return cityName.includes(query);
+    });
+  };
+
+  const filteredCities = filteCities(alerts, searchQuery);
 
   if (typeof alerts.map((item: any) => item) !== "undefined") {
     const title: any = Array.from(alerts)[0];
@@ -22,8 +40,8 @@ export const Detail = () => {
               <div className="w-full md:w-4/5">
                 <Search
                   placeholder={LANGUAGE.list.city}
-                  // searchQuery={searchQuery}
-                  // setSearchQuery={setSearchQuery}
+                  searchQuery={searchQuery}
+                  setSearchQuery={setSearchQuery}
                 />
               </div>
               <div className="site__detail-item flex items-center">
@@ -34,7 +52,7 @@ export const Detail = () => {
                   myTextColor="text-ind"
                 />
               </div>
-              {alerts.map((item: any, index: any) => (
+              {filteredCities.map((item: any, index: any) => (
                 <CityDetail
                   key={index}
                   ville={item?.ville}
