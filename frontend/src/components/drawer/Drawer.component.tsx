@@ -13,7 +13,11 @@ export const MyDrawer = (props: any) => {
       className={`site__drawer p-2 flex items-center justify-${props.justify}`}
     >
       <button className="flex items-center" onClick={toggleDrawer}>
-        <img className={`w-8 h-auto mt-2 md:mt-4 md:ml-40`} src={menu} />
+        <img
+          alt="menu"
+          className={`w-8 h-auto mt-2 md:mt-4 md:ml-40`}
+          src={menu}
+        />
       </button>
       <Drawer
         size={350}
@@ -25,10 +29,11 @@ export const MyDrawer = (props: any) => {
         <div className="p-4 md:p-10">
           {ITEMS.map((i: any) => (
             <div
+              key={i?.name}
               style={{ borderColor: "#cecece" }}
               className="drawer__item border-b items-center flex pt-6 md:pt-10 pb-4"
             >
-              <img src={i.icon} className="w-7 h-auto" />
+              <img alt="icon" src={i.icon} className="w-7 h-auto" />
               <a
                 className="pl-4"
                 style={{

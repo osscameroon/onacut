@@ -1,26 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { COUNTRY } from "../../assets/data/Country.data";
+import React from "react";
+import { useRecoilState } from "recoil";
+import { dataState } from "../../atoms/data";
 import { City } from "../../components/city/City.component";
 import { MyDrawer } from "../../components/drawer/Drawer.component";
 import { MyText } from "../../components/myText/MyText.component";
 import { LANGUAGE } from "../../constants/language";
-// import { RegionService } from "../../services/regions.service";
+import alerts from "../../scripts/alerts.json";
+
+const printByRegion = (name: any): any => {
+  return alerts.filter((alert) => alert.region === name);
+};
 
 export const List = () => {
-  // const [data, setData] = useState([]);
-  // const [region, setRegion] = useState([]);
-  // const [loader, setLoader] = useState(false);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const result = await RegionService.regions(`1`);
-  //     console.log(result);
-  //     const result = await RegionService.regions(`${regionId}`);
-  //     setLoader(true);
-  //     setRegion(await result.data);
-  //     await result;
-  //   };
-  //   fetchData();
-  // }, []);
+  const [alert, setAlert] = useRecoilState(dataState);
+  const uniqueRegion = Array.from(
+    new Set(
+      alerts.map((a) => {
+        return a.region;
+      })
+    )
+  ).map((id) => {
+    return alerts.find((a) => a.region === id);
+  });
+
   return (
     <div className="site__list bg-cover w-auto h-screen bg-hero ">
       <div className="px-4 md:px-20 pt-5 md:pt-0">
@@ -33,8 +35,18 @@ export const List = () => {
               myTextColor="text-white"
             />
             <div className="site__list-items pt-8 md:pt-24  ">
-              {COUNTRY.map((i: any) => (
-                <City myMb="border-b" country={i.name} />
+              {uniqueRegion.map((item: any) => (
+                <City
+                  key={item.region}
+                  myClick={() =>
+                    setAlert((alert) => (alert = printByRegion(item?.region)))
+                  }
+                  region={item?.region}
+                  myMb="border-b"
+                  country={item?.region}
+                  quartier={item?.quartier}
+                  total={item?.length}
+                />
               ))}
             </div>
           </main>
