@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { MyText } from "../myText/MyText.component";
 import home from "../../assets/img/epingle.png";
 import time from "../../assets/img/time.png";

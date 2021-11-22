@@ -5,16 +5,12 @@ import { CityDetail } from "../../components/cityDetail/CityDetail.component";
 import { MyDrawer } from "../../components/drawer/Drawer.component";
 import { MyText } from "../../components/myText/MyText.component";
 import home from "../../assets/img/hotel.png";
-import { useParams } from "react-router";
 
 export const Detail = () => {
-  const v: any = useRecoilValue(dataState);
-  let params: any = useParams();
+  const alerts: any = useRecoilValue(dataState);
 
-  console.log("VALUE DE RECOIL:::::", v, "params:::", params);
-
-  if (typeof v.map((i: any) => i) !== "undefined") {
-    const title: any = Array.from(v)[0];
+  if (typeof alerts.map((item: any) => item) !== "undefined") {
+    const title: any = Array.from(alerts)[0];
     return (
       <div className="site__conseils bg-cover w-auto h-screen bg-hero ">
         <div className="px-4 md:px-20 pt-5 md:pt-0">
@@ -29,15 +25,15 @@ export const Detail = () => {
                   myTextColor="text-ind"
                 />
               </div>
-              {v.map((i: any, index: any) => (
+              {alerts.map((item: any, index: any) => (
                 <CityDetail
                   key={index}
-                  ville={i?.ville}
-                  observations={i?.observations}
-                  calendar={i?.prog_date}
-                  quartier={i?.quartier}
-                  debut={i?.prog_heure_debut}
-                  fin={i?.prog_heure_fin}
+                  ville={item?.ville}
+                  observations={item?.observations}
+                  calendar={item?.prog_date}
+                  quartier={item?.quartier}
+                  debut={item?.prog_heure_debut}
+                  fin={item?.prog_heure_fin}
                 />
               ))}
             </main>

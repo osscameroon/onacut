@@ -5,22 +5,22 @@ import { City } from "../../components/city/City.component";
 import { MyDrawer } from "../../components/drawer/Drawer.component";
 import { MyText } from "../../components/myText/MyText.component";
 import { LANGUAGE } from "../../constants/language";
-import fetchData from "../../scripts/alerts.json";
+import alerts from "../../scripts/alerts.json";
 
 const printByRegion = (name: any): any => {
-  return fetchData.filter((data) => data.region === name);
+  return alerts.filter((alert) => alert.region === name);
 };
 
 export const List = () => {
-  const [d, setD] = useRecoilState(dataState);
+  const [alert, setAlert] = useRecoilState(dataState);
   const uniqueRegion = Array.from(
     new Set(
-      fetchData.map((a) => {
+      alerts.map((a) => {
         return a.region;
       })
     )
   ).map((id) => {
-    return fetchData.find((a) => a.region === id);
+    return alerts.find((a) => a.region === id);
   });
 
   return (
@@ -35,15 +35,17 @@ export const List = () => {
               myTextColor="text-white"
             />
             <div className="site__list-items pt-8 md:pt-24  ">
-              {uniqueRegion.map((i: any) => (
+              {uniqueRegion.map((item: any) => (
                 <City
-                  key={i.region}
-                  myClick={() => setD((d) => (d = printByRegion(i?.region)))}
-                  region={i?.region}
+                  key={item.region}
+                  myClick={() =>
+                    setAlert((alert) => (alert = printByRegion(item?.region)))
+                  }
+                  region={item?.region}
                   myMb="border-b"
-                  country={i?.region}
-                  quartier={i?.quartier}
-                  total={i?.length}
+                  country={item?.region}
+                  quartier={item?.quartier}
+                  total={item?.length}
                 />
               ))}
             </div>

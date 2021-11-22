@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { MyText } from "../../components/myText/MyText.component";
 import "react-modern-drawer/dist/index.css";
 import { MyDrawer } from "../../components/drawer/Drawer.component";
