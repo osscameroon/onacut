@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { dataState } from "../../atoms/data";
+import { regionState } from "../../atoms/regions";
 import { City } from "../../components/city/City.component";
 import { MyDrawer } from "../../components/drawer/Drawer.component";
 import { MyText } from "../../components/myText/MyText.component";
@@ -13,8 +14,13 @@ const printByRegion = (name: any): any => {
 };
 
 export const List = () => {
+  const { search } = window.location;
+  const query = new URLSearchParams(search).get("s");
+  const [searchQuery, setSearchQuery] = useState(query || "");
+
   const [alert, setAlert] = useRecoilState(dataState);
-  const uniqueRegion = Array.from(
+  const [region, setRegion] = useRecoilState(regionState);
+  const uniqueRegion: any = Array.from(
     new Set(
       alerts.map((a) => {
         return a.region;
@@ -24,6 +30,20 @@ export const List = () => {
     return alerts.find((a) => a.region === id);
   });
 
+  const filteRegions = (regions: any, query: any) => {
+    if (!query) {
+      return regions;
+    }
+
+    return regions.filter((region: any) => {
+      const regionName = region.region.toLowerCase();
+      return regionName.includes(query);
+    });
+  };
+  useEffect(() => {
+    setRegion((region) => (region = uniqueRegion));
+  }, []);
+  const filteredRegions = filteRegions(region, searchQuery);
   return (
     <div className="site__list bg-cover w-auto h-screen bg-hero ">
       <div className="px-4 md:px-20 pt-5 md:pt-0">
@@ -36,8 +56,11 @@ export const List = () => {
               myTextColor="text-white"
             />
             <div className="site__list-items pt-8 md:pt-24  ">
-              <Search />
-              {uniqueRegion.map((item: any) => (
+              <Search
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+              />
+              {filteredRegions.map((item: any) => (
                 <City
                   key={item.region}
                   myClick={() =>
