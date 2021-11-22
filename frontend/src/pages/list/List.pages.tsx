@@ -57,6 +57,7 @@ export const List = () => {
             />
             <div className="site__list-items pt-8 md:pt-24  ">
               <Search
+                placeholder={LANGUAGE.list.search}
                 searchQuery={searchQuery}
                 setSearchQuery={setSearchQuery}
               />

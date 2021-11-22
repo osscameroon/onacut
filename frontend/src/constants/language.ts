@@ -12,6 +12,7 @@ export const LANGUAGE = {
     },
     list: {
         title: "Troubles actuels",
-        search: "Entrez la region"
+        search: "Entrez la region",
+        city: "Entrez la ville",
     }
 }

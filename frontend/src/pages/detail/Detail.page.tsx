@@ -5,6 +5,8 @@ import { CityDetail } from "../../components/cityDetail/CityDetail.component";
 import { MyDrawer } from "../../components/drawer/Drawer.component";
 import { MyText } from "../../components/myText/MyText.component";
 import home from "../../assets/img/hotel.png";
+import { Search } from "../../components/search/Search.component";
+import { LANGUAGE } from "../../constants/language";
 
 export const Detail = () => {
   const alerts: any = useRecoilValue(dataState);
@@ -17,6 +19,13 @@ export const Detail = () => {
           <div className="container mx-auto">
             <MyDrawer />
             <main className="site__main pt-8 px-4 md:px-40">
+              <div className="w-full md:w-4/5">
+                <Search
+                  placeholder={LANGUAGE.list.city}
+                  // searchQuery={searchQuery}
+                  // setSearchQuery={setSearchQuery}
+                />
+              </div>
               <div className="site__detail-item flex items-center">
                 <img src={home} alt="" className="w-10 h-10 mr-3" />
                 <MyText

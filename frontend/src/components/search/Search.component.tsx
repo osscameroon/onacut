@@ -9,7 +9,7 @@ export const Search = (props: any) => {
         <input
           type="text"
           className="px-4 py-2 w-10/12 lg:w-11/12"
-          placeholder={LANGUAGE.list.search}
+          placeholder={props.placeholder}
           value={props.searchQuery}
           onInput={(e: any) => props.setSearchQuery(e.target.value)}
         />
