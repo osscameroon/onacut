@@ -4,6 +4,7 @@ import { dataState } from "../../atoms/data";
 import { City } from "../../components/city/City.component";
 import { MyDrawer } from "../../components/drawer/Drawer.component";
 import { MyText } from "../../components/myText/MyText.component";
+import { Search } from "../../components/search/Search.component";
 import { LANGUAGE } from "../../constants/language";
 import alerts from "../../scripts/alerts.json";
 
@@ -35,6 +36,7 @@ export const List = () => {
               myTextColor="text-white"
             />
             <div className="site__list-items pt-8 md:pt-24  ">
+              <Search />
               {uniqueRegion.map((item: any) => (
                 <City
                   key={item.region}
