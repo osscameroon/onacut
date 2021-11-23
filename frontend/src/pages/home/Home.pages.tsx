@@ -4,6 +4,8 @@ import "react-modern-drawer/dist/index.css";
 import { MyDrawer } from "../../components/drawer/Drawer.component";
 import technique from "../../assets/img/technique.png";
 import { LANGUAGE } from "../../constants/language";
+import alerts from "../../scripts/alerts.json";
+import { CityDetail } from "../../components/cityDetail/CityDetail.component";
 
 export const Home = () => {
   useEffect(() => {
@@ -33,6 +35,21 @@ export const Home = () => {
             <MyDrawer justify="start" />
           </div>
         </div>
+        <main className="site__main pt-8 px-4 md:px-40">
+          <div className="site__list-items pt-8 md:pt-24">
+            {alerts.map((item: any, index: any) => (
+              <CityDetail
+                key={index}
+                ville={item?.ville}
+                observations={item?.observations}
+                calendar={item?.prog_date}
+                quartier={item?.quartier}
+                debut={item?.prog_heure_debut}
+                fin={item?.prog_heure_fin}
+              />
+            ))}
+          </div>
+        </main>
       </div>
     </div>
   );
