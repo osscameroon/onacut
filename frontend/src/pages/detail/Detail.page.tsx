@@ -14,8 +14,6 @@ export const Detail = () => {
   const [searchQuery, setSearchQuery] = useState(query || "");
   const alerts: any = useRecoilValue(dataState);
 
-  console.log("ALERTTT:::::", alerts);
-
   const filteCities = (cities: any, query: any) => {
     if (!query) {
       return cities;
