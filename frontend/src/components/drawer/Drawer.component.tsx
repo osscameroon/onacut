@@ -15,7 +15,7 @@ export const MyDrawer = (props: any) => {
       <button className="flex items-center" onClick={toggleDrawer}>
         <img
           alt="menu"
-          className={`w-8 h-auto mt-2 md:mt-4 md:ml-40`}
+          className={`w-12 bg-cover h-auto mt-2 md:mt-4 md:ml-40 border-2 border-ind border-solid px-1 pt-2`}
           src={menu}
         />
       </button>
