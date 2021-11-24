@@ -25,7 +25,7 @@ export const Home = () => {
                   className="flex px-4 py-2 text-gray-200"
                 >
                   <img src={bolt} alt="" className="w-6 h-6 mr-2" />
-                  Panne électrique
+                  {LANGUAGE.home.panne}
                 </p>
               </Link>
             </div>
