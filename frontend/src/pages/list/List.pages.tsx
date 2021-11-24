@@ -4,7 +4,6 @@ import { dataState } from "../../atoms/data";
 import { regionState } from "../../atoms/regions";
 import { City } from "../../components/city/City.component";
 import { MyDrawer } from "../../components/drawer/Drawer.component";
-import { MyText } from "../../components/myText/MyText.component";
 import { Search } from "../../components/search/Search.component";
 import { LANGUAGE } from "../../constants/language";
 import alerts from "../../scripts/alerts.json";
@@ -49,32 +48,25 @@ export const List = () => {
       <div className="px-4 md:px-20 pt-5 md:pt-0">
         <div className="container mx-auto">
           <MyDrawer />
-          <main className="site__main pt-8 px-4 md:px-40">
-            <MyText
-              variant="title"
-              myText={LANGUAGE.list.title}
-              myTextColor="text-white"
+          <main className="site__main pt-8 md:pt-20 px-4 pb-6 md:px-40">
+            <Search
+              placeholder={LANGUAGE.list.search}
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
             />
-            <div className="site__list-items pt-8 md:pt-24  ">
-              <Search
-                placeholder={LANGUAGE.list.search}
-                searchQuery={searchQuery}
-                setSearchQuery={setSearchQuery}
+            {filteredRegions.map((item: any) => (
+              <City
+                key={item.region}
+                myClick={() =>
+                  setAlert((alert) => (alert = printByRegion(item?.region)))
+                }
+                region={item?.region}
+                myMb="border-b"
+                country={item?.region}
+                quartier={item?.quartier}
+                total={item?.length}
               />
-              {filteredRegions.map((item: any) => (
-                <City
-                  key={item.region}
-                  myClick={() =>
-                    setAlert((alert) => (alert = printByRegion(item?.region)))
-                  }
-                  region={item?.region}
-                  myMb="border-b"
-                  country={item?.region}
-                  quartier={item?.quartier}
-                  total={item?.length}
-                />
-              ))}
-            </div>
+            ))}
           </main>
         </div>
       </div>

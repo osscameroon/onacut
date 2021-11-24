@@ -4,7 +4,10 @@ import { LANGUAGE } from "../../constants/language";
 
 export const Search = (props: any) => {
   return (
-    <div className="flex items-center">
+    <div
+      style={{ width: props.width }}
+      className={`flex items-center ${props.position}`}
+    >
       <div className="flex border-2 mb-4 md:mb-10 border-gray-200 rounded w-full">
         <input
           type="text"
