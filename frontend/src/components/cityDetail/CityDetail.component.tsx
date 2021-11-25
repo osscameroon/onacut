@@ -8,7 +8,7 @@ import city from "../../assets/img/city.png";
 
 export const CityDetail = (props: any) => {
   return (
-    <div className="site__detail border mt-4  p-4 w-full md:w-4/5">
+    <div className="site__detail border mt-4 p-4 w-full">
       <div className="site__detail-item flex items-center">
         <img src={home} alt="" className="w-6 h-6 mr-3" />
         <MyText variant="title" myText={props.ville} myTextColor="text-ind" />

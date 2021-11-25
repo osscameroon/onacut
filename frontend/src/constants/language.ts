@@ -11,6 +11,8 @@ export const LANGUAGE = {
         link: "Liens rapides:"
     },
     list: {
-        title: "Troubles actuels"
+        title: "Troubles actuels",
+        search: "Entrez la region",
+        city: "Entrez la ville",
     }
 }

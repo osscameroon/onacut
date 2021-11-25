@@ -8,6 +8,12 @@ module.exports = {
       },
       colors: {
         'ind': '#ff4f00'
+      },
+      width: {
+        '700': '700px'
+      },
+      height: {
+        '800': '800px'
       }
     },
   },
