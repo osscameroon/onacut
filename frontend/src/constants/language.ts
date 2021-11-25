@@ -3,7 +3,8 @@ export const LANGUAGE = {
         home: "Page d'accueil",
         info: "Conseils et informations",
         vue: "Vue liste",
-        title: "Où est la panne de courant actuelle? Carte des opérateurs de réseau"
+        title: "Où est la panne de courant actuelle? Carte des opérateurs de réseau",
+        panne: "Panne électrique"
     },
     info: {
         title: "Panne de courant, et maintenant ? ",

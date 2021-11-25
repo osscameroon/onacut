@@ -4,6 +4,7 @@ import { Conseils } from "../../pages/conseils/Conseils.pages";
 import { Detail } from "../../pages/detail/Detail.page";
 import { Home } from "../../pages/home/Home.pages";
 import { List } from "../../pages/list/List.pages";
+import { StreetMap } from "../../pages/streetMap/StreetMap.page";
 export const AppNavigation = () => {
   return (
     <BrowserRouter>
