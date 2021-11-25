@@ -49,7 +49,7 @@ export const StreetMap = () => {
       style={{ height: "100vh" }}
       center={[7.3696495, 12.3445856]}
       zoom={7}
-      zoomControl={true}
+      zoomControl={false}
       scrollWheelZoom={true}
     >
       <TileLayer
@@ -62,7 +62,7 @@ export const StreetMap = () => {
         </Popup>
       </Marker>
       <LocationMarker />
-      <ZoomControl position="bottomright" zoomInText="🧐" zoomOutText="🗺️" />
+      <ZoomControl position="topright" zoomInText="🧐" zoomOutText="🗺️" />
       <SetViewOnClick animateRef={animateRef} />
     </MapContainer>
   );
