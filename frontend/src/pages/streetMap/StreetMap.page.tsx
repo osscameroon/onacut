@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 
 import {
   MapContainer,
@@ -6,29 +6,13 @@ import {
   Marker,
   Popup,
   useMapEvent,
-  useMapEvents,
   ZoomControl,
+  CircleMarker,
+  Tooltip,
 } from "react-leaflet";
+import { LocationMarker } from "../../scripts/check_position";
 
-// Check position
-function LocationMarker() {
-  const [position, setPosition] = useState(null);
-  const map = useMapEvents({
-    click() {
-      map.locate();
-    },
-    locationfound(e: any) {
-      setPosition(e.latlng);
-      map.flyTo(e.latlng, map.getZoom());
-    },
-  });
-
-  return position === null ? null : (
-    <Marker position={position}>
-      <Popup>You are here</Popup>
-    </Marker>
-  );
-}
+const position: any = [7.3696495, 12.3445856];
 
 const SetViewOnClick = (animateRef: any) => {
   const map = useMapEvent("click", (e) => {
@@ -42,13 +26,14 @@ const SetViewOnClick = (animateRef: any) => {
 
 export const StreetMap = () => {
   const animateRef = useRef(false);
+  const greenOptions = { color: "green", fillColor: "green" };
 
   return (
     <MapContainer
       className="z-0"
       style={{ height: "100vh" }}
-      center={[7.3696495, 12.3445856]}
-      zoom={7}
+      center={position}
+      zoom={8}
       zoomControl={false}
       scrollWheelZoom={true}
     >
@@ -56,7 +41,21 @@ export const StreetMap = () => {
         attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
         url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
       />
-      <Marker draggable={true} position={[14.3210095, 10.5925289]}>
+      <CircleMarker
+        center={[45.51, -0.12]}
+        pathOptions={{ color: "red" }}
+        radius={2}
+      >
+        <Tooltip>Tooltip for CircleMarker</Tooltip>
+      </CircleMarker>
+      <CircleMarker
+        center={[51.51, -0.12]}
+        pathOptions={{ color: "red" }}
+        radius={2}
+      >
+        <Tooltip>Tooltip for CircleMarker</Tooltip>
+      </CircleMarker>
+      <Marker position={position}>
         <Popup>
           A pretty CSS3 popup. <br /> Easily customizable.
         </Popup>
