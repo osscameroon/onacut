@@ -3,8 +3,6 @@ import React, { useRef } from "react";
 import {
   MapContainer,
   TileLayer,
-  Marker,
-  Popup,
   useMapEvent,
   ZoomControl,
   CircleMarker,
@@ -109,11 +107,6 @@ export const StreetMap = () => {
       >
         <Tooltip>Tooltip for CircleMarker</Tooltip>
       </CircleMarker>
-      <Marker position={LATLONG.yaounde}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
-      </Marker>
       <LocationMarker />
       <ZoomControl position="topright" zoomInText="🧐" zoomOutText="🗺️" />
       <SetViewOnClick animateRef={animateRef} />
