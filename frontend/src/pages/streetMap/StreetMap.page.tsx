@@ -1,5 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
-// import "./StreetMap.css";
+import React, { useRef, useState } from "react";
 
 import {
   MapContainer,
@@ -8,13 +7,8 @@ import {
   Popup,
   useMapEvent,
   useMapEvents,
-  Circle,
   ZoomControl,
 } from "react-leaflet";
-
-const center: any = [14.3210095, 10.5925289];
-
-const fillBlueOptions = { fillColor: "blue" };
 
 // Check position
 function LocationMarker() {
@@ -53,7 +47,7 @@ export const StreetMap = () => {
     <MapContainer
       className="z-0"
       style={{ height: "100vh" }}
-      center={[14.3210095, 10.5925289]}
+      center={[7.3696495, 12.3445856]}
       zoom={7}
       zoomControl={true}
       scrollWheelZoom={true}
@@ -62,7 +56,7 @@ export const StreetMap = () => {
         attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
         url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
       />
-      <Marker position={[14.3210095, 10.5925289]}>
+      <Marker draggable={true} position={[14.3210095, 10.5925289]}>
         <Popup>
           A pretty CSS3 popup. <br /> Easily customizable.
         </Popup>
@@ -70,7 +64,6 @@ export const StreetMap = () => {
       <LocationMarker />
       <ZoomControl position="bottomright" zoomInText="🧐" zoomOutText="🗺️" />
       <SetViewOnClick animateRef={animateRef} />
-      <Circle center={center} pathOptions={fillBlueOptions} radius={200} />
     </MapContainer>
   );
 };
