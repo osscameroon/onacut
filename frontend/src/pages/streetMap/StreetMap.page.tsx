@@ -1,6 +1,6 @@
 import L from "leaflet";
 import React, { useRef } from "react";
-import bolt from "../../assets/img/lighting.png";
+import bolt from "../../assets/img/energy.png";
 
 import {
   MapContainer,
@@ -28,9 +28,9 @@ var lightBolt = L.icon({
   iconUrl: bolt,
   shadowUrl: bolt,
 
-  iconSize: [10, 10], // size of the icon
-  shadowSize: [50, 64], // size of the shadow
-  shadowAnchor: [10, 72], // the same for the shadow
+  iconSize: [0, 0], // size of the icon
+  shadowSize: [30, 30], // size of the shadow
+  shadowAnchor: [10, 45], // the same for the shadow
 });
 
 export const StreetMap = () => {
@@ -51,13 +51,16 @@ export const StreetMap = () => {
         url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
       />
       {LATLONG.map((item: any, index: any) => (
-        <CircleMarker key={index} center={item.longlat}>
-          <Marker position={item.longlat} icon={lightBolt}>
-            <Tooltip direction="right" offset={[30, -60]} opacity={1} permanent>
-              <span>{item.name}</span>
-            </Tooltip>
-          </Marker>
-        </CircleMarker>
+        <Marker position={item.longlat} icon={lightBolt} key={index}>
+          <Tooltip
+            direction="right"
+            offset={[20, -35]}
+            // sticky={false}
+            permanent
+          >
+            <span>{item.name}</span>
+          </Tooltip>
+        </Marker>
       ))}
       <LocationMarker />
       <ZoomControl position="topright" zoomInText="🧐" zoomOutText="🗺️" />
