@@ -1,4 +1,6 @@
+import L from "leaflet";
 import React, { useRef } from "react";
+import bolt from "../../assets/img/lighting.png";
 
 import {
   MapContainer,
@@ -8,7 +10,6 @@ import {
   CircleMarker,
   Tooltip,
   Marker,
-  Popup,
 } from "react-leaflet";
 import { LocationMarker } from "../../scripts/check_position";
 import { LATLONG } from "../../scripts/lat_long";
@@ -22,6 +23,15 @@ const SetViewOnClick = (animateRef: any) => {
 
   return null;
 };
+
+var lightBolt = L.icon({
+  iconUrl: bolt,
+  shadowUrl: bolt,
+
+  iconSize: [10, 10], // size of the icon
+  shadowSize: [50, 64], // size of the shadow
+  shadowAnchor: [10, 72], // the same for the shadow
+});
 
 export const StreetMap = () => {
   const yaounde: any = [3.826985, 11.495974];
@@ -41,9 +51,9 @@ export const StreetMap = () => {
         url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
       />
       {LATLONG.map((item: any, index: any) => (
-        <CircleMarker key={index} center={item.longlat} radius={5} color="red">
-          <Marker position={item.longlat}>
-            <Tooltip direction="right" offset={[-8, -2]} opacity={1} permanent>
+        <CircleMarker key={index} center={item.longlat}>
+          <Marker position={item.longlat} icon={lightBolt}>
+            <Tooltip direction="right" offset={[30, -60]} opacity={1} permanent>
               <span>{item.name}</span>
             </Tooltip>
           </Marker>
