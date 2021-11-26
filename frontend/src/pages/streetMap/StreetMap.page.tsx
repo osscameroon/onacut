@@ -41,7 +41,7 @@ export const StreetMap = () => {
         url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
       />
       {LATLONG.map((item: any, index: any) => (
-        <CircleMarker key={index} center={item.longlat}>
+        <CircleMarker key={index} center={item.longlat} radius={5} color="red">
           <Marker position={item.longlat}>
             <Tooltip direction="right" offset={[-8, -2]} opacity={1} permanent>
               <span>{item.name}</span>
