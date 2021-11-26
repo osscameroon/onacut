@@ -7,6 +7,8 @@ import {
   ZoomControl,
   CircleMarker,
   Tooltip,
+  Marker,
+  Popup,
 } from "react-leaflet";
 import { LocationMarker } from "../../scripts/check_position";
 import { LATLONG } from "../../scripts/lat_long";
@@ -30,7 +32,7 @@ export const StreetMap = () => {
       className="z-0"
       style={{ height: "100vh" }}
       center={yaounde}
-      zoom={7}
+      zoom={8}
       zoomControl={false}
       scrollWheelZoom={true}
     >
@@ -39,13 +41,12 @@ export const StreetMap = () => {
         url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
       />
       {LATLONG.map((item: any, index: any) => (
-        <CircleMarker
-          key={index}
-          center={item.longlat}
-          pathOptions={{ color: "red" }}
-          radius={5}
-        >
-          <Tooltip>{item.name}</Tooltip>
+        <CircleMarker key={index} center={item.longlat}>
+          <Marker position={item.longlat}>
+            <Tooltip direction="right" offset={[-8, -2]} opacity={1} permanent>
+              <span>{item.name}</span>
+            </Tooltip>
+          </Marker>
         </CircleMarker>
       ))}
       <LocationMarker />
