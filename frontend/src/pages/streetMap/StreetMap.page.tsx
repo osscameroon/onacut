@@ -1,40 +1,17 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
-// import "./StreetMap.css";
+import L from "leaflet";
+import React, { useRef } from "react";
+import bolt from "../../assets/img/energy.png";
 
 import {
   MapContainer,
   TileLayer,
-  Marker,
-  Popup,
   useMapEvent,
-  useMapEvents,
-  Circle,
   ZoomControl,
+  Tooltip,
+  Marker,
 } from "react-leaflet";
-
-const center: any = [14.3210095, 10.5925289];
-
-const fillBlueOptions = { fillColor: "blue" };
-
-// Check position
-function LocationMarker() {
-  const [position, setPosition] = useState(null);
-  const map = useMapEvents({
-    click() {
-      map.locate();
-    },
-    locationfound(e: any) {
-      setPosition(e.latlng);
-      map.flyTo(e.latlng, map.getZoom());
-    },
-  });
-
-  return position === null ? null : (
-    <Marker position={position}>
-      <Popup>You are here</Popup>
-    </Marker>
-  );
-}
+import { LocationMarker } from "../../scripts/check_position";
+import { LATLONG } from "../../scripts/lat_long";
 
 const SetViewOnClick = (animateRef: any) => {
   const map = useMapEvent("click", (e) => {
@@ -46,31 +23,42 @@ const SetViewOnClick = (animateRef: any) => {
   return null;
 };
 
+var lightBolt = L.icon({
+  iconUrl: bolt,
+  shadowUrl: bolt,
+
+  iconSize: [0, 0], // size of the icon
+  shadowSize: [30, 30], // size of the shadow
+  shadowAnchor: [10, 45], // the same for the shadow
+});
+
 export const StreetMap = () => {
+  const yaounde: any = LATLONG[9].longlat;
   const animateRef = useRef(false);
 
   return (
     <MapContainer
       className="z-0"
       style={{ height: "100vh" }}
-      center={[14.3210095, 10.5925289]}
-      zoom={7}
-      zoomControl={true}
+      center={yaounde}
+      zoom={8}
+      zoomControl={false}
       scrollWheelZoom={true}
     >
       <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+        url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
       />
-      <Marker position={[14.3210095, 10.5925289]}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
-      </Marker>
+      {LATLONG.map((item: any, index: any) => (
+        <Marker position={item.longlat} icon={lightBolt} key={index}>
+          <Tooltip direction="right" offset={[20, -35]} permanent>
+            <span>{item.name}</span>
+          </Tooltip>
+        </Marker>
+      ))}
       <LocationMarker />
-      <ZoomControl position="bottomright" zoomInText="🧐" zoomOutText="🗺️" />
+      <ZoomControl position="topright" />
       <SetViewOnClick animateRef={animateRef} />
-      <Circle center={center} pathOptions={fillBlueOptions} radius={200} />
     </MapContainer>
   );
 };

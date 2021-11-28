@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
-import { MyText } from "../../components/myText/MyText.component";
 import "react-modern-drawer/dist/index.css";
 import { MyDrawer } from "../../components/drawer/Drawer.component";
-import technique from "../../assets/img/technique.png";
 import { LANGUAGE } from "../../constants/language";
 import { StreetMap } from "../streetMap/StreetMap.page";
 import bolt from "../../assets/img/bolt.png";
