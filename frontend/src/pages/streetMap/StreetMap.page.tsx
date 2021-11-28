@@ -7,7 +7,6 @@ import {
   TileLayer,
   useMapEvent,
   ZoomControl,
-  CircleMarker,
   Tooltip,
   Marker,
 } from "react-leaflet";
@@ -34,7 +33,7 @@ var lightBolt = L.icon({
 });
 
 export const StreetMap = () => {
-  const yaounde: any = [3.826985, 11.495974];
+  const yaounde: any = LATLONG[9].longlat;
   const animateRef = useRef(false);
 
   return (
@@ -52,18 +51,13 @@ export const StreetMap = () => {
       />
       {LATLONG.map((item: any, index: any) => (
         <Marker position={item.longlat} icon={lightBolt} key={index}>
-          <Tooltip
-            direction="right"
-            offset={[20, -35]}
-            // sticky={false}
-            permanent
-          >
+          <Tooltip direction="right" offset={[20, -35]} permanent>
             <span>{item.name}</span>
           </Tooltip>
         </Marker>
       ))}
       <LocationMarker />
-      <ZoomControl position="topright" zoomInText="🧐" zoomOutText="🗺️" />
+      <ZoomControl position="topright" />
       <SetViewOnClick animateRef={animateRef} />
     </MapContainer>
   );
