@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/onacut/static/css/main.93e926d0.chunk.css",
-    "main.js": "/onacut/static/js/main.dc8e5934.chunk.js",
-    "main.js.map": "/onacut/static/js/main.dc8e5934.chunk.js.map",
+    "main.js": "/onacut/static/js/main.c24339b6.chunk.js",
+    "main.js.map": "/onacut/static/js/main.c24339b6.chunk.js.map",
     "runtime-main.js": "/onacut/static/js/runtime-main.af07529f.js",
     "runtime-main.js.map": "/onacut/static/js/runtime-main.af07529f.js.map",
     "static/css/2.d0d69aab.chunk.css": "/onacut/static/css/2.d0d69aab.chunk.css",
@@ -29,6 +29,6 @@
     "static/css/2.d0d69aab.chunk.css",
     "static/js/2.e322681f.chunk.js",
     "static/css/main.93e926d0.chunk.css",
-    "static/js/main.dc8e5934.chunk.js"
+    "static/js/main.c24339b6.chunk.js"
   ]
 }
