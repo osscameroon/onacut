@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { dataState } from "../../atoms/data";
 import { CityDetail } from "../../components/cityDetail/CityDetail.component";
@@ -7,6 +7,8 @@ import { MyText } from "../../components/myText/MyText.component";
 import home from "../../assets/img/hotel.png";
 import { Search } from "../../components/search/Search.component";
 import { LANGUAGE } from "../../constants/language";
+import { NotFound } from "../../components/notFound/NotFound.component";
+import { ALERTS } from "../../scripts/lat_long";
 
 export const Detail = () => {
   const { search } = window.location;
@@ -26,6 +28,12 @@ export const Detail = () => {
   };
 
   const filteredCities = filteCities(alerts, searchQuery);
+
+  const alert_length = alerts.length;
+  if (alert_length === 0) {
+    console.log("ALERTTT::::", ALERTS);
+    return <NotFound />;
+  }
 
   if (typeof alerts.map((item: any) => item) !== "undefined") {
     const title: any = Array.from(alerts)[0];

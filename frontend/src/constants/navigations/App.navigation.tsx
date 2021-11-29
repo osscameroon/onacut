@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Conseils } from "../../pages/conseils/Conseils.pages";
 import { Detail } from "../../pages/detail/Detail.page";
@@ -9,10 +9,12 @@ export const AppNavigation = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/conseils" component={Conseils} />
-        <Route exact path="/lists" component={List} />
-        <Route exact path="/details/:region" component={Detail} />
+        <Suspense fallback="">
+          <Route exact path="/" component={Home} />
+          <Route exact path="/conseils" component={Conseils} />
+          <Route exact path="/lists" component={List} />
+          <Route exact path="/details/:region" component={Detail} />
+        </Suspense>
       </Switch>
     </BrowserRouter>
   );

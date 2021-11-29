@@ -51,8 +51,13 @@ export const StreetMap = () => {
       />
       {LATLONG.map((item: any, index: any) => (
         <Marker position={item.longlat} icon={lightBolt} key={index}>
-          <Tooltip direction="right" offset={[20, -35]} permanent>
-            <span>{item.name}</span>
+          <Tooltip
+            className="rounded-full"
+            direction="right"
+            offset={[15, -40]}
+            permanent
+          >
+            <span className="rounded-full">{item.name}</span>
           </Tooltip>
         </Marker>
       ))}
