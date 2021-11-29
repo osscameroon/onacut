@@ -30,7 +30,7 @@ export const Detail = () => {
   if (typeof alerts.map((item: any) => item) !== "undefined") {
     const title: any = Array.from(alerts)[0];
     return (
-      <div className="site__conseils bg-cover w-auto h-screen bg-hero ">
+      <div className="site__conseils bg-cover w-auto h-screen">
         <div className="px-4 md:px-20 pt-5 md:pt-0">
           <div className="container mx-auto">
             <MyDrawer />
