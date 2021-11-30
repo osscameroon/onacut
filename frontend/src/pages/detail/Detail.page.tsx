@@ -8,13 +8,14 @@ import home from "../../assets/img/hotel.png";
 import { Search } from "../../components/search/Search.component";
 import { LANGUAGE } from "../../constants/language";
 import { NotFound } from "../../components/notFound/NotFound.component";
-import { ALERTS } from "../../scripts/lat_long";
 
 export const Detail = () => {
   const { search } = window.location;
   const query = new URLSearchParams(search).get("s");
   const [searchQuery, setSearchQuery] = useState(query || "");
-  const alerts: any = useRecoilValue(dataState);
+  const alerts = useRecoilValue(dataState);
+
+  console.log(alerts);
 
   const filteCities = (cities: any, query: any) => {
     if (!query) {
@@ -30,12 +31,11 @@ export const Detail = () => {
   const filteredCities = filteCities(alerts, searchQuery);
 
   const alert_length = alerts.length;
-  if (alert_length === 0) {
-    console.log("ALERTTT::::", ALERTS);
-    return <NotFound />;
-  }
 
-  if (typeof alerts.map((item: any) => item) !== "undefined") {
+  if (
+    typeof alerts.map((item: any) => item) !== "undefined" &&
+    alerts.length > 0
+  ) {
     const title: any = Array.from(alerts)[0];
     return (
       <div className="site__conseils bg-cover w-auto h-screen">

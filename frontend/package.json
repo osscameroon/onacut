@@ -24,6 +24,7 @@
     "react-search-field": "^2.0.1",
     "react-search-input": "^0.11.3",
     "recoil": "^0.5.2",
+    "recoil-persist": "^4.0.0",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },

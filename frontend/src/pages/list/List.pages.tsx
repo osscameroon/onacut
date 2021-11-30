@@ -58,7 +58,9 @@ export const List = () => {
               <City
                 key={item.region}
                 myClick={() =>
-                  setAlert((alert) => (alert = printByRegion(item?.region)))
+                  setAlert(
+                    (alert: any) => (alert = printByRegion(item?.region))
+                  )
                 }
                 region={item?.region}
                 myMb="border-b"
