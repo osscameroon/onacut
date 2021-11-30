@@ -73,6 +73,6 @@ export const Detail = () => {
       </div>
     );
   } else {
-    return <p className="text-white">chargement </p>;
+    return <NotFound />;
   }
 };
