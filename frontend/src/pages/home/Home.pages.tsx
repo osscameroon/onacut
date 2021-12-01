@@ -5,6 +5,7 @@ import { LANGUAGE } from "../../constants/language";
 import { StreetMap } from "../streetMap/StreetMap.page";
 import bolt from "../../assets/img/bolt.png";
 import { Link } from "react-router-dom";
+import { HomeModal } from "../homeModal/HomeModal.pages";
 
 export const Home = () => {
   useEffect(() => {
@@ -12,6 +13,7 @@ export const Home = () => {
   });
   return (
     <div className="site h-screen">
+      <HomeModal />
       <div className="fixed z-10 px-4 md:px-20 pt-5 md:pt-0">
         <div className="container mx-auto">
           <div className="flex justify-center items-center">

@@ -4481,6 +4481,11 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
+disable-scroll@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/disable-scroll/-/disable-scroll-0.6.0.tgz#ff0ae8d4c9d395e65842583eefb9313d046f462a"
+  integrity sha512-6bTAS16sz+3X7Pib8d5dAO9xo5MvqDZvSlzuhW/2c3NhUvbPNqnsV3JttvnqgNCDEgWUgNWJYM392iUmLETDxA==
+
 dlv@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/dlv/-/dlv-1.1.3.tgz#5c198a8a11453596e751494d49874bc7732f2e79"
@@ -5589,6 +5594,11 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
+fuse.js@^3.0.0:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/fuse.js/-/fuse.js-3.6.1.tgz#7de85fdd6e1b3377c23ce010892656385fd9b10c"
+  integrity sha512-hT9yh/tiinkmirKrlv4KWOjztdoZo1mx9Qh4KvWqC7isoXwdUY3PNWUxceF4/qO9R6riA2C29jdTOeQOIROjgw==
+
 gensync@^1.0.0-beta.1, gensync@^1.0.0-beta.2:
   version "1.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.2.tgz#32a6ee76c3d7f52d46b2b1ae5d93fea8580a25e0"
@@ -5644,6 +5654,11 @@ get-value@^2.0.3, get-value@^2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/get-value/-/get-value-2.0.6.tgz#dc15ca1c672387ca76bd37ac0a395ba2042a2c28"
   integrity sha1-3BXKHGcjh8p2vTesCjlbogQqLCg=
+
+github-buttons@^2.8.0:
+  version "2.20.1"
+  resolved "https://registry.yarnpkg.com/github-buttons/-/github-buttons-2.20.1.tgz#d5cf7b9cafc3c51f517b526fe0e293f0b3dc0604"
+  integrity sha512-UQpZJP7uVtbjy9vXuIMktmtoH9REy0V50iQnFQ56cyOqzDE8e/9WGedTMD8qVwp593Kyn+EKo2e4IKshoXBeZQ==
 
 glob-parent@^3.1.0:
   version "3.1.0"
@@ -9430,7 +9445,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@15.7.2, prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -9678,6 +9693,20 @@ react-error-overlay@^6.0.9:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.9.tgz#3c743010c9359608c375ecd6bc76f35d93995b0a"
   integrity sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
 
+react-github-btn@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-github-btn/-/react-github-btn-1.2.0.tgz#464066f999a77c0eed27980260601b51cbe15614"
+  integrity sha512-/b2TGTeek5Ky+KtuP5BxOaXgb1FGhbwgZNI6rkwkGk7+xtCtsNMkdchOcCnC3qU1JGTWPKzYZWpPBIouVhXAoQ==
+  dependencies:
+    github-buttons "^2.8.0"
+
+react-hooks-use-modal@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-hooks-use-modal/-/react-hooks-use-modal-2.1.0.tgz#ec0a0f545fa421c12cbe724ece5425f34535b088"
+  integrity sha512-3/W8QigIUYfGtQcPIxxALxZDi/1Ic91qAft0QTEO88ZRO8WgvE3CjsXsoEBvRE8HXBYZtUDf2dTCoQs6ZdCBPQ==
+  dependencies:
+    disable-scroll "^0.6.0"
+
 react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -9799,6 +9828,23 @@ react-scripts@4.0.3:
     workbox-webpack-plugin "5.1.4"
   optionalDependencies:
     fsevents "^2.1.3"
+
+react-search-field@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-search-field/-/react-search-field-2.0.1.tgz#86f131ce2e7568c8c235cabb6d5e900f8adda99b"
+  integrity sha512-4Qoe145ykncVhyA1gfoUEXTbiMdnJLIb4CFFo7vZT/sKn140HmP621W/4EtMEot3CThnUzxRPowPWybxDSipyA==
+  dependencies:
+    prop-types "15.7.2"
+    react-github-btn "1.2.0"
+    typeco "1.0.0"
+
+react-search-input@^0.11.3:
+  version "0.11.3"
+  resolved "https://registry.yarnpkg.com/react-search-input/-/react-search-input-0.11.3.tgz#3dd1f9fc584b6bc40a6ee133ae042b6fbb7ae8dd"
+  integrity sha512-Yo05lNR5YLeIY+mTEk0lMkYHX0qkTlElJmxMTw5JlZPu92EP8YWwIY3QSbEFULvX4wiTfyDdUovTUpp2VockpA==
+  dependencies:
+    fuse.js "^3.0.0"
+    prop-types "^15.5.8"
 
 react-transition-group@^4.4.2:
   version "4.4.2"
@@ -11424,6 +11470,11 @@ type@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/type/-/type-2.5.0.tgz#0a2e78c2e77907b252abe5f298c1b01c63f0db3d"
   integrity sha512-180WMDQaIMm3+7hGXWf12GtdniDEy7nYcyFMKJn/eZz/6tSLXrUN9V0wKSbMjej0I1WHWbpREDEKHtqPQa9NNw==
+
+typeco@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/typeco/-/typeco-1.0.0.tgz#7e3ff93aafb03d9769e159fccad2dbcc13fe1bdd"
+  integrity sha512-3mWzemIyiY5jL/fmW2sZp1vv7ifQ5ONjF6fT/4RMHJw3/1oabumpxvYZ9D+z01a5wRFSRPPXZkQjM4WIUzY+GA==
 
 typedarray-to-buffer@^3.1.5:
   version "3.1.5"
