@@ -44,7 +44,7 @@ export const List = () => {
   }, []);
   const filteredRegions = filteRegions(region, searchQuery);
   return (
-    <div className="site__list bg-cover w-auto h-screen bg-hero ">
+    <div className="site__list bg-cover w-auto h-screen  ">
       <div className="px-4 md:px-20 pt-5 md:pt-0">
         <div className="container mx-auto">
           <MyDrawer />
@@ -58,7 +58,9 @@ export const List = () => {
               <City
                 key={item.region}
                 myClick={() =>
-                  setAlert((alert) => (alert = printByRegion(item?.region)))
+                  setAlert(
+                    (alert: any) => (alert = printByRegion(item?.region))
+                  )
                 }
                 region={item?.region}
                 myMb="border-b"

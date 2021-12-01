@@ -7,7 +7,8 @@ module.exports = {
         'hero': "url('/src/assets/img/bg.jpg')"
       },
       colors: {
-        'ind': '#ff4f00'
+        'ind': '#ff4f00',
+        'blue': 'blue'
       },
       width: {
         '700': '700px'

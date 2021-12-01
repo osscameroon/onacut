@@ -23,13 +23,13 @@ const SetViewOnClick = (animateRef: any) => {
   return null;
 };
 
-var lightBolt = L.icon({
+const lightBolt = L.icon({
   iconUrl: bolt,
   shadowUrl: bolt,
 
-  iconSize: [0, 0], // size of the icon
-  shadowSize: [30, 30], // size of the shadow
-  shadowAnchor: [10, 45], // the same for the shadow
+  iconSize: [0, 0],
+  shadowSize: [30, 30],
+  shadowAnchor: [10, 45],
 });
 
 export const StreetMap = () => {
@@ -51,8 +51,13 @@ export const StreetMap = () => {
       />
       {LATLONG.map((item: any, index: any) => (
         <Marker position={item.longlat} icon={lightBolt} key={index}>
-          <Tooltip direction="right" offset={[20, -35]} permanent>
-            <span>{item.name}</span>
+          <Tooltip
+            className="text-gray-700 h-7 rounded-full bg-blue"
+            direction="right"
+            offset={[15, -40]}
+            permanent
+          >
+            <span className="rounded-full">{item.name}</span>
           </Tooltip>
         </Marker>
       ))}

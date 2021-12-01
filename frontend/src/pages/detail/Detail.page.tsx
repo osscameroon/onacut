@@ -7,12 +7,15 @@ import { MyText } from "../../components/myText/MyText.component";
 import home from "../../assets/img/hotel.png";
 import { Search } from "../../components/search/Search.component";
 import { LANGUAGE } from "../../constants/language";
+import { NotFound } from "../../components/notFound/NotFound.component";
 
 export const Detail = () => {
   const { search } = window.location;
   const query = new URLSearchParams(search).get("s");
   const [searchQuery, setSearchQuery] = useState(query || "");
-  const alerts: any = useRecoilValue(dataState);
+  const alerts = useRecoilValue(dataState);
+
+  console.log(alerts);
 
   const filteCities = (cities: any, query: any) => {
     if (!query) {
@@ -27,10 +30,15 @@ export const Detail = () => {
 
   const filteredCities = filteCities(alerts, searchQuery);
 
-  if (typeof alerts.map((item: any) => item) !== "undefined") {
+  const alert_length = alerts.length;
+
+  if (
+    typeof alerts.map((item: any) => item) !== "undefined" &&
+    alerts.length > 0
+  ) {
     const title: any = Array.from(alerts)[0];
     return (
-      <div className="site__conseils bg-cover w-auto h-screen bg-hero ">
+      <div className="site__conseils bg-cover w-auto h-screen">
         <div className="px-4 md:px-20 pt-5 md:pt-0">
           <div className="container mx-auto">
             <MyDrawer />
@@ -65,6 +73,6 @@ export const Detail = () => {
       </div>
     );
   } else {
-    return <p className="text-white">chargement </p>;
+    return <NotFound />;
   }
 };

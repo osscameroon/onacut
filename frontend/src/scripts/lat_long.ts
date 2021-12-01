@@ -1,7 +1,4 @@
-
-const alerts = require("../scripts/alerts.json")
-
-console.log(alerts)
+export const ALERTS = require("../scripts/alerts.json")
 
 let count_yaounde: number = 0
 let count_maroua: number = 0
@@ -14,7 +11,7 @@ let count_bafoussam: number = 0
 let count_bertoua: number = 0
 let count_bamenda: number = 0
 
-alerts.map((i: any) => {
+ALERTS.map((i: any) => {
     if (i.ville === "MAROUA") {
         count_maroua += 1
         return count_maroua

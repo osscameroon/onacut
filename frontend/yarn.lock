@@ -9700,6 +9700,7 @@ react-github-btn@1.2.0:
   dependencies:
     github-buttons "^2.8.0"
 
+
 react-hooks-use-modal@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-hooks-use-modal/-/react-hooks-use-modal-2.1.0.tgz#ec0a0f545fa421c12cbe724ece5425f34535b088"
@@ -9920,6 +9921,11 @@ readdirp@~3.6.0:
   integrity sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==
   dependencies:
     picomatch "^2.2.1"
+
+recoil-persist@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/recoil-persist/-/recoil-persist-4.0.0.tgz#03496afd3c742cefbc19fdb1cae0408cd1e0b424"
+  integrity sha512-hJFWxAFYpEMF1/rdF+AjBQABWuERFMWoJ5Ag1vJKG1Aj1603MuBmk3epaz8rU/Jy4IUBRkFibl6zFrvwhRhCew==
 
 recoil@^0.5.2:
   version "0.5.2"
