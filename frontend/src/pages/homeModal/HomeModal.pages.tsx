@@ -3,7 +3,7 @@ import { useModal } from "react-hooks-use-modal";
 import { MyText } from "../../components/myText/MyText.component";
 
 export const HomeModal = () => {
-  let [Modal, open, close, isOpen] = useModal("root", {
+  let [Modal, open, close] = useModal("root", {
     preventScroll: true,
     closeOnOverlayClick: true,
   });
@@ -30,7 +30,6 @@ export const HomeModal = () => {
           myTextColor="text-white"
           myTextAlign="text-center"
         />
-        {/* <p className="text-white">This is a customizable modal.</p> */}
         <div className="site__btn-panne flex items-center justify-center bg-ind p-2 mx-auto rounded-3xl mt-6 w-1/2">
           <p
             onClick={() => close()}
@@ -42,6 +41,5 @@ export const HomeModal = () => {
         </div>
       </div>
     </Modal>
-    // </div>
   );
 };
