@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { dataState } from "../../atoms/data";
 import { CityDetail } from "../../components/cityDetail/CityDetail.component";
