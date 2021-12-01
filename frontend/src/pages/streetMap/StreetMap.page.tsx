@@ -1,6 +1,7 @@
 import L from "leaflet";
 import React, { useRef } from "react";
 import bolt from "../../assets/img/energy.png";
+import "./StreetMap.css";
 
 import {
   MapContainer,
@@ -52,12 +53,22 @@ export const StreetMap = () => {
       {LATLONG.map((item: any, index: any) => (
         <Marker position={item.longlat} icon={lightBolt} key={index}>
           <Tooltip
-            className="text-gray-700 h-7 rounded-full bg-blue"
             direction="right"
-            offset={[15, -40]}
+            className="Tooltip"
+            offset={[2, -40]}
             permanent
+            opacity={1}
           >
-            <span className="rounded-full">{item.name}</span>
+            <span
+              style={{
+                fontSize: "8px",
+                fontWeight: "bold",
+                fontFamily: "sans-serif",
+              }}
+              className="text-xs p-2"
+            >
+              {item.name}
+            </span>
           </Tooltip>
         </Marker>
       ))}
