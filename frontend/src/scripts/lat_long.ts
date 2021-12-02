@@ -21,9 +21,6 @@ let count_domayo: number = 0;
 let count_comice: number = 0;
 
 
-console.log(ALERTS.map((i: any) => (i)))
-
-
 ALERTS.map((item: any) => {
     if (item.quartier === "CENTRAL HOTEL") {
         count_central_hotel += 1
