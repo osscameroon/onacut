@@ -42,7 +42,7 @@ export const StreetMap = () => {
       className="z-0"
       style={{ height: "100vh" }}
       center={yaounde}
-      zoom={8}
+      zoom={9}
       zoomControl={false}
       scrollWheelZoom={true}
     >
