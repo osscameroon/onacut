@@ -64,8 +64,9 @@ export const StreetMap = () => {
                 fontSize: "8px",
                 fontWeight: "bold",
                 fontFamily: "sans-serif",
+                padding: "5px",
               }}
-              className="text-xs p-2"
+              className="text-xs"
             >
               {item.name}
             </span>
