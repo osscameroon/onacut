@@ -34,15 +34,15 @@ const lightBolt = L.icon({
 });
 
 export const StreetMap = () => {
-  const yaounde: any = LATLONG[9].longlat;
+  // const yaounde: any = LATLONG[9].longlat;
   const animateRef = useRef(false);
 
   return (
     <MapContainer
       className="z-0"
       style={{ height: "100vh" }}
-      center={yaounde}
-      zoom={9}
+      center={[3.826985, 11.495974]}
+      zoom={14.3}
       zoomControl={false}
       scrollWheelZoom={true}
     >
