@@ -11,6 +11,7 @@ let count_bafoussam: number = 0
 let count_bertoua: number = 0
 let count_bamenda: number = 0
 
+
 ALERTS.map((i: any) => {
     if (i.ville === "MAROUA") {
         count_maroua += 1
