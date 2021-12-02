@@ -1,6 +1,6 @@
 import L from "leaflet";
 import React, { useRef } from "react";
-import bolt from "../../assets/img/energy.png";
+import bolt from "../../assets/img/electricity.png";
 import "./StreetMap.css";
 
 import {
