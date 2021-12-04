@@ -74,7 +74,7 @@ export const StreetMap = () => {
         </Marker>
       ))}
       <LocationMarker />
-      <ZoomControl position="topright" />
+      <ZoomControl position="bottomright" />
       <SetViewOnClick animateRef={animateRef} />
     </MapContainer>
   );
