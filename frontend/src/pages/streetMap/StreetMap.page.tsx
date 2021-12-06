@@ -12,7 +12,7 @@ import {
   Marker,
 } from "react-leaflet";
 import { LocationMarker } from "../../scripts/check_position";
-import { ALL_LIST } from "../../scripts/all_city";
+import { ALL_LIST } from "../../scripts/all_list";
 import { LIST_VILLE } from "../../scripts/list_ville";
 
 const SetViewOnClick = (animateRef: any) => {
