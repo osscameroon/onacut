@@ -12,7 +12,8 @@ import {
   Marker,
 } from "react-leaflet";
 import { LocationMarker } from "../../scripts/check_position";
-import { LATLONG } from "../../scripts/lat_long";
+import { ALL_LIST } from "../../scripts/all_city";
+import { LIST_VILLE } from "../../scripts/list_ville";
 
 const SetViewOnClick = (animateRef: any) => {
   const map = useMapEvent("click", (e) => {
@@ -27,14 +28,13 @@ const SetViewOnClick = (animateRef: any) => {
 const lightBolt = L.icon({
   iconUrl: bolt,
   shadowUrl: bolt,
-
   iconSize: [0, 0],
   shadowSize: [30, 30],
   shadowAnchor: [10, 45],
 });
 
 export const StreetMap = () => {
-  const yaounde: any = LATLONG[9].longlat;
+  const yaounde: any = LIST_VILLE[9].longlat;
   const animateRef = useRef(false);
 
   return (
@@ -42,15 +42,17 @@ export const StreetMap = () => {
       className="z-0"
       style={{ height: "100vh" }}
       center={yaounde}
-      zoom={9}
+      zoom={13}
       zoomControl={false}
       scrollWheelZoom={true}
+      minZoom={9}
+      maxZoom={16}
     >
       <TileLayer
         attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
         url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
       />
-      {LATLONG.map((item: any, index: any) => (
+      {ALL_LIST.map((item: any, index: any) => (
         <Marker position={item.longlat} icon={lightBolt} key={index}>
           <Tooltip
             direction="right"
@@ -75,6 +77,7 @@ export const StreetMap = () => {
       ))}
       <LocationMarker />
       <ZoomControl position="bottomright" />
+
       <SetViewOnClick animateRef={animateRef} />
     </MapContainer>
   );

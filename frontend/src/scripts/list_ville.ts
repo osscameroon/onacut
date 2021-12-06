@@ -11,7 +11,6 @@ let count_bafoussam: number = 0
 let count_bertoua: number = 0
 let count_bamenda: number = 0
 
-
 ALERTS.map((i: any) => {
     if (i.ville === "MAROUA") {
         count_maroua += 1
@@ -94,8 +93,7 @@ const yaounde = {
     name: count_yaounde,
     longlat: [3.826985, 11.495974]
 }
-
-export const LATLONG = [
+export const LIST_VILLE = [
     bamenda,
     bafoussan,
     bertoua,
@@ -105,5 +103,5 @@ export const LATLONG = [
     garoua,
     maroua,
     nagoundere,
-    yaounde
+    yaounde,
 ]
