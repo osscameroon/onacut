@@ -1,109 +1,178 @@
 export const ALERTS = require("../scripts/alerts.json")
 
-let count_yaounde: number = 0
-let count_maroua: number = 0
-let count_garoua: number = 0
-let count_ngaoudere: number = 0
-let count_ebolowa: number = 0
-let count_douala: number = 0
-let count_buea: number = 0
-let count_bafoussam: number = 0
-let count_bertoua: number = 0
-let count_bamenda: number = 0
+// QUARTIERS 
+// 1. YAOUNDE
+let count_central_hotel: number = 0
+let count_nsam: number = 0;
+let count_efoulan: number = 0;
+let count_odza: number = 0;
+let count_dakar: number = 0;
+let count_shakes: number = 0;
+let count_fustel: number = 0;
+let count_mvan: number = 0;
+let count_baseaerienne: number = 0;
+// 2. MAROUA
+let count_godola: number = 0;
+let count_manbang: number = 0;
+let count_mokolo: number = 0;
+let count_waza: number = 0;
+let count_kousseri: number = 0;
+let count_domayo: number = 0;
+let count_comice: number = 0;
 
 
-ALERTS.map((i: any) => {
-    if (i.ville === "MAROUA") {
-        count_maroua += 1
-        return count_maroua
+ALERTS.map((item: any) => {
+    if (item.quartier === "CENTRAL HOTEL") {
+        count_central_hotel += 1
+        return count_central_hotel
     }
-    if (i.ville === "GAROUA") {
-        count_garoua += 1
-        return count_garoua
+    if (item.quartier === "NSAM") {
+        count_nsam += 1
+        return count_nsam
     }
-    if (i.ville === "NGAOUNDERE") {
-        count_ngaoudere += 1
-        return count_ngaoudere
+    if (item.quartier === " EFOULAN") {
+        count_efoulan += 1
+        return count_efoulan
     }
-    if (i.ville === "YAOUNDE") {
-        count_yaounde += 1
-        return count_yaounde
+    if (item.quartier === "ODZA") {
+        count_odza += 1
+        return count_odza
     }
-    if (i.ville === "DOUALA") {
-        count_douala += 1
-        return count_douala
+    if (item.quartier === "DAKAR") {
+        count_dakar += 1
+        return count_dakar
     }
-    if (i.ville === "BUEA") {
-        count_buea += 1
-        return count_buea
+    if (item.quartier === "SHAKESPEARE") {
+        count_shakes += 1
+        return count_shakes
     }
-    if (i.ville === "EBOLOWA") {
-        count_ebolowa += 1
-        return count_ebolowa
+    if (item.quartier === "FUSTEL") {
+        count_fustel += 1
+        return count_fustel
     }
-    if (i.ville === "BAFOUSSAM") {
-        count_bafoussam += 1
-        return count_bafoussam
+    if (item.quartier === "MVAN") {
+        count_mvan += 1
+        return count_mvan
     }
-    if (i.ville === "BAMENDA") {
-        count_bamenda += 1
-        return count_bamenda
+    if (item.quartier === " BASE AERIENNE") {
+        count_baseaerienne += 1
+        return count_baseaerienne
     }
-}
-)
+    // MAROUA
+    if (item.quartier === "GODOLA") {
+        count_godola += 1
+        return count_godola
+    }
+    if (item.quartier === "MAMBANG") {
+        count_manbang += 1
+        return count_manbang
+    }
+    if (item.quartier === "TALA MOKOLO") {
+        count_mokolo += 1
+        return count_mokolo
+    }
+    if (item.quartier === "WAZA") {
+        count_waza += 1
+        return count_waza
+    }
+    if (item.quartier === "KOUSSERI") {
+        count_kousseri += 1
+        return count_kousseri
+    }
+    if (item.quartier === "DOMAYO ZONE INDUSTRIELLE ") {
+        count_domayo += 1
+        return count_domayo
+    }
+    if (item.quartier === "MATGENIE") {
+        count_comice += 1
+        return count_comice
+    }
+})
 
-const bamenda = {
-    name: count_bamenda,
-    longlat: [5.914395, 10.129316]
+// 1. YAOUNDE
+const central_hotel = {
+    name: count_central_hotel,
+    longlat: [3.8663, 11.5178]
 }
-
-const bafoussan = {
-    name: count_bafoussam,
-    longlat: [5.468774, 10.420834]
+const nsam = {
+    name: count_nsam,
+    longlat: [3.8268, 11.5078]
 }
-
-const bertoua = {
-    name: count_bertoua,
-    longlat: [4.558081, 13.662206]
+const efoulan = {
+    name: count_efoulan,
+    longlat: [3.9203, 12.2877]
 }
-const buea = {
-    name: count_buea,
-    longlat: [4.155587, 9.232463]
+const odza = {
+    name: count_odza,
+    longlat: [3.7635, 11.5482]
 }
-const douala = {
-    name: count_douala,
-    longlat: [4.03222, 9.706715]
+const dakar = {
+    name: count_dakar,
+    longlat: [3.8379, 11.5118]
 }
-const ebolowa = {
-    name: count_ebolowa,
-    longlat: [2.891746, 11.15648]
+const shakes = {
+    name: count_shakes,
+    longlat: [3.8626, 11.5718]
 }
-const garoua = {
-    name: count_garoua,
-    longlat: [9.278875, 13.394429]
+const fustel = {
+    name: count_fustel,
+    longlat: [3.8768, 11.5163]
 }
-const maroua = {
-    name: count_maroua,
-    longlat: [10.588261, 14.350791]
+const mvan = {
+    name: count_mvan,
+    longlat: [3.8227, 11.5167]
 }
-const nagoundere = {
-    name: count_ngaoudere,
-    longlat: [7.349664, 13.577051]
+const baseaerienne = {
+    name: count_baseaerienne,
+    longlat: [3.8362, 11.5215]
 }
-const yaounde = {
-    name: count_yaounde,
-    longlat: [3.826985, 11.495974]
+// 1. MAROUA
+const godola = {
+    name: count_godola,
+    longlat: [10.6993, 14.2655]
+}
+const mambang = {
+    name: count_manbang,
+    longlat: [10.6596, 14.2878]
+}
+const mokolo = {
+    name: count_mokolo,
+    longlat: [10.7411, 13.7988]
+}
+const waza = {
+    name: count_waza,
+    longlat: [11.4008, 14.5685]
+}
+const kousseri = {
+    name: count_kousseri,
+    longlat: [12.0839, 15.0250]
+}
+const domayo = {
+    name: count_domayo,
+    longlat: [10.5288, 14.2106]
+}
+const comice = {
+    name: count_comice,
+    longlat: [10.5882, 14.3194]
 }
 
 export const LATLONG = [
-    bamenda,
-    bafoussan,
-    bertoua,
-    buea,
-    douala,
-    ebolowa,
-    garoua,
-    maroua,
-    nagoundere,
-    yaounde
+    // 1. Yaounde
+    central_hotel,
+    nsam,
+    efoulan,
+    odza,
+    dakar,
+    shakes,
+    fustel,
+    mvan,
+    baseaerienne,
+    // 2. Maroua
+    godola,
+    mambang,
+    mokolo,
+    waza,
+    kousseri,
+    domayo,
+    comice
 ]
