@@ -53,8 +53,6 @@ export const StreetMap = () => {
       zoom={13}
       zoomControl={false}
       scrollWheelZoom={true}
-      minZoom={9}
-      maxZoom={16}
     >
       <TileLayer
         attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
