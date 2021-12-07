@@ -1,6 +1,7 @@
-import L from "leaflet";
 import React, { useRef } from "react";
+import L from "leaflet";
 import bolt from "../../assets/img/electricity.png";
+import energy from "../../assets/img/energy.png";
 import "./StreetMap.css";
 
 import {
@@ -12,8 +13,8 @@ import {
   Marker,
 } from "react-leaflet";
 import { LocationMarker } from "../../scripts/check_position";
-import { ALL_LIST } from "../../scripts/all_list";
 import { LIST_VILLE } from "../../scripts/list_ville";
+import { LIST_QUARTIER } from "../../scripts/list_quartier";
 
 const SetViewOnClick = (animateRef: any) => {
   const map = useMapEvent("click", (e) => {
@@ -25,6 +26,13 @@ const SetViewOnClick = (animateRef: any) => {
   return null;
 };
 
+const energyBolt = L.icon({
+  iconUrl: energy,
+  shadowUrl: energy,
+  iconSize: [0, 0],
+  shadowSize: [30, 30],
+  shadowAnchor: [10, 45],
+});
 const lightBolt = L.icon({
   iconUrl: bolt,
   shadowUrl: bolt,
@@ -52,8 +60,31 @@ export const StreetMap = () => {
         attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
         url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
       />
-      {ALL_LIST.map((item: any, index: any) => (
+      {LIST_VILLE.map((item: any, index: any) => (
         <Marker position={item.longlat} icon={lightBolt} key={index}>
+          <Tooltip
+            direction="right"
+            className="Tooltip"
+            offset={[2, -40]}
+            permanent
+            opacity={1}
+          >
+            <span
+              style={{
+                fontSize: "8px",
+                fontWeight: "bold",
+                fontFamily: "sans-serif",
+                padding: "5px",
+              }}
+              className="text-xs"
+            >
+              {item.name}
+            </span>
+          </Tooltip>
+        </Marker>
+      ))}
+      {LIST_QUARTIER.map((item: any, index: any) => (
+        <Marker position={item.longlat} icon={energyBolt} key={index}>
           <Tooltip
             direction="right"
             className="Tooltip"
