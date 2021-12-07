@@ -13,8 +13,8 @@ import {
   useMapEvents,
 } from "react-leaflet";
 import { LocationMarker } from "../../scripts/check_position";
-import { LIST_VILLE } from "../../scripts/list_ville";
-import { LIST_QUARTIER } from "../../scripts/list_quartier";
+import { Cities } from "../../scripts/cities";
+import { Districts } from "../../scripts/districts";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { zoomLevelState } from "../../atoms/zoom_level";
 
@@ -47,7 +47,7 @@ const lightBolt = L.icon({
 });
 
 export const StreetMap = () => {
-  const yaounde: any = LIST_VILLE[9].longlat;
+  const yaounde: any = Cities[9].longlat;
   const animateRef = useRef(false);
   const v = useRecoilValue(zoomLevelState);
   if (v > 9) {
@@ -65,7 +65,7 @@ export const StreetMap = () => {
           attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
           url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
         />
-        {LIST_QUARTIER.map((item: any, index: any) => (
+        {Districts.map((item: any, index: any) => (
           <Marker position={item.longlat} icon={lightBolt} key={index}>
             <Tooltip
               direction="right"
@@ -109,7 +109,7 @@ export const StreetMap = () => {
           attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
           url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
         />
-        {LIST_VILLE.map((item: any, index: any) => (
+        {Cities.map((item: any, index: any) => (
           <Marker position={item.longlat} icon={lightBolt} key={index}>
             <Tooltip
               direction="right"

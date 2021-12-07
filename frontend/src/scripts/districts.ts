@@ -99,7 +99,7 @@ const ahala = {
     longlat: coord_ahala
 }
 
-export const LIST_QUARTIER = [
+export const Districts = [
     guider,
     dabanga,
     ahala,

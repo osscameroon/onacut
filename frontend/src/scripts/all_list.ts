@@ -1,4 +1,4 @@
-import { LIST_QUARTIER } from "./list_quartier";
-import { LIST_VILLE } from "./list_ville";
+import { Districts } from "./districts";
+import { Cities } from "./cities";
 
-export const ALL_LIST = LIST_VILLE.concat(LIST_QUARTIER)
+export const ALL_LIST = Cities.concat(Districts);

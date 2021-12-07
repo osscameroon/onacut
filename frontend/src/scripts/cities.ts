@@ -93,7 +93,8 @@ const yaounde = {
     name: count_yaounde,
     longlat: [3.826985, 11.495974]
 }
-export const LIST_VILLE = [
+
+export const Cities = [
     bamenda,
     bafoussan,
     bertoua,
