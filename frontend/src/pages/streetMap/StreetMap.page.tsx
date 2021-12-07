@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import L from "leaflet";
 import bolt from "../../assets/img/electricity.png";
-import energy from "../../assets/img/energy.png";
 import "./StreetMap.css";
 
 import {
@@ -39,13 +38,6 @@ const SetViewOnClick = (animateRef: any) => {
   return null;
 };
 
-const energyBolt = L.icon({
-  iconUrl: energy,
-  shadowUrl: energy,
-  iconSize: [0, 0],
-  shadowSize: [30, 30],
-  shadowAnchor: [10, 45],
-});
 const lightBolt = L.icon({
   iconUrl: bolt,
   shadowUrl: bolt,
@@ -76,7 +68,7 @@ export const StreetMap = () => {
           url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
         />
         {LIST_QUARTIER.map((item: any, index: any) => (
-          <Marker position={item.longlat} icon={energyBolt} key={index}>
+          <Marker position={item.longlat} icon={lightBolt} key={index}>
             <Tooltip
               direction="right"
               className="Tooltip"
