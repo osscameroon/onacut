@@ -18,7 +18,7 @@ import { LIST_QUARTIER } from "../../scripts/list_quartier";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { zoomLevelState } from "../../atoms/zoom_level";
 
-function MyComponent() {
+function ZoomComponent() {
   const [zoomLevel, setZoomLevel] = useRecoilState(zoomLevelState); // initial zoom level provided for MapContainer
   const mapEvents = useMapEvents({
     zoomend: () => {
@@ -60,7 +60,7 @@ export const StreetMap = () => {
         zoomControl={false}
         scrollWheelZoom={true}
       >
-        <MyComponent />
+        <ZoomComponent />
         <TileLayer
           attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
           url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
@@ -104,7 +104,7 @@ export const StreetMap = () => {
         zoomControl={false}
         scrollWheelZoom={true}
       >
-        <MyComponent />
+        <ZoomComponent />
         <TileLayer
           attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
           url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
