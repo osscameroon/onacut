@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import L from "leaflet";
 import bolt from "../../assets/img/electricity.png";
 import "./StreetMap.css";
@@ -50,8 +50,6 @@ export const StreetMap = () => {
   const yaounde: any = LIST_VILLE[9].longlat;
   const animateRef = useRef(false);
   const v = useRecoilValue(zoomLevelState);
-  console.log(v);
-
   if (v > 9) {
     return (
       <MapContainer
