@@ -83,7 +83,7 @@ export const StreetMap = () => {
                 }}
                 className="text-xs"
               >
-                {item.name}
+                {item.count}
               </span>
             </Tooltip>
           </Marker>
@@ -127,7 +127,7 @@ export const StreetMap = () => {
                 }}
                 className="text-xs"
               >
-                {item.name}
+                {item.count}
               </span>
             </Tooltip>
           </Marker>

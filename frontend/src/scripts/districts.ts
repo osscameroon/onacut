@@ -12,22 +12,22 @@ let coord_guider: Array<number> = []
 let coord_dabanga: Array<number> = []
 
 LIST_COORD.map((item: any) => {
-    if (item.name === "Ahala") {
+    if (item.count === "Ahala") {
         return coord_ahala.push(item.lat, item.long)
     }
-    if (item.name === "Etoa") {
+    if (item.count === "Etoa") {
         return coord_etoa.push(item.lat, item.long)
     }
-    if (item.name === "Mbankomo") {
+    if (item.count === "Mbankomo") {
         return coord_mbankomo.push(item.lat, item.long)
     }
-    if (item.name === "Mimboman") {
+    if (item.count === "Mimboman") {
         return coord_mimboman.push(item.lat, item.long)
     }
-    if (item.name === "Guider") {
+    if (item.count === "Guider") {
         return coord_guider.push(item.lat, item.long)
     }
-    if (item.name === "Dabanga") {
+    if (item.count === "Dabanga") {
         console.log(item.lat, item.long)
         return coord_dabanga.push(item.lat, item.long)
     }
@@ -75,27 +75,27 @@ ALERTS.map((i: any) => {
 )
 
 const dabanga = {
-    name: count_dabanga,
+    count: count_dabanga,
     longlat: coord_dabanga
 }
 const guider = {
-    name: count_guider,
+    count: count_guider,
     longlat: coord_guider
 }
 const etoua = {
-    name: count_ahala,
+    count: count_ahala,
     longlat: coord_etoa
 }
 const mbankomo = {
-    name: count_mbankomo,
+    count: count_mbankomo,
     longlat: coord_mbankomo
 }
 const mimboman = {
-    name: count_mimboman,
+    count: count_mimboman,
     longlat: coord_mimboman
 }
 const ahala = {
-    name: count_ahala,
+    count: count_ahala,
     longlat: coord_ahala
 }
 

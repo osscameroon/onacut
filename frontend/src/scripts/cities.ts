@@ -54,45 +54,45 @@ ALERTS.map((i: any) => {
 )
 
 const bamenda = {
-    name: count_bamenda,
+    count: count_bamenda,
     longlat: [5.914395, 10.129316]
 }
 
 const bafoussam = {
-    name: count_bafoussam,
+    count: count_bafoussam,
     longlat: [5.468774, 10.420834]
 }
 
 const bertoua = {
-    name: count_bertoua,
+    count: count_bertoua,
     longlat: [4.558081, 13.662206]
 }
 const buea = {
-    name: count_buea,
+    count: count_buea,
     longlat: [4.155587, 9.232463]
 }
 const douala = {
-    name: count_douala,
+    count: count_douala,
     longlat: [4.03222, 9.706715]
 }
 const ebolowa = {
-    name: count_ebolowa,
+    count: count_ebolowa,
     longlat: [2.891746, 11.15648]
 }
 const garoua = {
-    name: count_garoua,
+    count: count_garoua,
     longlat: [9.278875, 13.394429]
 }
 const maroua = {
-    name: count_maroua,
+    count: count_maroua,
     longlat: [10.588261, 14.350791]
 }
 const ngaoundere = {
-    name: count_ngaoudere,
+    count: count_ngaoudere,
     longlat: [7.349664, 13.577051]
 }
 const yaounde = {
-    name: count_yaounde,
+    count: count_yaounde,
     longlat: [3.826985, 11.495974]
 }
 
