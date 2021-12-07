@@ -12,39 +12,41 @@ let count_bertoua: number = 0
 let count_bamenda: number = 0
 
 ALERTS.map((i: any) => {
-    if (i.ville === "MAROUA") {
+    const city = i.ville;
+
+    if (city === "MAROUA") {
         count_maroua += 1
         return count_maroua
     }
-    if (i.ville === "GAROUA") {
+    if (city === "GAROUA") {
         count_garoua += 1
         return count_garoua
     }
-    if (i.ville === "NGAOUNDERE") {
+    if (city === "NGAOUNDERE") {
         count_ngaoudere += 1
         return count_ngaoudere
     }
-    if (i.ville === "YAOUNDE") {
+    if (city === "YAOUNDE") {
         count_yaounde += 1
         return count_yaounde
     }
-    if (i.ville === "DOUALA") {
+    if (city === "DOUALA") {
         count_douala += 1
         return count_douala
     }
-    if (i.ville === "BUEA") {
+    if (city === "BUEA") {
         count_buea += 1
         return count_buea
     }
-    if (i.ville === "EBOLOWA") {
+    if (city === "EBOLOWA") {
         count_ebolowa += 1
         return count_ebolowa
     }
-    if (i.ville === "BAFOUSSAM") {
+    if (city === "BAFOUSSAM") {
         count_bafoussam += 1
         return count_bafoussam
     }
-    if (i.ville === "BAMENDA") {
+    if (city === "BAMENDA") {
         count_bamenda += 1
         return count_bamenda
     }
@@ -56,7 +58,7 @@ const bamenda = {
     longlat: [5.914395, 10.129316]
 }
 
-const bafoussan = {
+const bafoussam = {
     name: count_bafoussam,
     longlat: [5.468774, 10.420834]
 }
@@ -85,7 +87,7 @@ const maroua = {
     name: count_maroua,
     longlat: [10.588261, 14.350791]
 }
-const nagoundere = {
+const ngaoundere = {
     name: count_ngaoudere,
     longlat: [7.349664, 13.577051]
 }
@@ -94,15 +96,15 @@ const yaounde = {
     longlat: [3.826985, 11.495974]
 }
 
-export const Cities = [
+export const Cities = {
     bamenda,
-    bafoussan,
+    bafoussam,
     bertoua,
     buea,
     douala,
     ebolowa,
     garoua,
     maroua,
-    nagoundere,
+    ngaoundere,
     yaounde,
-]
+}

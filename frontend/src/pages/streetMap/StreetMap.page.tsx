@@ -47,7 +47,7 @@ const lightBolt = L.icon({
 });
 
 export const StreetMap = () => {
-  const yaounde: any = Cities[9].longlat;
+  const yaounde: any = Cities.yaounde.longlat;
   const animateRef = useRef(false);
   const v = useRecoilValue(zoomLevelState);
   if (v > 9) {
@@ -109,7 +109,7 @@ export const StreetMap = () => {
           attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
           url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
         />
-        {Cities.map((item: any, index: any) => (
+        {Object.values(Cities).map((item: any, index: any) => (
           <Marker position={item.longlat} icon={lightBolt} key={index}>
             <Tooltip
               direction="right"
