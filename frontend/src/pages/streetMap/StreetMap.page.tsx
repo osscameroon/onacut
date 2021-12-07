@@ -16,7 +16,7 @@ import { LocationMarker } from "../../scripts/check_position";
 import { LIST_VILLE } from "../../scripts/list_ville";
 import { LIST_QUARTIER } from "../../scripts/list_quartier";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { zoomLevelState } from "../../atoms/zom_leve";
+import { zoomLevelState } from "../../atoms/zoom_level";
 
 function MyComponent() {
   const [zoomLevel, setZoomLevel] = useRecoilState(zoomLevelState); // initial zoom level provided for MapContainer
