@@ -1,0 +1,12 @@
+{
+  "name": "city_parser",
+  "version": "1.0.0",
+  "description": "parse cities",
+  "main": "index.js",
+  "author": "osscameroon",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node ./index.js"
+  }
+}

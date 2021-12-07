@@ -50,6 +50,9 @@ export const StreetMap = () => {
   const yaounde: any = Cities.yaounde.longlat;
   const animateRef = useRef(false);
   const v = useRecoilValue(zoomLevelState);
+
+  console.log("Cities.yaounde: ", Cities.yaounde); // Debug
+  console.log("Cities: ", Cities); // Debug
   if (v > 9) {
     return (
       <MapContainer
@@ -65,7 +68,10 @@ export const StreetMap = () => {
           attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
           url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
         />
-        {Districts.map((item: any, index: any) => (
+        {Districts.map(
+          (item: any, index: any) => {
+            console.log("item: ", item); // Debug
+            return (
           <Marker position={item.longlat} icon={lightBolt} key={index}>
             <Tooltip
               direction="right"
@@ -87,7 +93,9 @@ export const StreetMap = () => {
               </span>
             </Tooltip>
           </Marker>
-        ))}
+        );
+          }
+                      )}
         <LocationMarker />
         <ZoomControl position="bottomright" />
 
@@ -127,7 +135,7 @@ export const StreetMap = () => {
                 }}
                 className="text-xs"
               >
-                {item.count}
+                {item?.alerts?.count || 0}
               </span>
             </Tooltip>
           </Marker>

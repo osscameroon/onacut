@@ -11,25 +11,30 @@ let coord_mimboman: Array<number> = []
 let coord_guider: Array<number> = []
 let coord_dabanga: Array<number> = []
 
-LIST_COORD.map((item: any) => {
+LIST_COORD.forEach((item: any) => {
     if (item.count === "Ahala") {
-        return coord_ahala.push(item.lat, item.long)
+         coord_ahala = [item.lat, item.long]
+         return
     }
     if (item.count === "Etoa") {
-        return coord_etoa.push(item.lat, item.long)
+        coord_etoa = [item.lat, item.long]
+        return
     }
     if (item.count === "Mbankomo") {
-        return coord_mbankomo.push(item.lat, item.long)
+        coord_mbankomo = [item.lat, item.long]
+        return
     }
     if (item.count === "Mimboman") {
-        return coord_mimboman.push(item.lat, item.long)
+        coord_mimboman = [item.lat, item.long]
+        return
     }
     if (item.count === "Guider") {
-        return coord_guider.push(item.lat, item.long)
+        coord_guider = [item.lat, item.long]
+        return
     }
     if (item.count === "Dabanga") {
-        console.log(item.lat, item.long)
-        return coord_dabanga.push(item.lat, item.long)
+        coord_dabanga = [item.lat, item.long]
+        return
     }
 })
 let count_ahala: number = 0
@@ -83,7 +88,7 @@ const guider = {
     longlat: coord_guider
 }
 const etoua = {
-    count: count_ahala,
+    count: count_etoa,
     longlat: coord_etoa
 }
 const mbankomo = {
