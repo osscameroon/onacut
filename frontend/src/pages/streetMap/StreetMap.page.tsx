@@ -11,6 +11,7 @@ import {
   Tooltip,
   Marker,
   useMapEvents,
+  Popup,
 } from "react-leaflet";
 import { LocationMarker } from "../../scripts/check_position";
 import { LIST_VILLE } from "../../scripts/list_ville";
@@ -40,10 +41,11 @@ const SetViewOnClick = (animateRef: any) => {
 
 const lightBolt = L.icon({
   iconUrl: bolt,
-  shadowUrl: bolt,
-  iconSize: [0, 0],
   shadowSize: [30, 30],
+  iconAnchor: [10, 45],
   shadowAnchor: [10, 45],
+  popupAnchor: [-0, -0],
+  iconSize: [30, 30],
 });
 
 export const StreetMap = () => {
@@ -67,6 +69,7 @@ export const StreetMap = () => {
         />
         {LIST_QUARTIER.map((item: any, index: any) => (
           <Marker position={item.longlat} icon={lightBolt} key={index}>
+            <Popup>{item.longlat}</Popup>
             <Tooltip
               direction="right"
               className="Tooltip"
@@ -111,6 +114,7 @@ export const StreetMap = () => {
         />
         {LIST_VILLE.map((item: any, index: any) => (
           <Marker position={item.longlat} icon={lightBolt} key={index}>
+            <Popup>{item.name}</Popup>
             <Tooltip
               direction="right"
               className="Tooltip"
