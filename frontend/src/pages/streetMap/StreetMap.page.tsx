@@ -53,6 +53,8 @@ export const StreetMap = () => {
   const animateRef = useRef(false);
   const v = useRecoilValue(zoomLevelState);
   const [show, setShow] = useState(false);
+  let [ville, setVille]: any = useState("");
+  let [numAlert, setNumAlert]: any = useState(0);
 
   if (v > 9) {
     return (
@@ -118,8 +120,9 @@ export const StreetMap = () => {
           <Marker
             eventHandlers={{
               click: () => {
-                console.log("SHOW", show);
                 console.log("NAME", item.id);
+                setVille(() => (ville = item.id));
+                setNumAlert(() => (numAlert = item.name));
                 setShow(true);
               },
             }}
@@ -128,8 +131,8 @@ export const StreetMap = () => {
             key={index}
           >
             <Modal
-              ville={item.id}
-              numberOfAlerts={item.name}
+              ville={ville}
+              numberOfAlerts={numAlert}
               onClose={() => setShow(false)}
               show={show}
             />

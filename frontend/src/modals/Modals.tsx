@@ -7,6 +7,7 @@ import elec from "../assets/img/elec.png";
 import clock from "../assets/img/clock.png";
 
 export const Modal = (props: any) => {
+  console.log(props);
   if (!props.show) {
     return null;
   }
