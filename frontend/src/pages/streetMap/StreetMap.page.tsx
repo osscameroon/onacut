@@ -1,8 +1,7 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import L from "leaflet";
 import bolt from "../../assets/img/electricity.png";
 import "./StreetMap.css";
-
 import {
   MapContainer,
   TileLayer,
@@ -18,6 +17,7 @@ import { LIST_VILLE } from "../../scripts/list_ville";
 import { LIST_QUARTIER } from "../../scripts/list_quartier";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { zoomLevelState } from "../../atoms/zom_leve";
+import { Modal } from "../../modals/Modals";
 
 function MyComponent() {
   const [zoomLevel, setZoomLevel] = useRecoilState(zoomLevelState); // initial zoom level provided for MapContainer
@@ -52,6 +52,8 @@ export const StreetMap = () => {
   const yaounde: any = LIST_VILLE[9].longlat;
   const animateRef = useRef(false);
   const v = useRecoilValue(zoomLevelState);
+  const [show, setShow] = useState(false);
+
   if (v > 9) {
     return (
       <MapContainer
@@ -69,7 +71,7 @@ export const StreetMap = () => {
         />
         {LIST_QUARTIER.map((item: any, index: any) => (
           <Marker position={item.longlat} icon={lightBolt} key={index}>
-            <Popup>{item.longlat}</Popup>
+            <Popup className="absolute bottom-0">{item.longlat} ASAM </Popup>
             <Tooltip
               direction="right"
               className="Tooltip"
@@ -113,8 +115,24 @@ export const StreetMap = () => {
           url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
         />
         {LIST_VILLE.map((item: any, index: any) => (
-          <Marker position={item.longlat} icon={lightBolt} key={index}>
-            <Popup>{item.name}</Popup>
+          <Marker
+            eventHandlers={{
+              click: () => {
+                console.log("SHOW", show);
+                console.log("NAME", item.id);
+                setShow(true);
+              },
+            }}
+            position={item.longlat}
+            icon={lightBolt}
+            key={index}
+          >
+            <Modal
+              ville={item.id}
+              numberOfAlerts={item.name}
+              onClose={() => setShow(false)}
+              show={show}
+            />
             <Tooltip
               direction="right"
               className="Tooltip"
@@ -138,7 +156,6 @@ export const StreetMap = () => {
         ))}
         <LocationMarker />
         <ZoomControl position="bottomright" />
-
         <SetViewOnClick animateRef={animateRef} />
       </MapContainer>
     );

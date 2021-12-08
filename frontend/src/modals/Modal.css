@@ -1,0 +1,10 @@
+.modal {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  z-index: 10000;
+}

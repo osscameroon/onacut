@@ -32,6 +32,20 @@ export const Home = () => {
           </div>
         </div>
       </div>
+
+      <div className="absolute bottom-0 z-10 px-4 md:px-20 pb-4 ">
+        <div className="container mx-auto">
+          <div className="site__btn-panne md:ml-20 bg-ind px-2 rounded-3xl mt-3 py-1 ml-4">
+            <p
+              style={{ fontFamily: " 'Varela Round', sans-serif" }}
+              className="flex px-4 py-1 text-gray-200"
+            >
+              <img src={bolt} alt="" className="w-6 h-6 mr-2" />
+              Signaler une panne de courant
+            </p>
+          </div>
+        </div>
+      </div>
       <main className="site__main">
         <StreetMap />
       </main>
