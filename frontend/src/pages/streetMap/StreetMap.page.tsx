@@ -72,8 +72,17 @@ export const StreetMap = () => {
           url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
         />
         {LIST_QUARTIER.map((item: any, index: any) => (
-          <Marker position={item.longlat} icon={lightBolt} key={index}>
-            <Popup className="absolute bottom-0">{item.longlat} ASAM </Popup>
+          <Marker
+            eventHandlers={{
+              click: () => {
+                setShow(true);
+              },
+            }}
+            position={item.longlat}
+            icon={lightBolt}
+            key={index}
+          >
+            <Modal show={show} onClose={() => setShow(false)} />
             <Tooltip
               direction="right"
               className="Tooltip"
@@ -97,7 +106,6 @@ export const StreetMap = () => {
         ))}
         <LocationMarker />
         <ZoomControl position="bottomright" />
-
         <SetViewOnClick animateRef={animateRef} />
       </MapContainer>
     );
