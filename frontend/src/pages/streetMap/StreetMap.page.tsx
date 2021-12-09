@@ -10,7 +10,6 @@ import {
   Tooltip,
   Marker,
   useMapEvents,
-  Popup,
 } from "react-leaflet";
 import { LocationMarker } from "../../scripts/check_position";
 import { LIST_VILLE } from "../../scripts/list_ville";
@@ -128,7 +127,6 @@ export const StreetMap = () => {
           <Marker
             eventHandlers={{
               click: () => {
-                console.log("NAME", item.id);
                 setVille(() => (ville = item.id));
                 setNumAlert(() => (numAlert = item.name));
                 setShow(true);
