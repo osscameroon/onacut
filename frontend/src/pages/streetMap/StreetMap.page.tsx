@@ -53,6 +53,7 @@ export const StreetMap = () => {
   const [show, setShow] = useState(false);
   let [ville, setVille]: any = useState("");
   let [numAlert, setNumAlert]: any = useState(0);
+  let [listQuartier, setListQuartier]: any = useState([]);
 
   if (v > 9) {
     return (
@@ -125,8 +126,10 @@ export const StreetMap = () => {
           <Marker
             eventHandlers={{
               click: () => {
+                console.log(item.quartiers);
                 setVille(() => (ville = item.id));
                 setNumAlert(() => (numAlert = item.name));
+                setListQuartier(() => (listQuartier = item.quartiers));
                 setShow(true);
               },
             }}
@@ -137,6 +140,7 @@ export const StreetMap = () => {
             <Modal
               ville={ville}
               numberOfAlerts={numAlert}
+              quartiers={listQuartier}
               onClose={() => setShow(false)}
               show={show}
             />
