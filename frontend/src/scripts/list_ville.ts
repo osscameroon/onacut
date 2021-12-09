@@ -21,6 +21,7 @@ let quartier_douala: any = []
 let quartier_buea: any = []
 let quartier_bafoussam: any = []
 let quartier_bamenda: any = []
+let quartier_bertoua: any = []
 
 const separate = "    • "
 
@@ -28,47 +29,42 @@ ALERTS.map((i: any) => {
     if (i.ville === "MAROUA") {
         quartier_maroua.push(separate + i.quartier)
         count_maroua += 1
-        return count_maroua
     }
     if (i.ville === "GAROUA") {
         count_garoua += 1
         quartier_garoua.push(i.quartier)
-        return count_garoua
     }
     if (i.ville === "NGAOUNDERE") {
         count_ngaoudere += 1
         quartier_ngaoundere.push(i.quartier)
-        return count_ngaoudere
     }
     if (i.ville === "YAOUNDE") {
         count_yaounde += 1
         quartier_yaounde.push(separate + i.quartier)
-        return count_yaounde
     }
     if (i.ville === "DOUALA") {
         count_douala += 1
         quartier_douala.push(separate + i.quartier)
-        return count_douala
     }
     if (i.ville === "BUEA") {
         count_buea += 1
         quartier_buea.push(separate + i.quartier)
-        return count_buea
     }
     if (i.ville === "EBOLOWA") {
         count_ebolowa += 1
         quartier_ebolowa.push(i.quartier)
-        return count_ebolowa
     }
     if (i.ville === "BAFOUSSAM") {
         count_bafoussam += 1
         quartier_bafoussam.push(separate + i.quartier)
-        return count_bafoussam
+    }
+    if (i.ville === "BERTOUA") {
+        count_bertoua += 1
+        quartier_bertoua.push(separate + i.quartier)
     }
     if (i.ville === "BAMENDA") {
         count_bamenda += 1
         quartier_bamenda.push(separate + i.quartier)
-        return count_bamenda
     }
 }
 )
