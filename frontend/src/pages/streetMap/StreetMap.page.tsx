@@ -11,7 +11,6 @@ import {
   Marker,
   useMapEvents,
 } from "react-leaflet";
-import { LocationMarker } from "../../scripts/check_position";
 import { LIST_VILLE } from "../../scripts/list_ville";
 import { LIST_QUARTIER } from "../../scripts/list_quartier";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -103,7 +102,6 @@ export const StreetMap = () => {
             </Tooltip>
           </Marker>
         ))}
-        <LocationMarker />
         <ZoomControl position="bottomright" />
         <SetViewOnClick animateRef={animateRef} />
       </MapContainer>
@@ -163,7 +161,6 @@ export const StreetMap = () => {
             </Tooltip>
           </Marker>
         ))}
-        <LocationMarker />
         <ZoomControl position="bottomright" />
         <SetViewOnClick animateRef={animateRef} />
       </MapContainer>
