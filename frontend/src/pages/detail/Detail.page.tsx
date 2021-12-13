@@ -14,9 +14,6 @@ const Detail = () => {
     const query = new URLSearchParams(search).get("s");
     const [searchQuery, setSearchQuery] = useState(query || "");
     const alerts = useRecoilValue(dataState);
-
-    console.log(alerts);
-
     const filteCities = (cities: any, query: any) => {
         if (!query) {
             return cities;
