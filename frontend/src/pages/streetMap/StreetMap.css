@@ -1,8 +1,8 @@
 .leaflet-container {
-  width: 100%;
-  height: 100vh;
+    width: 100%;
+    height: 100vh;
 }
 
 .Tooltip {
-  background-color: red;
+    background-color: red;
 }
