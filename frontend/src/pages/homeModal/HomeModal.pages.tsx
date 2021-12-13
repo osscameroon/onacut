@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useModal } from "react-hooks-use-modal";
 import { MyText } from "../../components/myText/MyText.component";
 
-export const HomeModal = () => {
+const HomeModal = () => {
     let [Modal, open, close, isOpen] = useModal("root", {
         preventScroll: true,
         closeOnOverlayClick: true,
@@ -43,3 +43,5 @@ export const HomeModal = () => {
         </Modal>
     );
 };
+
+export default HomeModal;

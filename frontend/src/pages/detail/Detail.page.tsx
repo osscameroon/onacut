@@ -9,7 +9,7 @@ import { Search } from "../../components/search/Search.component";
 import { LANGUAGE } from "../../constants/language";
 import { NotFound } from "../../components/notFound/NotFound.component";
 
-export const Detail = () => {
+const Detail = () => {
     const { search } = window.location;
     const query = new URLSearchParams(search).get("s");
     const [searchQuery, setSearchQuery] = useState(query || "");
@@ -80,3 +80,5 @@ export const Detail = () => {
         return <NotFound />;
     }
 };
+
+export default Detail;

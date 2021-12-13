@@ -46,7 +46,7 @@ const lightBolt = L.icon({
     iconSize: [30, 30],
 });
 
-export const StreetMap = () => {
+const StreetMap = () => {
     const yaounde: any = LIST_VILLE[9].longlat;
     const animateRef = useRef(false);
     const v = useRecoilValue(zoomLevelState);
@@ -173,3 +173,5 @@ export const StreetMap = () => {
         );
     }
 };
+
+export default StreetMap;

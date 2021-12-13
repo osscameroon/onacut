@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import "react-modern-drawer/dist/index.css";
 import { MyDrawer } from "../../components/drawer/Drawer.component";
 import { LANGUAGE } from "../../constants/language";
-import { StreetMap } from "../streetMap/StreetMap.page";
 import bolt from "../../assets/img/bolt.png";
 import { Link } from "react-router-dom";
-import { HomeModal } from "../homeModal/HomeModal.pages";
+import HomeModal from "../homeModal/HomeModal.pages";
+import StreetMap from "../streetMap/StreetMap.page";
 
-export const Home = () => {
+const Home = () => {
     useEffect(() => {
         document.title = LANGUAGE.home.title;
     });
@@ -61,3 +61,5 @@ export const Home = () => {
         </div>
     );
 };
+
+export default Home;

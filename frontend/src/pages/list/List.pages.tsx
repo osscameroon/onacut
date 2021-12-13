@@ -12,7 +12,7 @@ const printByRegion = (name: any): any => {
     return alerts.filter((alert) => alert.region === name);
 };
 
-export const List = () => {
+const List = () => {
     const { search } = window.location;
     const query = new URLSearchParams(search).get("s");
     const [searchQuery, setSearchQuery] = useState(query || "");
@@ -78,3 +78,5 @@ export const List = () => {
         </div>
     );
 };
+
+export default List;
