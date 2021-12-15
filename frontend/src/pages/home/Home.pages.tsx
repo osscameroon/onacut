@@ -50,7 +50,7 @@ const Home = () => {
                             className="flex px-4 py-1 text-gray-200"
                         >
                             <img src={bolt} alt="" className="w-6 h-6 mr-2" />
-                            Signaler une panne de courant
+                            {LANGUAGE.home.signalerPanne}
                         </p>
                     </div>
                 </div>
