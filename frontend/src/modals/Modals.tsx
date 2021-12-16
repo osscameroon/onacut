@@ -10,7 +10,7 @@ export const Modal = (props: any) => {
     return null;
   }
   return (
-    <div className="modal ml-0 md:ml-24 bg-blueDark rounded-l-xl w-full md:w-5/12 rounded-r-xl">
+    <div className="modal ml-0 sm:ml-32 bg-blueDark rounded-l-xl w-full sm:w-full md:w-5/12 rounded-r-xl">
       <div className="modal__title flex justify-between items-center">
         <div className="modal__title-description">
           <p
