@@ -3,7 +3,6 @@ import "./Modal.css";
 import close from "../../src/assets/img/close.png";
 import { ModalItems } from "./ModalItems";
 import location from "../assets/img/location.png";
-import elec from "../assets/img/elec.png";
 
 export const Modal = (props: any) => {
   console.log(props);
@@ -11,7 +10,7 @@ export const Modal = (props: any) => {
     return null;
   }
   return (
-    <div className="modal ml-0 md:ml-24 bg-blueDark rounded-l-xl w-full md:w-1/3 rounded-r-xl">
+    <div className="modal ml-0 md:ml-24 bg-blueDark rounded-l-xl w-full md:w-5/12 rounded-r-xl">
       <div className="modal__title flex justify-between items-center">
         <div className="modal__title-description">
           <p

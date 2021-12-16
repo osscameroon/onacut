@@ -129,7 +129,11 @@ export const StreetMap = () => {
                 console.log(item.quartiers);
                 setVille(() => (ville = item.id));
                 setNumAlert(() => (numAlert = item.name));
-                setListQuartier(() => (listQuartier = item.quartiers));
+                setListQuartier(
+                  () =>
+                    (listQuartier =
+                      item.quartiers.length === 0 ? "Vide" : item.quartiers)
+                );
                 setShow(true);
               },
             }}
