@@ -4,7 +4,8 @@ export const LANGUAGE = {
         info: "Conseils et informations",
         vue: "Vue liste",
         title: "Où est la panne de courant actuelle? Carte des opérateurs de réseau",
-        panne: "Panne électrique"
+        panne: "Panne électrique",
+        signalerPanne: "Signaler une panne de courant",
     },
     info: {
         title: "Panne de courant, et maintenant ? ",
