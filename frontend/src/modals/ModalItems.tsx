@@ -16,4 +16,5 @@ export const ModalItems = (props: any) => {
             </div>
         </div>
     );
+
 };

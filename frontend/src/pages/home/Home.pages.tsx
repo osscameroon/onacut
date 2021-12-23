@@ -39,7 +39,6 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-
             <div className="absolute bottom-0 z-10 px-4 md:px-20 pb-4 ">
                 <div className="container mx-auto">
                     <div className="site__btn-panne md:ml-20 bg-ind px-2 rounded-3xl mt-3 py-1 ml-4">

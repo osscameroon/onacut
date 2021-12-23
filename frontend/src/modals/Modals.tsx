@@ -3,7 +3,6 @@ import "./Modal.css";
 import close from "../../src/assets/img/close.png";
 import { ModalItems } from "./ModalItems";
 import location from "../assets/img/location.png";
-import elec from "../assets/img/elec.png";
 
 export const Modal = (props: any) => {
     console.log(props);
@@ -40,6 +39,7 @@ export const Modal = (props: any) => {
             <div className="modal__items">
                 <ModalItems image={location} text={props.quartiers} h={24} />
             </div>
+
         </div>
     );
 };
