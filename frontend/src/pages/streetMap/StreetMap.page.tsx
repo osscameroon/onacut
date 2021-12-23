@@ -1,8 +1,7 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import L from "leaflet";
 import bolt from "../../assets/img/electricity.png";
 import "./StreetMap.css";
-
 import {
   MapContainer,
   TileLayer,
@@ -12,11 +11,11 @@ import {
   Marker,
   useMapEvents,
 } from "react-leaflet";
-import { LocationMarker } from "../../scripts/check_position";
 import { LIST_VILLE } from "../../scripts/list_ville";
 import { LIST_QUARTIER } from "../../scripts/list_quartier";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { zoomLevelState } from "../../atoms/zom_leve";
+import { Modal } from "../../modals/Modals";
 
 function MyComponent() {
   const [zoomLevel, setZoomLevel] = useRecoilState(zoomLevelState); // initial zoom level provided for MapContainer
@@ -40,16 +39,22 @@ const SetViewOnClick = (animateRef: any) => {
 
 const lightBolt = L.icon({
   iconUrl: bolt,
-  shadowUrl: bolt,
-  iconSize: [0, 0],
   shadowSize: [30, 30],
+  iconAnchor: [10, 45],
   shadowAnchor: [10, 45],
+  popupAnchor: [-0, -0],
+  iconSize: [30, 30],
 });
 
 export const StreetMap = () => {
   const yaounde: any = LIST_VILLE[9].longlat;
   const animateRef = useRef(false);
   const v = useRecoilValue(zoomLevelState);
+  const [show, setShow] = useState(false);
+  let [ville, setVille]: any = useState("");
+  let [numAlert, setNumAlert]: any = useState(0);
+  let [listQuartier, setListQuartier]: any = useState([]);
+
   if (v > 9) {
     return (
       <MapContainer
@@ -66,7 +71,17 @@ export const StreetMap = () => {
           url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
         />
         {LIST_QUARTIER.map((item: any, index: any) => (
-          <Marker position={item.longlat} icon={lightBolt} key={index}>
+          <Marker
+            eventHandlers={{
+              click: () => {
+                setShow(true);
+              },
+            }}
+            position={item.longlat}
+            icon={lightBolt}
+            key={index}
+          >
+            <Modal show={show} onClose={() => setShow(false)} />
             <Tooltip
               direction="right"
               className="Tooltip"
@@ -88,9 +103,7 @@ export const StreetMap = () => {
             </Tooltip>
           </Marker>
         ))}
-        <LocationMarker />
         <ZoomControl position="bottomright" />
-
         <SetViewOnClick animateRef={animateRef} />
       </MapContainer>
     );
@@ -110,7 +123,31 @@ export const StreetMap = () => {
           url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
         />
         {LIST_VILLE.map((item: any, index: any) => (
-          <Marker position={item.longlat} icon={lightBolt} key={index}>
+          <Marker
+            eventHandlers={{
+              click: () => {
+                console.log(item.quartiers);
+                setVille(() => (ville = item.id));
+                setNumAlert(() => (numAlert = item.name));
+                setListQuartier(
+                  () =>
+                    (listQuartier =
+                      item.quartiers.length === 0 ? "Vide" : item.quartiers)
+                );
+                setShow(true);
+              },
+            }}
+            position={item.longlat}
+            icon={lightBolt}
+            key={index}
+          >
+            <Modal
+              ville={ville}
+              numberOfAlerts={numAlert}
+              quartiers={listQuartier}
+              onClose={() => setShow(false)}
+              show={show}
+            />
             <Tooltip
               direction="right"
               className="Tooltip"
@@ -132,9 +169,7 @@ export const StreetMap = () => {
             </Tooltip>
           </Marker>
         ))}
-        <LocationMarker />
         <ZoomControl position="bottomright" />
-
         <SetViewOnClick animateRef={animateRef} />
       </MapContainer>
     );

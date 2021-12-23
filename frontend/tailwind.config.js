@@ -8,7 +8,9 @@ module.exports = {
       },
       colors: {
         'ind': '#ff4f00',
-        'blue': 'blue'
+        'blue': 'blue',
+        'blueDark': '#00182B',
+        'blueDark-500': '#4cb7b9'
       },
       width: {
         '700': '700px'
