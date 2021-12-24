@@ -5,7 +5,6 @@ import { ModalItems } from "./ModalItems";
 import location from "../assets/img/location.png";
 
 export const Modal = (props: any) => {
-    console.log(props);
     if (!props.show) {
         return null;
     }
@@ -39,7 +38,6 @@ export const Modal = (props: any) => {
             <div className="modal__items">
                 <ModalItems image={location} text={props.quartiers} h={24} />
             </div>
-
         </div>
     );
 };

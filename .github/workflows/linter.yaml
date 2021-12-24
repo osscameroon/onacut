@@ -1,0 +1,15 @@
+name: Lint
+on:
+  pull_request:
+    paths:
+      - .github/workflows/linter.yaml
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - uses: actions/checkout@v2
+      - run: yarn install
+      - run: yarn lint
