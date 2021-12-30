@@ -9,12 +9,11 @@ export const ModalItems = (props: any) => {
             <div className="modal__item-text pl-4">
                 <p
                     style={{ fontFamily: " 'Varela Round', sans-serif" }}
-                    className={`text-sm  text-gray-200 overflow-auto flex h-${props.h}`}
+                    className={`text-sm justify-center py-2  text-gray-200 overflow-auto flex h-${props.h}`}
                 >
                     {props.text}
                 </p>
             </div>
         </div>
     );
-
 };
