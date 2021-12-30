@@ -12,7 +12,10 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.8.0",
+    "@typescript-eslint/parser": "^5.8.0",
     "axios": "^0.22.0",
+    "eslint": "^8.5.0",
     "leaflet": "^1.7.1",
     "rc-drawer": "^4.4.2",
     "react": "^17.0.2",
@@ -33,7 +36,8 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --fix --ext .js,.ts ."
   },
   "eslintConfig": {
     "extends": [

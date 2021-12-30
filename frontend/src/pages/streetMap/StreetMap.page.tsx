@@ -126,7 +126,6 @@ const StreetMap = () => {
                     <Marker
                         eventHandlers={{
                             click: () => {
-                                console.log(item.quartiers);
                                 setVille(() => (ville = item.id));
                                 setNumAlert(() => (numAlert = item.name));
                                 setListQuartier(
