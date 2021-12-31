@@ -129,7 +129,11 @@ const StreetMap = () => {
                                 setVille(() => (ville = item.id));
                                 setNumAlert(() => (numAlert = item.name));
                                 setListQuartier(
-                                    () => (listQuartier = item.quartiers)
+                                    () =>
+                                        (listQuartier =
+                                            item.quartiers.length === 0
+                                                ? "Vide"
+                                                : item.quartiers)
                                 );
                                 setShow(true);
                             },

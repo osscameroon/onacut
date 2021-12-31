@@ -5,7 +5,7 @@ import { MyText } from "../../components/myText/MyText.component";
 const HomeModal = () => {
     let [Modal, open, close, isOpen] = useModal("root", {
         preventScroll: true,
-        closeOnOverlayClick: true,
+        closeOnOverlayClick: false,
     });
 
     let [openModal, setOpenModal] = useState(open);
