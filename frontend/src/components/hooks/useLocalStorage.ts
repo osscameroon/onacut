@@ -12,118 +12,118 @@ type SetValue<T> = Dispatch<SetStateAction<T>>
 function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T>] {
 
 
-  const readValue = (): T => {
+    const readValue = (): T => {
 
-    // Prevent build error "window is undefined" but keep keep working
+        // Prevent build error "window is undefined" but keep keep working
 
-    if (typeof window === 'undefined') {
+        if (typeof window === 'undefined') {
 
-      return initialValue
+            return initialValue
 
-    }
-
-
-    try {
-
-      const item = window.localStorage.getItem(key)
-
-      return item ? (parseJSON(item) as T) : initialValue
-
-    } catch (error) {
-
-      console.warn(`Error reading localStorage key “${key}”:`, error)
-
-      return initialValue
-
-    }
-
-  }
+        }
 
 
-  // State to store our value
+        try {
 
-  // Pass initial state function to useState so logic is only executed once
+            const item = window.localStorage.getItem(key)
 
-  const [storedValue, setStoredValue] = useState<T>(readValue)
+            return item ? (parseJSON(item) as T) : initialValue
 
+        } catch (error) {
 
-  // Return a wrapped version of useState's setter function that ...
+            console.warn(`Error reading localStorage key “${key}”:`, error)
 
-  // ... persists the new value to localStorage.
+            return initialValue
 
-  const setValue: SetValue<T> = value => {
-
-    // Prevent build error "window is undefined" but keeps working
-
-    if (typeof window == 'undefined') {
-
-      console.warn(
-
-        `Tried setting localStorage key “${key}” even though environment is not a client`,
-
-      )
+        }
 
     }
 
 
-    try {
+    // State to store our value
 
-      // Allow value to be a function so we have the same API as useState
+    // Pass initial state function to useState so logic is only executed once
 
-      const newValue = value instanceof Function ? value(storedValue) : value
-
-
-      // Save to local storage
-
-      window.localStorage.setItem(key, JSON.stringify(newValue))
+    const [storedValue, setStoredValue] = useState<T>(readValue)
 
 
-      // Save state
+    // Return a wrapped version of useState's setter function that ...
 
-      setStoredValue(newValue)
+    // ... persists the new value to localStorage.
+
+    const setValue: SetValue<T> = value => {
+
+        // Prevent build error "window is undefined" but keeps working
+
+        if (typeof window == 'undefined') {
+
+            console.warn(
+
+                `Tried setting localStorage key “${key}” even though environment is not a client`,
+
+            )
+
+        }
 
 
-      // We dispatch a custom event so every useLocalStorage hook are notified
+        try {
 
-      window.dispatchEvent(new Event('local-storage'))
+            // Allow value to be a function so we have the same API as useState
 
-    } catch (error) {
+            const newValue = value instanceof Function ? value(storedValue) : value
 
-      console.warn(`Error setting localStorage key “${key}”:`, error)
+
+            // Save to local storage
+
+            window.localStorage.setItem(key, JSON.stringify(newValue))
+
+
+            // Save state
+
+            setStoredValue(newValue)
+
+
+            // We dispatch a custom event so every useLocalStorage hook are notified
+
+            window.dispatchEvent(new Event('local-storage'))
+
+        } catch (error) {
+
+            console.warn(`Error setting localStorage key “${key}”:`, error)
+
+        }
 
     }
 
-  }
+
+    useEffect(() => {
+
+        setStoredValue(readValue())
 
 
-  useEffect(() => {
-
-    setStoredValue(readValue())
+    }, [])
 
 
-  }, [])
+    const handleStorageChange = () => {
+
+        setStoredValue(readValue())
+
+    }
 
 
-  const handleStorageChange = () => {
+    // this only works for other documents, not the current one
 
-    setStoredValue(readValue())
-
-  }
+    useEventListener('storage', handleStorageChange)
 
 
-  // this only works for other documents, not the current one
+    // this is a custom event, triggered in writeValueToLocalStorage
 
-  useEventListener('storage', handleStorageChange)
+    // See: useLocalStorage()
 
-
-  // this is a custom event, triggered in writeValueToLocalStorage
-
-  // See: useLocalStorage()
-
-  useEventListener('local-storage', handleStorageChange)
+    useEventListener('local-storage', handleStorageChange)
 
 
-  return [storedValue, setValue]
+    return [storedValue, setValue]
 
 }
 
@@ -135,16 +135,16 @@ export default useLocalStorage
 
 function parseJSON<T>(value: string | null): T | undefined {
 
-  try {
+    try {
 
-    return value === 'undefined' ? undefined : JSON.parse(value ?? '')
+        return value === 'undefined' ? undefined : JSON.parse(value ?? '')
 
-  } catch (error) {
+    } catch (error) {
 
-    console.log('parsing error on', { value })
+        console.log('parsing error on', { value })
 
-    return undefined
+        return undefined
 
-  }
+    }
 
 }

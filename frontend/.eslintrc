@@ -12,7 +12,7 @@
         "@typescript-eslint/ban-ts-comment": "off",
         "no-extra-boolean-cast": "off",
         "@typescript-eslint/indent": "off",
-        "no-console": "error"
+        "no-console": 1
     },
     "env": {
         "node": true
