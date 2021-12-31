@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useModal } from "react-hooks-use-modal";
+import { useRecoilState } from "recoil";
+import { modalState } from "../../atoms/modal";
 import { MyText } from "../../components/myText/MyText.component";
+import useLocalStorage from "../../components/hooks/useLocalStorage";
 
 const HomeModal = () => {
     let [Modal, open, close, isOpen] = useModal("root", {
@@ -8,6 +11,7 @@ const HomeModal = () => {
         closeOnOverlayClick: false,
     });
 
+    let [myModal, setMyModal] = useRecoilState(modalState);
     let [openModal, setOpenModal] = useState(open);
 
     useEffect(() => {
@@ -32,7 +36,11 @@ const HomeModal = () => {
                 />
                 <div className="site__btn-panne flex items-center justify-center bg-ind p-2 mx-auto rounded-3xl mt-6 w-1/2">
                     <p
-                        onClick={() => close()}
+                        onClick={() => {
+                            setMyModal(() => (myModal = "close"));
+                            localStorage.setItem("modalValue", myModal);
+                            close();
+                        }}
                         style={{ fontFamily: " 'Varela Round', sans-serif" }}
                         className="flex cursor-pointer px-4 py-1 text-sm text-center text-gray-200"
                     >
