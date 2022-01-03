@@ -6,8 +6,6 @@ import bolt from "../../assets/img/bolt.png";
 import { Link } from "react-router-dom";
 import HomeModal from "../homeModal/HomeModal.pages";
 import StreetMap from "../streetMap/StreetMap.page";
-import { useRecoilValue } from "recoil";
-import { modalState } from "../../atoms/modal";
 
 const Home = () => {
     let open = localStorage.getItem("modalValue");

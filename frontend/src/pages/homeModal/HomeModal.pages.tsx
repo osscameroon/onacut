@@ -3,7 +3,6 @@ import { useModal } from "react-hooks-use-modal";
 import { useRecoilState } from "recoil";
 import { modalState } from "../../atoms/modal";
 import { MyText } from "../../components/myText/MyText.component";
-import useLocalStorage from "../../components/hooks/useLocalStorage";
 
 const HomeModal = () => {
     let [Modal, open, close, isOpen] = useModal("root", {
