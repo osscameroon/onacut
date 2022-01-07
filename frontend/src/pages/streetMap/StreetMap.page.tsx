@@ -104,7 +104,6 @@ const StreetMap = () => {
                     </Marker>
                 ))}
                 <ZoomControl position="bottomright" />
-                <SetViewOnClick animateRef={animateRef} />
             </MapContainer>
         );
     } else {
@@ -171,7 +170,6 @@ const StreetMap = () => {
                     </Marker>
                 ))}
                 <ZoomControl position="bottomright" />
-                <SetViewOnClick animateRef={animateRef} />
             </MapContainer>
         );
     }
