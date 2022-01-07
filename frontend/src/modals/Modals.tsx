@@ -36,7 +36,7 @@ export const Modal = (props: any) => {
                 className="bg-gray-400 w-full my-4"
             />
             <div className="modal__items">
-                <ModalItems image={location} text={props.quartiers} h={24} />
+                <ModalItems image={location} text={props.quartiers} h={36} />
             </div>
         </div>
     );

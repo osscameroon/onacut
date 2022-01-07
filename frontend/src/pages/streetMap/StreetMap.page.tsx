@@ -16,6 +16,7 @@ import { LIST_QUARTIER } from "../../scripts/list_quartier";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { zoomLevelState } from "../../atoms/zom_leve";
 import { Modal } from "../../modals/Modals";
+import { panneBtnState } from "../../atoms/panne_btn";
 
 function MyComponent() {
     const [zoomLevel, setZoomLevel] = useRecoilState(zoomLevelState); // initial zoom level provided for MapContainer
@@ -51,6 +52,7 @@ const StreetMap = () => {
     const animateRef = useRef(false);
     const v = useRecoilValue(zoomLevelState);
     const [show, setShow] = useState(false);
+    let [panneBtn, setPanneBtn] = useRecoilState(panneBtnState);
     let [ville, setVille]: any = useState("");
     let [numAlert, setNumAlert]: any = useState(0);
     let [listQuartier, setListQuartier]: any = useState([]);
@@ -127,6 +129,7 @@ const StreetMap = () => {
                             click: () => {
                                 setVille(() => (ville = item.id));
                                 setNumAlert(() => (numAlert = item.name));
+                                setPanneBtn(() => (panneBtn = 0));
                                 setListQuartier(
                                     () =>
                                         (listQuartier =
@@ -145,7 +148,10 @@ const StreetMap = () => {
                             ville={ville}
                             numberOfAlerts={numAlert}
                             quartiers={listQuartier}
-                            onClose={() => setShow(false)}
+                            onClose={() => {
+                                setShow(false);
+                                setPanneBtn(() => (panneBtn = 10));
+                            }}
                             show={show}
                         />
                         <Tooltip
