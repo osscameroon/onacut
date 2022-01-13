@@ -7,7 +7,6 @@ on:
       - frontend/**
     branches:
       - main
-      - frontend-stage-deploy
 
 jobs:
   build:
