@@ -26,7 +26,13 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 
+
+
+
 ![onacut11](https://user-images.githubusercontent.com/34966088/153770236-1ecc3886-26f6-4af2-9fc4-9b1096fd517f.png)
+
+
+
 
 
 
@@ -34,11 +40,20 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 
+
+
+
 ![onacut33](https://user-images.githubusercontent.com/34966088/153770243-782ec229-0d44-4969-88e2-76982bd5f26f.png)
 
 
 
+
+
+
 ![onacut44](https://user-images.githubusercontent.com/34966088/153770245-9206cd20-9af4-47f2-9f9d-1b3eea8e370c.png)
+
+
+
 
 
 
