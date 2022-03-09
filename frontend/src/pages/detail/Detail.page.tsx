@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { dataState } from "../../atoms/data";
 import { CityDetail } from "../../components/cityDetail/CityDetail.component";
@@ -26,15 +26,17 @@ const Detail = () => {
     };
 
     const filteredCities = filteCities(alerts, searchQuery);
-
-    const alert_length = alerts.length;
-
-    if (
-        typeof alerts.map((item: any) => item) !== "undefined" &&
-        alerts.length > 0
-    ) {
-        const title: any = Array.from(alerts)[0];
+    const title: any = Array.from(alerts)[0];
+    while (typeof alerts !== "object") {
         return (
+            <Suspense fallback="chargement...">
+                <NotFound />;
+            </Suspense>
+        );
+    }
+
+    return (
+        <Suspense fallback="chargement..">
             <div className="site__conseils bg-cover w-auto h-screen">
                 <div className="px-4 md:px-20 pt-5 md:pt-0">
                     <div className="container mx-auto">
@@ -72,10 +74,8 @@ const Detail = () => {
                     </div>
                 </div>
             </div>
-        );
-    } else {
-        return <NotFound />;
-    }
+        </Suspense>
+    );
 };
 
 export default Detail;
