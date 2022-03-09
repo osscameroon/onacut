@@ -19,5 +19,8 @@ export const LANGUAGE = {
         title: "Troubles actuels",
         search: "Entrez la region",
         city: "Entrez la ville",
+    },
+    notfound: {
+        homePage: "Acceder a la page d'accueil"
     }
 }

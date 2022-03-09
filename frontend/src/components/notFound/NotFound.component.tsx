@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import error from "../../assets/img/error.png";
+import { LANGUAGE } from "../../constants/language";
 import { MyText } from "../myText/MyText.component";
 
 export const NotFound = () => {
@@ -27,7 +28,7 @@ export const NotFound = () => {
                         className="text-gray-300"
                         style={{ fontFamily: " 'Varela Round', sans-serif" }}
                     >
-                        Acceder a la page d'accueil
+                        {LANGUAGE.notfound.homePage}
                     </p>
                 </Link>
             </div>
