@@ -44,11 +44,11 @@ def create_region():
         db.session.add(reg)
     db.session.commit()
 
-def create_towns():
-    towns = ["bamenda", "bafoussam", "bertoua", "buea", "douala", "ebolowa", "garoua", "maroua", "ngaoundere", "yaounde"]
-    for town in towns:
+def create_cities():
+    cities = ["bamenda", "bafoussam", "bertoua", "buea", "douala", "ebolowa", "garoua", "maroua", "ngaoundere", "yaounde"]
+    for _city in cities:
         city = City()
-        city.name = town
+        city.name = _city
         db.session.add(city)
     db.session.commit()
 
@@ -106,7 +106,7 @@ def main():
     create_db()
     create_location()
     create_region()
-    create_towns()
+    create_cities()
     create_alerts()
 
 if __name__ == "__main__":
