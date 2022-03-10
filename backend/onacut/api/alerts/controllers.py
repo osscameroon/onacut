@@ -16,7 +16,7 @@ def format_alert(alert: Alert):
         "end_time": alert.end_time,
         "region": alert.region.name,
         "city": alert.city.name,
-        "quatier": alert.quartier.name
+        "district": alert.district.name
     }
 
 class AlertsApi(Resource):
