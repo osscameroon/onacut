@@ -8,5 +8,5 @@ alert_get_fields = {
     "end_time": fields.String(),
     "region": fields.String(),
     "city": fields.String(),
-    "quatier": fields.String()
+    "district": fields.String()
 }

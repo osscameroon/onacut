@@ -13,10 +13,10 @@ CityLocation = db.Table(
     db.Column("city_id", db.Integer, db.ForeignKey("city.id"))
 )
 
-QuartierLocation = db.Table(
-    "quartier_location",
+DistrictLocation = db.Table(
+    "district_location",
     db.Column("location_id", db.Integer, db.ForeignKey("location.id")),
-    db.Column("quartier_id", db.Integer, db.ForeignKey("quartier.id"))
+    db.Column("district_id", db.Integer, db.ForeignKey("district.id"))
 )
 
 class Location(db.Model):
@@ -53,15 +53,15 @@ class City(db.Model):
         lazy="dynamic"
     )
 
-class Quartier(db.Model):
-    __tablename__ = "quartier"
+class District(db.Model):
+    __tablename__ = "district"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), unique=True)
-    alerts = db.relationship("Alert", backref="quartier", lazy=True)
+    alerts = db.relationship("Alert", backref="district", lazy=True)
     limits = db.relationship(
-        "Location", secondary=QuartierLocation,
-        backref=db.backref("quatiers", lazy="dynamic"),
+        "Location", secondary=DistrictLocation,
+        backref=db.backref("districts", lazy="dynamic"),
         lazy="dynamic"
     )
 
@@ -75,5 +75,5 @@ class Alert(db.Model):
     end_time = db.Column(db.Time(), nullable=False)
     region_id = db.Column(db.Integer, db.ForeignKey("region.id"))
     city_id = db.Column(db.Integer, db.ForeignKey("city.id"))
-    quartier_id = db.Column(db.Integer, db.ForeignKey("quartier.id"))
+    district_id = db.Column(db.Integer, db.ForeignKey("district.id"))
 

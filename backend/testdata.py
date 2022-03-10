@@ -4,7 +4,7 @@ import re
 from datetime import datetime, timedelta
 
 from onacut import app, db
-from onacut.models import Alert, Location, City, Quartier, Region
+from onacut.models import Alert, Location, City, District, Region
 
 GEO_PATH = "../frontend/src/scripts/list_geo_cm.json"
 ALERT_PATH = "../frontend/src/scripts/alerts.json"
@@ -76,16 +76,17 @@ def create_alerts():
             db.session.commit()
             alert.region_id = region.id
 
-        in_quartier = data["quartier"].strip().lower()
-        qua = Quartier.query.filter_by(name=in_quartier).first()
-        if qua:
-            alert.quartier_id = qua.id
+        in_district = data["quartier"].strip().lower()
+        dis = District.query.filter_by(name=in_district).first()
+        if dis:
+            alert.district_id = dis.id
         else:
-            quartier = Quartier()
-            quartier.name = in_quartier
-            db.session.add(quartier)
+            district = District()
+            district.name = in_district
+            db.session.add(district)
             db.session.commit()
-            alert.quartier_id = quartier.id
+            alert.district_id = district.id
+            
         in_city = data["ville"].strip().lower()
         vil = City.query.filter_by(name=in_city).first()
         if vil:
