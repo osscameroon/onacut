@@ -13,7 +13,7 @@ class CitiesApi(MethodResource, Resource):
     @use_kwargs(CityGetParser, location=("json"))
     @marshal_with(CityGetResponseSchema(many=True))
     def get(self):
-        args = alert_get_parser.parse_args()
+        args = city_get_parser.parse_args()
         city_id = args["id"]
         if city_id:
             city = City.query.get(city_id)
