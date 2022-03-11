@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
-import { dataState } from "../../atoms/data";
 import { CityDetail } from "../../components/cityDetail/CityDetail.component";
 import { MyDrawer } from "../../components/drawer/Drawer.component";
 import { MyText } from "../../components/myText/MyText.component";
@@ -8,19 +7,20 @@ import home from "../../assets/img/hotel.png";
 import { Search } from "../../components/search/Search.component";
 import { LANGUAGE } from "../../constants/language";
 import { NotFound } from "../../components/notFound/NotFound.component";
+import { alertsState } from "../../atoms/alerts";
 
 const Detail = () => {
     const { search } = window.location;
     const query = new URLSearchParams(search).get("s");
     const [searchQuery, setSearchQuery] = useState(query || "");
-    const alerts = useRecoilValue(dataState);
+    const alerts = useRecoilValue(alertsState);
     const filteCities = (cities: any, query: any) => {
         if (!query) {
             return cities;
         }
 
         return cities.filter((region: any) => {
-            const cityName = region.quartier.toLowerCase();
+            const cityName = region.district.toLowerCase();
             return cityName.includes(query);
         });
     };
@@ -60,12 +60,12 @@ const Detail = () => {
                             {filteredCities.map((item: any, index: any) => (
                                 <CityDetail
                                     key={index}
-                                    ville={item?.ville}
+                                    ville={item?.city}
                                     observations={item?.observations}
-                                    calendar={item?.prog_date}
-                                    quartier={item?.quartier}
-                                    debut={item?.prog_heure_debut}
-                                    fin={item?.prog_heure_fin}
+                                    calendar={item?.date}
+                                    quartier={item?.district}
+                                    debut={item?.begin_time}
+                                    fin={item?.end_time}
                                 />
                             ))}
                         </main>
