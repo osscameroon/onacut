@@ -7,6 +7,9 @@ export const LANGUAGE = {
         panne: "Panne électrique",
         signalerPanne: "Signaler une panne de courant",
     },
+    homeModal: {
+        accept: "J'accepte"
+    },
     info: {
         title: "Panne de courant, et maintenant ? ",
         content: "Une panne de courant est un événement soudain et rare. Cependant, en cas de panne de courant, il est conseillé de rester calme dans un premier temps. De plus, vous devez faire attention à quelques éléments de votre foyer et nous signaler la panne de courant. ",
@@ -16,5 +19,8 @@ export const LANGUAGE = {
         title: "Troubles actuels",
         search: "Entrez la region",
         city: "Entrez la ville",
+    },
+    notfound: {
+        homePage: "Acceder a la page d'accueil"
     }
 }

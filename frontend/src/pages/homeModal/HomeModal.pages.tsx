@@ -3,6 +3,7 @@ import { useModal } from "react-hooks-use-modal";
 import { useRecoilState } from "recoil";
 import { modalState } from "../../atoms/modal";
 import { MyText } from "../../components/myText/MyText.component";
+import { LANGUAGE } from "../../constants/language";
 
 const HomeModal = () => {
     let [Modal, open, close, isOpen] = useModal("root", {
@@ -43,7 +44,7 @@ const HomeModal = () => {
                         style={{ fontFamily: " 'Varela Round', sans-serif" }}
                         className="flex cursor-pointer px-4 py-1 text-sm text-center text-gray-200"
                     >
-                        J'accepte
+                        {LANGUAGE.homeModal.accept}
                     </p>
                 </div>
             </div>
