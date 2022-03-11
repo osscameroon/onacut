@@ -2,6 +2,7 @@ Faker
 Flask
 Flask-Migrate
 Flask-RESTful
+flask-apispec
 Flask-SQLAlchemy==2.5.1
 Flask-Cors
 psycopg2-binary
