@@ -3,41 +3,25 @@ import datetime
 from onacut import db, app
 from flask import abort
 from onacut.models import City, Alert
-from flask_restful import Resource, fields, marshal_with
-from .parsers import alert_get_parser
-from .fields import alert_get_fields
+from flask_restful import Resource, fields
+from flask_apispec import marshal_with, doc, use_kwargs
+from flask_apispec.views import MethodResource
+from .parsers import alert_get_parser, AlertGetParser
+from .fields import AlertGetResponseSchema
 
-def format_alert(alert: Alert):
-    return {
-        "id": alert.id,
-        "observations": alert.observations,
-        "date": alert.date,
-        "begin_time": alert.begin_time,
-        "end_time": alert.end_time,
-        "region": alert.region.name,
-        "city": alert.city.name,
-        "district": alert.district.name
-    }
-
-class AlertsApi(Resource):
-    @marshal_with(alert_get_fields)
+class AlertsApi(MethodResource, Resource):
+    @doc(description='GET all Alerts.', tags=['Alerts'])
+    @use_kwargs(AlertGetParser, location=("json"))
+    @marshal_with(AlertGetResponseSchema(many=True))
     def get(self):
         args = alert_get_parser.parse_args()
         alert_id = args["id"]
         if alert_id:
-            alert = Alert.query.get()
+            alert = Alert.query.get(alert_id)
             if not alert:
                 abort(404)
-            return format_alert(alert), 200
+            return [alert], 200
         
         alerts = Alert.query.all()
-        return [format_alert(alert) for alert in alerts], 200
-
-    def post(self):
-        pass
-
-    def put(self):
-        pass
-
-    def delete(self):
-        pass
+        
+        return alerts, 200
