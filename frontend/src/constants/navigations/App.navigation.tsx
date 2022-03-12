@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Conseils from "../../pages/conseils/Conseils.pages";
+import Conseils from "../../pages/advices/Advices";
 import Detail from "../../pages/detail/Detail.page";
 import Home from "../../pages/home/Home.pages";
 import List from "../../pages/list/List.pages";

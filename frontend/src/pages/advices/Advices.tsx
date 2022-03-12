@@ -5,7 +5,7 @@ import { MyDrawer } from "../../components/drawer/Drawer.component";
 import { MyText } from "../../components/myText/MyText.component";
 import { LANGUAGE } from "../../constants/language";
 
-const Conseils = () => {
+const Advices = () => {
     return (
         <div className="site__conseils bg-cover w-auto h-screen">
             <div className="px-4 md:px-20 pt-5 md:pt-0">
@@ -42,4 +42,4 @@ const Conseils = () => {
     );
 };
 
-export default Conseils;
+export default Advices;
