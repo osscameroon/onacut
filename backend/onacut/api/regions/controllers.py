@@ -1,26 +1,26 @@
 import datetime
 
 from onacut import db, app
-from onacut.models import City
+from onacut.models import Region
 from flask_restful import Resource
 from flask_apispec import marshal_with, doc, use_kwargs
 from flask_apispec.views import MethodResource
-from .parsers import city_get_parser, CityGetParser
-from .fields import CityGetResponseSchema
+from .parsers import region_get_parser, RegionGetParser
+from .fields import RegionGetResponseSchema
 
-class CitiesApi(MethodResource, Resource):
-    @doc(description='GET all Cities.', tags=['Cities'])
-    @use_kwargs(CityGetParser, location=("json"))
-    @marshal_with(CityGetResponseSchema(many=True))
+class RegionsApi(MethodResource, Resource):
+    @doc(description="GET all Region.", tags=["Region"])
+    @use_kwargs(RegionGetParser, location=("json"))
+    @marshal_with(RegionGetResponseSchema(many=True))
     def get(self):
-        args = city_get_parser.parse_args()
-        city_id = args["id"]
-        if city_id:
-            city = City.query.get(city_id)
-            if not city:
+        args = region_get_parser.parse_args()
+        reg_id = args["id"]
+        if reg_id:
+            region = Region.query.get(reg_id)
+            if not region:
                 abort(404)
-            return [city], 200
+            return [region], 200
         
-        cities = City.query.all()
+        regions = Region.query.all()
         
-        return cities, 200
+        return regions, 200
