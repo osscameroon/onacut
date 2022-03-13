@@ -15,6 +15,7 @@ export const CityDetail = (props: any) => {
                     variant="title"
                     myText={props.ville}
                     myTextColor="text-ind"
+                    textUppercase="uppercase"
                 />
             </div>
             <div className="site__detail-item mt-4 flex items-center">
@@ -23,6 +24,7 @@ export const CityDetail = (props: any) => {
                     variant="normal"
                     myText={props.quartier}
                     myTextColor="text-gray-300"
+                    textUppercase="uppercase"
                 />
             </div>
             <div className="site__detail-item mt-4 flex items-center">
@@ -48,6 +50,7 @@ export const CityDetail = (props: any) => {
                         variant="item"
                         myText={`${props.debut} - ${props.fin}`}
                         myTextColor="text-gray-300"
+                        textUppercase="uppercase"
                     />
                 </div>
             </div>
