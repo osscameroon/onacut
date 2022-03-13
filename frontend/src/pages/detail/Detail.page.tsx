@@ -57,6 +57,7 @@ const Detail = () => {
                                     variant="title"
                                     myText={`${title?.region}`}
                                     myTextColor="text-ind"
+                                    textUppercase="uppercase"
                                 />
                             </div>
                             {filteredCities.map((item: any, index: any) => (

@@ -23,6 +23,7 @@ export const City = (props: any) => {
                             variant="normal"
                             myText={props.country}
                             myTextColor="text-white"
+                            textUppercase="uppercase"
                         />
                     </Link>
                 </div>
