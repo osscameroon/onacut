@@ -5,7 +5,7 @@ import { City } from "../../components/city/City.component";
 import { MyDrawer } from "../../components/drawer/Drawer.component";
 import { Search } from "../../components/search/Search.component";
 import { LANGUAGE } from "../../constants/language";
-import { alertsState, getAlerts } from "../../atoms/alerts";
+import { alertsState } from "../../atoms/alerts";
 import { getRegions } from "../../atoms/regions";
 import { NotFound } from "../../components/notFound/NotFound.component";
 import { Link } from "react-router-dom";
@@ -15,9 +15,8 @@ const List = () => {
     const { search } = window.location;
     const query = new URLSearchParams(search).get("s");
     const [searchQuery, setSearchQuery] = useState(query || "");
-    const myAlerts: any = useRecoilValue(getAlerts);
     const myRegions: any = useRecoilValue(getRegions);
-    console.log("MY REGIONS::::", myRegions?.data);
+    const alerts: any = useRecoilValue(alertsState);
     const [alert, setAlert] = useRecoilState(alertsState);
     const [region, setRegion] = useRecoilState(regionState);
     const printByRegion = (name: any): any => {
@@ -47,9 +46,6 @@ const List = () => {
         setRegion((region) => (region = uniqueRegion));
     }, []);
     const filteredRegions = filteRegions(region, searchQuery);
-    if (myRegions?.status !== 200) {
-        return <NotFound />;
-    }
     return (
         <div className="site__list bg-cover w-auto h-screen  ">
             <div className="px-4 md:px-20 pt-5 md:pt-0">
@@ -75,14 +71,13 @@ const List = () => {
                         {filteredRegions.map((item: any) => (
                             <City
                                 key={item}
-                                myClick={() =>
-                                    setAlert(
-                                        (alert: any) =>
-                                            (alert = printByRegion(
-                                                item?.region
-                                            ))
-                                    )
-                                }
+                                myClick={() => {
+                                    setAlert(printByRegion(item?.name));
+                                    localStorage.setItem(
+                                        "myRegionName",
+                                        item?.name
+                                    );
+                                }}
                                 region={item?.name}
                                 myMb="border-b"
                                 country={item?.name}
