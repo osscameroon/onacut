@@ -26,7 +26,7 @@ class Location(db.Model):
     name = db.Column(db.String(255))
     asciiname = db.Column(db.String(255))
     alternativenames = db.Column(db.Text)
-    longitude = db.Column(db.Float,)
+    longitude = db.Column(db.Float)
     lattitude = db.Column(db.Float)
 
 class Region(db.Model):
@@ -34,6 +34,7 @@ class Region(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), unique=True)
+    cities = db.relationship("City", backref="region", lazy=True)
     alerts = db.relationship("Alert", backref="region", lazy=True)
     limits = db.relationship(
         "Location", secondary=RegionLocation,
@@ -45,7 +46,9 @@ class City(db.Model):
     __tablename__ = "city"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), unique=True)
+    name = db.Column(db.String(255))
+    region_id = db.Column(db.Integer, db.ForeignKey("region.id"))
+    districts = db.relationship("District", backref="city", lazy=True)
     alerts = db.relationship("Alert", backref="city", lazy=True)
     limits = db.relationship(
         "Location", secondary=CityLocation,
@@ -58,6 +61,7 @@ class District(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), unique=True)
+    city_id = db.Column(db.Integer, db.ForeignKey("city.id"))
     alerts = db.relationship("Alert", backref="district", lazy=True)
     limits = db.relationship(
         "Location", secondary=DistrictLocation,
@@ -76,4 +80,3 @@ class Alert(db.Model):
     region_id = db.Column(db.Integer, db.ForeignKey("region.id"))
     city_id = db.Column(db.Integer, db.ForeignKey("city.id"))
     district_id = db.Column(db.Integer, db.ForeignKey("district.id"))
-

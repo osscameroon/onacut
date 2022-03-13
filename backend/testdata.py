@@ -10,6 +10,19 @@ GEO_PATH = "../frontend/src/scripts/list_geo_cm.json"
 ALERT_PATH = "../frontend/src/scripts/alerts.json"
 UNITS = {'S':'seconds', 'M':'minutes', 'H':'hours', 'D':'days', 'W':'weeks'}
 
+SOME_CITIES = [
+    {"name": "bamenda", "region": "sud-ouest"},
+    {"name": "bafoussam", "region": "ouest"},
+    {"name": "bertoua", "region": "est"},
+    {"name": "buea", "region": "nord-ouest"},
+    {"name": "douala", "region": "littoral"},
+    {"name": "ebolowa", "region": "sud"},
+    {"name": "yaounde", "region": "centre"},
+    {"name": "garoua", "region": "nord"},
+    {"name": "ngaoundere", "region": "adamaoua"},
+    {"name": "maroua", "region": "extreme-nord"},
+]
+
 def convert_to_seconds(s):
     return int(timedelta(**{
         UNITS.get(m.group('unit').lower(), 'seconds'): float(m.group('val'))
@@ -37,7 +50,18 @@ def create_location():
     db.session.commit()
 
 def create_region():
-    regions = ["Yaounde", "Douala", "Sud-Ouest", "Sud", "Nord-Ouest", "Nord", "Ouest", "Littoral", "Extreme-Nord", "Est", "Centre", "Adamaoua"]
+    regions = [
+        "sud-ouest",
+        "sud",
+        "nord-ouest",
+        "nord",
+        "ouest",
+        "littoral",
+        "extreme-nord",
+        "est",
+        "centre",
+        "adamaoua"
+    ]
     for region in regions:
         reg = Region()
         reg.name = region
@@ -45,10 +69,20 @@ def create_region():
     db.session.commit()
 
 def create_cities():
-    cities = ["bamenda", "bafoussam", "bertoua", "buea", "douala", "ebolowa", "garoua", "maroua", "ngaoundere", "yaounde"]
-    for _city in cities:
+    for _city in SOME_CITIES:
         city = City()
-        city.name = _city
+        city.name = _city["name"]
+
+        reg = Region.query.filter_by(name=_city["region"]).first()
+
+        if reg:
+            city.region_id = reg.id
+        else:
+            reg = Region()
+            reg.name = _city["region"]
+            db.session.add(reg)
+            city.region_id = reg.id
+
         db.session.add(city)
     db.session.commit()
 
@@ -76,17 +110,6 @@ def create_alerts():
             db.session.commit()
             alert.region_id = region.id
 
-        in_district = data["quartier"].strip().lower()
-        dis = District.query.filter_by(name=in_district).first()
-        if dis:
-            alert.district_id = dis.id
-        else:
-            district = District()
-            district.name = in_district
-            db.session.add(district)
-            db.session.commit()
-            alert.district_id = district.id
-
         in_city = data["ville"].strip().lower()
         vil = City.query.filter_by(name=in_city).first()
         if vil:
@@ -95,8 +118,27 @@ def create_alerts():
             city = City()
             city.name = in_city
             db.session.add(city)
+            if reg:
+                city.region_id = reg.id
+            else:
+                city.region_id = region.id
             db.session.commit()
             alert.city_id = city.id
+
+        in_district = data["quartier"].strip().lower()
+        dis = District.query.filter_by(name=in_district).first()
+        if dis:
+            alert.district_id = dis.id
+        else:
+            district = District()
+            district.name = in_district
+            if vil:
+                district.city_id = vil.id
+            else:
+                district.city_id = city.id
+            db.session.add(district)
+            db.session.commit()
+            alert.district_id = district.id
 
         db.session.add(alert)
     db.session.commit()
