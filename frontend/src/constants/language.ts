@@ -22,5 +22,6 @@ export const LANGUAGE = {
     },
     notfound: {
         homePage: "Acceder a la page d'accueil"
-    }
+    },
+    loading: "Chargement..."
 }

@@ -7,6 +7,8 @@ import { Search } from "../../components/search/Search.component";
 import { LANGUAGE } from "../../constants/language";
 import { alertsState, getAlerts } from "../../atoms/alerts";
 import { NotFound } from "../../components/notFound/NotFound.component";
+import { Link } from "react-router-dom";
+import accueil from "../../assets/img/accueil.png";
 
 const List = () => {
     const { search } = window.location;
@@ -50,7 +52,18 @@ const List = () => {
         <div className="site__list bg-cover w-auto h-screen  ">
             <div className="px-4 md:px-20 pt-5 md:pt-0">
                 <div className="container mx-auto">
-                    <MyDrawer />
+                    <header className="site__lists-header flex justify-between items-center">
+                        <MyDrawer />
+                        <Link to="/">
+                            <button className="flex items-center">
+                                <img
+                                    alt="menu"
+                                    className={`w-8 md:w-12 bg-cover h-auto mt-2 md:mt-4 md:mr-40 border-ind border-solid px-1 pt-2`}
+                                    src={accueil}
+                                />
+                            </button>
+                        </Link>
+                    </header>
                     <main className="site__main pt-8 md:pt-20 px-4 pb-6 md:px-40">
                         <Search
                             placeholder={LANGUAGE.list.search}
