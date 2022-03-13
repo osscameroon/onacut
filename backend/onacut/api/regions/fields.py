@@ -1,7 +1,7 @@
 from marshmallow import Schema, fields
 # from flask_restful import fields
 
-class CityGetResponseSchema(Schema):
+class RegionGetResponseSchema(Schema):
     id =  fields.Integer()
     name =  fields.String()
     
