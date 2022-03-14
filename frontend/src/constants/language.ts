@@ -23,5 +23,6 @@ export const LANGUAGE = {
     notfound: {
         homePage: "Acceder a la page d'accueil"
     },
-    loading: "Chargement..."
+    loading: "Chargement...",
+    empty: "Aucune alerte pour cette region"
 }
