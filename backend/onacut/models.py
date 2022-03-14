@@ -1,5 +1,5 @@
 
-from onacut import app, db
+from onacut import db
 
 RegionLocation = db.Table(
     "region_location",
@@ -19,6 +19,7 @@ DistrictLocation = db.Table(
     db.Column("district_id", db.Integer, db.ForeignKey("district.id"))
 )
 
+
 class Location(db.Model):
     __tablename__ = "location"
 
@@ -28,6 +29,7 @@ class Location(db.Model):
     alternativenames = db.Column(db.Text)
     longitude = db.Column(db.Float)
     lattitude = db.Column(db.Float)
+
 
 class Region(db.Model):
     __tablename__ = "region"
@@ -41,6 +43,7 @@ class Region(db.Model):
         backref=db.backref("regions", lazy="dynamic"),
         lazy="dynamic"
     )
+
 
 class City(db.Model):
     __tablename__ = "city"
@@ -56,6 +59,7 @@ class City(db.Model):
         lazy="dynamic"
     )
 
+
 class District(db.Model):
     __tablename__ = "district"
 
@@ -68,6 +72,7 @@ class District(db.Model):
         backref=db.backref("districts", lazy="dynamic"),
         lazy="dynamic"
     )
+
 
 class Alert(db.Model):
     __tablename__ = "alert"

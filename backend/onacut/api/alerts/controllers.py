@@ -1,13 +1,11 @@
-import datetime
-
-from onacut import db, app
 from flask import abort
 from onacut.models import City, Region, District, Alert
-from flask_restful import Resource, fields
+from flask_restful import Resource
 from flask_apispec import marshal_with, doc, use_kwargs
 from flask_apispec.views import MethodResource
 from .parsers import alert_get_parser, AlertGetParser
 from .fields import AlertGetResponseSchema
+
 
 class AlertsApi(MethodResource, Resource):
     @doc(description='GET all Alerts.', tags=['Alerts'])
@@ -25,7 +23,7 @@ class AlertsApi(MethodResource, Resource):
             if not alert:
                 abort(404)
             return [alert], 200
-        
+
         alerts = Alert.query
 
         if region_name:
@@ -48,5 +46,5 @@ class AlertsApi(MethodResource, Resource):
                 abort(404)
 
             alerts = alerts.filter_by(district_id=district.id)
-        
+
         return alerts.all(), 200

@@ -1,12 +1,11 @@
-import datetime
-
-from onacut import db, app
+from flask import abort
 from onacut.models import District
 from flask_restful import Resource
 from flask_apispec import marshal_with, doc, use_kwargs
 from flask_apispec.views import MethodResource
 from .parsers import DistrictGetParser, district_get_parser
 from .fields import DistrictGetResponseSchema
+
 
 class DistrictsApi(MethodResource, Resource):
     @doc(description='GET all Districts.', tags=['Districts'])
@@ -20,7 +19,7 @@ class DistrictsApi(MethodResource, Resource):
             if not district:
                 abort(404)
             return [district], 200
-        
+
         districts = District.query.all()
-        
+
         return districts, 200

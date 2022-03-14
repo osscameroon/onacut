@@ -25,7 +25,15 @@ alert_get_parser.add_argument(
 
 
 class AlertGetParser(Schema):
-    id = fields.Integer(required=False, description="Id of the alert")
-    region = fields.String(required=False, description="Thy name of the region in which the alert are")
-    city = fields.String(required=False, description="Thy name of the city in which the alert are")
-    district = fields.String(required=False, description="Thy name of the district in which the alert are")
+    id = fields.Integer(
+        required=False,
+        description="Id of the alert")
+    region = fields.String(
+        required=False,
+        description="Thy name of the region in which the alert are")
+    city = fields.String(
+        required=False,
+        description="Thy name of the city in which the alert are")
+    district = fields.String(
+        required=False,
+        description="Thy name of the district in which the alert are")

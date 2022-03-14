@@ -10,6 +10,7 @@ from .district.controllers import DistrictsApi
 api = Api()
 doc = FlaskApiSpec()
 
+
 def create_module(app, **kwargs):
     api.add_resource(CitiesApi, "/api/cities")
     api.add_resource(DistrictsApi, "/api/districts")

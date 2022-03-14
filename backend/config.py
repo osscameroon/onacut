@@ -3,6 +3,7 @@ import os
 from apispec import APISpec
 from apispec.ext.marshmallow import MarshmallowPlugin
 
+
 class BaseConfig(object):
     DEBUG = False
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))

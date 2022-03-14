@@ -7,3 +7,6 @@ Flask-SQLAlchemy==2.5.1
 Flask-Cors
 psycopg2-binary
 python-dotenv
+isort
+black
+flake8
