@@ -1,10 +1,12 @@
 from flask import abort
-from onacut.models import Region
-from flask_restful import Resource
-from flask_apispec import marshal_with, doc, use_kwargs
+from flask_apispec import doc, marshal_with, use_kwargs
 from flask_apispec.views import MethodResource
-from .parsers import region_get_parser, RegionGetParser
+from flask_restful import Resource
+
+from onacut.models import Region
+
 from .fields import RegionGetResponseSchema
+from .parsers import RegionGetParser, region_get_parser
 
 
 class RegionsApi(MethodResource, Resource):

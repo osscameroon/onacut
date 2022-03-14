@@ -1,10 +1,9 @@
 import json
 import re
-
 from datetime import datetime, timedelta
 
 from onacut import db
-from onacut.models import Alert, Location, City, District, Region
+from onacut.models import Alert, City, District, Location, Region
 
 GEO_PATH = "../frontend/src/scripts/list_geo_cm.json"
 ALERT_PATH = "../frontend/src/scripts/alerts.json"

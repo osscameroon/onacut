@@ -1,10 +1,12 @@
 from flask import abort
-from onacut.models import City
-from flask_restful import Resource
-from flask_apispec import marshal_with, doc, use_kwargs
+from flask_apispec import doc, marshal_with, use_kwargs
 from flask_apispec.views import MethodResource
-from .parsers import city_get_parser, CityGetParser
+from flask_restful import Resource
+
+from onacut.models import City
+
 from .fields import CityGetResponseSchema
+from .parsers import CityGetParser, city_get_parser
 
 
 class CitiesApi(MethodResource, Resource):

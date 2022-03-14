@@ -1,10 +1,12 @@
 from flask import abort
-from onacut.models import District
-from flask_restful import Resource
-from flask_apispec import marshal_with, doc, use_kwargs
+from flask_apispec import doc, marshal_with, use_kwargs
 from flask_apispec.views import MethodResource
-from .parsers import DistrictGetParser, district_get_parser
+from flask_restful import Resource
+
+from onacut.models import District
+
 from .fields import DistrictGetResponseSchema
+from .parsers import DistrictGetParser, district_get_parser
 
 
 class DistrictsApi(MethodResource, Resource):
