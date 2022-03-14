@@ -10,7 +10,7 @@ from .parsers import DistrictGetParser, district_get_parser
 
 
 class DistrictsApi(MethodResource, Resource):
-    @doc(description='GET all Districts.', tags=['Districts'])
+    @doc(description="GET all Districts.", tags=["Districts"])
     @use_kwargs(DistrictGetParser, location=("json"))
     @marshal_with(DistrictGetResponseSchema(many=True))
     def get(self):

@@ -10,7 +10,7 @@ from .parsers import AlertGetParser, alert_get_parser
 
 
 class AlertsApi(MethodResource, Resource):
-    @doc(description='GET all Alerts.', tags=['Alerts'])
+    @doc(description="GET all Alerts.", tags=["Alerts"])
     @use_kwargs(AlertGetParser, location=("json"))
     @marshal_with(AlertGetResponseSchema(many=True))
     def get(self):

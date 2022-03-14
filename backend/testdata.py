@@ -7,7 +7,7 @@ from onacut.models import Alert, City, District, Location, Region
 
 GEO_PATH = "../frontend/src/scripts/list_geo_cm.json"
 ALERT_PATH = "../frontend/src/scripts/alerts.json"
-UNITS = {'S': 'seconds', 'M': 'minutes', 'H': 'hours', 'D': 'days', 'W': 'weeks'}
+UNITS = {"S": "seconds", "M": "minutes", "H": "hours", "D": "days", "W": "weeks"}
 
 SOME_CITIES = [
     {"name": "bamenda", "region": "sud-ouest"},
@@ -24,10 +24,16 @@ SOME_CITIES = [
 
 
 def convert_to_seconds(s):
-    return int(timedelta(**{
-        UNITS.get(m.group('unit').lower(), 'seconds'): float(m.group('val'))
-        for m in re.finditer(r'(?P<val>\d+(\.\d+)?)(?P<unit>[smhdw]?)', s, flags=re.I)
-    }).total_seconds())
+    return int(
+        timedelta(
+            **{
+                UNITS.get(m.group("unit").lower(), "seconds"): float(m.group("val"))
+                for m in re.finditer(
+                    r"(?P<val>\d+(\.\d+)?)(?P<unit>[smhdw]?)", s, flags=re.I
+                )
+            }
+        ).total_seconds()
+    )
 
 
 def create_db():
@@ -63,7 +69,7 @@ def create_region():
         "extreme-nord",
         "est",
         "centre",
-        "adamaoua"
+        "adamaoua",
     ]
     for region in regions:
         reg = Region()

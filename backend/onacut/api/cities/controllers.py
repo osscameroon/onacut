@@ -10,7 +10,7 @@ from .parsers import CityGetParser, city_get_parser
 
 
 class CitiesApi(MethodResource, Resource):
-    @doc(description='GET all Cities.', tags=['Cities'])
+    @doc(description="GET all Cities.", tags=["Cities"])
     @use_kwargs(CityGetParser, location=("json"))
     @marshal_with(CityGetResponseSchema(many=True))
     def get(self):
