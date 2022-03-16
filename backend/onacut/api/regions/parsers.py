@@ -3,9 +3,7 @@ from marshmallow import Schema, fields
 
 region_get_parser = reqparse.RequestParser()
 region_get_parser.add_argument(
-    "id",
-    type=int,
-    location=["args", "values", "form", "json", "headers"]
+    "id", type=int, location=["args", "values", "form", "json", "headers"]
 )
 
 

@@ -1,23 +1,23 @@
-
-from onacut import app, db
+from onacut import db
 
 RegionLocation = db.Table(
     "region_location",
     db.Column("location_id", db.Integer, db.ForeignKey("location.id")),
-    db.Column("region_id", db.Integer, db.ForeignKey("region.id"))
+    db.Column("region_id", db.Integer, db.ForeignKey("region.id")),
 )
 
 CityLocation = db.Table(
     "city_location",
     db.Column("location_id", db.Integer, db.ForeignKey("location.id")),
-    db.Column("city_id", db.Integer, db.ForeignKey("city.id"))
+    db.Column("city_id", db.Integer, db.ForeignKey("city.id")),
 )
 
 DistrictLocation = db.Table(
     "district_location",
     db.Column("location_id", db.Integer, db.ForeignKey("location.id")),
-    db.Column("district_id", db.Integer, db.ForeignKey("district.id"))
+    db.Column("district_id", db.Integer, db.ForeignKey("district.id")),
 )
+
 
 class Location(db.Model):
     __tablename__ = "location"
@@ -29,6 +29,7 @@ class Location(db.Model):
     longitude = db.Column(db.Float)
     lattitude = db.Column(db.Float)
 
+
 class Region(db.Model):
     __tablename__ = "region"
 
@@ -37,10 +38,12 @@ class Region(db.Model):
     cities = db.relationship("City", backref="region", lazy=True)
     alerts = db.relationship("Alert", backref="region", lazy=True)
     limits = db.relationship(
-        "Location", secondary=RegionLocation,
+        "Location",
+        secondary=RegionLocation,
         backref=db.backref("regions", lazy="dynamic"),
-        lazy="dynamic"
+        lazy="dynamic",
     )
+
 
 class City(db.Model):
     __tablename__ = "city"
@@ -51,10 +54,12 @@ class City(db.Model):
     districts = db.relationship("District", backref="city", lazy=True)
     alerts = db.relationship("Alert", backref="city", lazy=True)
     limits = db.relationship(
-        "Location", secondary=CityLocation,
+        "Location",
+        secondary=CityLocation,
         backref=db.backref("cities", lazy="dynamic"),
-        lazy="dynamic"
+        lazy="dynamic",
     )
+
 
 class District(db.Model):
     __tablename__ = "district"
@@ -64,10 +69,12 @@ class District(db.Model):
     city_id = db.Column(db.Integer, db.ForeignKey("city.id"))
     alerts = db.relationship("Alert", backref="district", lazy=True)
     limits = db.relationship(
-        "Location", secondary=DistrictLocation,
+        "Location",
+        secondary=DistrictLocation,
         backref=db.backref("districts", lazy="dynamic"),
-        lazy="dynamic"
+        lazy="dynamic",
     )
+
 
 class Alert(db.Model):
     __tablename__ = "alert"

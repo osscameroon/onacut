@@ -1,14 +1,14 @@
-
-from flask_restful import Api
 from flask_apispec.extension import FlaskApiSpec
-from .cities.controllers import CitiesApi
-from .alerts.controllers import AlertsApi
-from .regions.controllers import RegionsApi
-from .district.controllers import DistrictsApi
+from flask_restful import Api
 
+from .alerts.controllers import AlertsApi
+from .cities.controllers import CitiesApi
+from .district.controllers import DistrictsApi
+from .regions.controllers import RegionsApi
 
 api = Api()
 doc = FlaskApiSpec()
+
 
 def create_module(app, **kwargs):
     api.add_resource(CitiesApi, "/api/cities")

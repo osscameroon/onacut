@@ -1,14 +1,13 @@
 import json
 import re
-
 from datetime import datetime, timedelta
 
-from onacut import app, db
-from onacut.models import Alert, Location, City, District, Region
+from onacut import db
+from onacut.models import Alert, City, District, Location, Region
 
 GEO_PATH = "../frontend/src/scripts/list_geo_cm.json"
 ALERT_PATH = "../frontend/src/scripts/alerts.json"
-UNITS = {'S':'seconds', 'M':'minutes', 'H':'hours', 'D':'days', 'W':'weeks'}
+UNITS = {"S": "seconds", "M": "minutes", "H": "hours", "D": "days", "W": "weeks"}
 
 SOME_CITIES = [
     {"name": "bamenda", "region": "sud-ouest"},
@@ -23,11 +22,19 @@ SOME_CITIES = [
     {"name": "maroua", "region": "extreme-nord"},
 ]
 
+
 def convert_to_seconds(s):
-    return int(timedelta(**{
-        UNITS.get(m.group('unit').lower(), 'seconds'): float(m.group('val'))
-        for m in re.finditer(r'(?P<val>\d+(\.\d+)?)(?P<unit>[smhdw]?)', s, flags=re.I)
-    }).total_seconds())
+    return int(
+        timedelta(
+            **{
+                UNITS.get(m.group("unit").lower(), "seconds"): float(m.group("val"))
+                for m in re.finditer(
+                    r"(?P<val>\d+(\.\d+)?)(?P<unit>[smhdw]?)", s, flags=re.I
+                )
+            }
+        ).total_seconds()
+    )
+
 
 def create_db():
     db.drop_all()
@@ -35,10 +42,11 @@ def create_db():
     db.create_all()
     db.session.commit()
 
+
 def create_location():
     with open(GEO_PATH, "r", encoding="utf-8") as f:
         data = json.load(f)
-    
+
     for geo in data:
         loc = Location()
         loc.name = geo["name"]
@@ -48,6 +56,7 @@ def create_location():
         loc.lattitude = geo["lat"]
         db.session.add(loc)
     db.session.commit()
+
 
 def create_region():
     regions = [
@@ -60,13 +69,14 @@ def create_region():
         "extreme-nord",
         "est",
         "centre",
-        "adamaoua"
+        "adamaoua",
     ]
     for region in regions:
         reg = Region()
         reg.name = region
         db.session.add(reg)
     db.session.commit()
+
 
 def create_cities():
     for _city in SOME_CITIES:
@@ -86,10 +96,11 @@ def create_cities():
         db.session.add(city)
     db.session.commit()
 
+
 def create_alerts():
     with open(ALERT_PATH, "r", encoding="utf-8") as f:
         datas = json.load(f)
-    
+
     for data in datas:
         alert = Alert()
         alert.observations = data["observations"]
@@ -150,6 +161,7 @@ def main():
     create_region()
     create_cities()
     create_alerts()
+
 
 if __name__ == "__main__":
     main()
