@@ -10,16 +10,16 @@ ALERT_PATH = "../frontend/src/scripts/alerts.json"
 UNITS = {"S": "seconds", "M": "minutes", "H": "hours", "D": "days", "W": "weeks"}
 
 SOME_CITIES = [
-    {"name": "bamenda", "region": "sud-ouest"},
-    {"name": "bafoussam", "region": "ouest"},
-    {"name": "bertoua", "region": "est"},
-    {"name": "buea", "region": "nord-ouest"},
-    {"name": "douala", "region": "littoral"},
-    {"name": "ebolowa", "region": "sud"},
-    {"name": "yaounde", "region": "centre"},
-    {"name": "garoua", "region": "nord"},
-    {"name": "ngaoundere", "region": "adamaoua"},
-    {"name": "maroua", "region": "extreme-nord"},
+    {"name": "bamenda", "region": "sud-ouest", "longlat": [5.914395, 10.129316]},
+    {"name": "bafoussam", "region": "ouest", "longlat": [5.468774, 10.420834]},
+    {"name": "bertoua", "region": "est", "longlat": [4.558081, 13.662206]},
+    {"name": "buea", "region": "nord-ouest", "longlat": [4.155587, 9.232463]},
+    {"name": "douala", "region": "littoral", "longlat": [4.03222, 9.706715]},
+    {"name": "ebolowa", "region": "sud", "longlat": [2.891746, 11.15648]},
+    {"name": "yaounde", "region": "centre", "longlat": [3.826985, 11.495974]},
+    {"name": "garoua", "region": "nord", "longlat": [7.349664, 13.577051]},
+    {"name": "ngaoundere", "region": "adamaoua", "longlat": [7.349664, 13.577051]},
+    {"name": "maroua", "region": "extreme-nord", "longlat": [10.588261, 14.350791]},
 ]
 
 
@@ -92,6 +92,21 @@ def create_cities():
             reg.name = _city["region"]
             db.session.add(reg)
             city.region_id = reg.id
+
+        longlat = _city["longlat"]
+
+        exist_loc = Location.query.filter_by(
+            longitude=longlat[0], lattitude=longlat[1]
+        ).first()
+        if exist_loc:
+            city.locations.append(exist_loc)
+        else:
+            loc = Location()
+            loc.name = _city["name"]
+            loc.asciiname = _city["name"]
+            loc.longitude, loc.lattitude = longlat
+            db.session.add(loc)
+            city.locations.append(loc)
 
         db.session.add(city)
     db.session.commit()

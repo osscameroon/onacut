@@ -37,7 +37,7 @@ class Region(db.Model):
     name = db.Column(db.String(255), unique=True)
     cities = db.relationship("City", backref="region", lazy=True)
     alerts = db.relationship("Alert", backref="region", lazy=True)
-    limits = db.relationship(
+    locations = db.relationship(
         "Location",
         secondary=RegionLocation,
         backref=db.backref("regions", lazy="dynamic"),
@@ -53,7 +53,7 @@ class City(db.Model):
     region_id = db.Column(db.Integer, db.ForeignKey("region.id"))
     districts = db.relationship("District", backref="city", lazy=True)
     alerts = db.relationship("Alert", backref="city", lazy=True)
-    limits = db.relationship(
+    locations = db.relationship(
         "Location",
         secondary=CityLocation,
         backref=db.backref("cities", lazy="dynamic"),
@@ -68,7 +68,7 @@ class District(db.Model):
     name = db.Column(db.String(255), unique=True)
     city_id = db.Column(db.Integer, db.ForeignKey("city.id"))
     alerts = db.relationship("Alert", backref="district", lazy=True)
-    limits = db.relationship(
+    locations = db.relationship(
         "Location",
         secondary=DistrictLocation,
         backref=db.backref("districts", lazy="dynamic"),
@@ -85,5 +85,6 @@ class Alert(db.Model):
     begin_time = db.Column(db.Time(), nullable=False)
     end_time = db.Column(db.Time(), nullable=False)
     region_id = db.Column(db.Integer, db.ForeignKey("region.id"))
+    # location_id = db.Column(db.Integer, db.ForeignKey("location.id"))
     city_id = db.Column(db.Integer, db.ForeignKey("city.id"))
     district_id = db.Column(db.Integer, db.ForeignKey("district.id"))
