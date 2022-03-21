@@ -1,8 +1,9 @@
 from marshmallow import Schema, fields
 
-# from flask_restful import fields
+from ..locations.fields import LocationGetResponseSchema
 
 
 class CityGetResponseSchema(Schema):
     id = fields.Integer()
     name = fields.String()
+    locations = fields.List(fields.Nested(LocationGetResponseSchema))

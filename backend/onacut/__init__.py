@@ -1,11 +1,12 @@
 import os
 
-from config import DevConfig, ProdConfig
 from dotenv import load_dotenv
 from flask import Flask
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+
+from config import DevConfig, ProdConfig
 
 load_dotenv()
 
