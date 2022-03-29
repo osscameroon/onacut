@@ -80,9 +80,11 @@ def create_region():
 
 def create_cities():
     for _city in SOME_CITIES:
+        point = get_city_location(_city["name"])
         city = City()
         city.name = _city["name"]
-
+        city.longitude = point["lon"] if point else 0.0
+        city.lattitude = point["lat"] if point else 0.0
         reg = Region.query.filter_by(name=_city["region"]).first()
 
         if reg:
@@ -136,13 +138,16 @@ def create_alerts():
             db.session.commit()
             alert.region_id = region.id
 
-        in_city = data["ville"].strip().lower()
+        in_city = data["ville"].split(",")[0].strip().lower()
+        point = get_city_location(in_city)
         vil = City.query.filter_by(name=in_city).first()
         if vil:
             alert.city_id = vil.id
         else:
             city = City()
             city.name = in_city
+            city.longitude = point["lon"] if point else 0.0
+            city.lattitude = point["lat"] if point else 0.0
             db.session.add(city)
             if reg:
                 city.region_id = reg.id

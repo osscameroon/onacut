@@ -51,6 +51,8 @@ class City(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     region_id = db.Column(db.Integer, db.ForeignKey("region.id"))
+    longitude = db.Column(db.Float)
+    lattitude = db.Column(db.Float)
     districts = db.relationship("District", backref="city", lazy=True)
     alerts = db.relationship("Alert", backref="city", lazy=True)
     locations = db.relationship(
