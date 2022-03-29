@@ -1,5 +1,7 @@
 import json
 import re
+import requests
+import random
 from datetime import datetime, timedelta
 
 from onacut import db
@@ -34,6 +36,28 @@ def convert_to_seconds(s):
             }
         ).total_seconds()
     )
+
+
+def filter_cameron_points(points):
+    results = []
+    for point in points:
+        if "cameroun" in point["display_name"].lower() \
+            or "cameroon" in point["display_name"].lower() \
+            or "kamerun" in point["display_name"].lower():
+            results.append(point)
+    return results
+
+
+def get_city_location(city: str):
+    endpoint = f"https://nominatim.openstreetmap.org/search.php?q={city}&format=json"
+
+    points = filter_cameron_points(requests.get(endpoint).json())
+    if points:
+        index = random.randint(0, len(points) - 1)
+        location = points[index]
+        return location
+    else:
+        return None
 
 
 def create_db():
