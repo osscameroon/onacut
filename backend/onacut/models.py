@@ -51,6 +51,8 @@ class City(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     region_id = db.Column(db.Integer, db.ForeignKey("region.id"))
+    longitude = db.Column(db.Float)
+    lattitude = db.Column(db.Float)
     districts = db.relationship("District", backref="city", lazy=True)
     alerts = db.relationship("Alert", backref="city", lazy=True)
     locations = db.relationship(
@@ -85,6 +87,7 @@ class Alert(db.Model):
     begin_time = db.Column(db.Time(), nullable=False)
     end_time = db.Column(db.Time(), nullable=False)
     region_id = db.Column(db.Integer, db.ForeignKey("region.id"))
-    # location_id = db.Column(db.Integer, db.ForeignKey("location.id"))
+    longitude = db.Column(db.Float)
+    lattitude = db.Column(db.Float)
     city_id = db.Column(db.Integer, db.ForeignKey("city.id"))
     district_id = db.Column(db.Integer, db.ForeignKey("district.id"))

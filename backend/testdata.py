@@ -1,5 +1,7 @@
 import json
 import re
+import requests
+import random
 from datetime import datetime, timedelta
 
 from onacut import db
@@ -34,6 +36,28 @@ def convert_to_seconds(s):
             }
         ).total_seconds()
     )
+
+
+def filter_cameron_points(points):
+    results = []
+    for point in points:
+        if "cameroun" in point["display_name"].lower() \
+            or "cameroon" in point["display_name"].lower() \
+            or "kamerun" in point["display_name"].lower():
+            results.append(point)
+    return results
+
+
+def get_city_location(city: str):
+    endpoint = f"https://nominatim.openstreetmap.org/search.php?q={city}&format=json"
+
+    points = filter_cameron_points(requests.get(endpoint).json())
+    if points:
+        index = random.randint(0, len(points) - 1)
+        location = points[index]
+        return location
+    else:
+        return None
 
 
 def create_db():
@@ -80,9 +104,11 @@ def create_region():
 
 def create_cities():
     for _city in SOME_CITIES:
+        point = get_city_location(_city["name"])
         city = City()
         city.name = _city["name"]
-
+        city.longitude = point["lon"] if point else 0.0
+        city.lattitude = point["lat"] if point else 0.0
         reg = Region.query.filter_by(name=_city["region"]).first()
 
         if reg:
@@ -136,13 +162,16 @@ def create_alerts():
             db.session.commit()
             alert.region_id = region.id
 
-        in_city = data["ville"].strip().lower()
+        in_city = data["ville"].split(",")[0].strip().lower()
+        point = get_city_location(in_city)
         vil = City.query.filter_by(name=in_city).first()
         if vil:
             alert.city_id = vil.id
         else:
             city = City()
             city.name = in_city
+            city.longitude = point["lon"] if point else 0.0
+            city.lattitude = point["lat"] if point else 0.0
             db.session.add(city)
             if reg:
                 city.region_id = reg.id
@@ -151,6 +180,8 @@ def create_alerts():
             db.session.commit()
             alert.city_id = city.id
 
+        alert.longitude = point["lon"] if point else 0.0
+        alert.lattitude = point["lat"] if point else 0.0
         in_district = data["quartier"].strip().lower()
         dis = District.query.filter_by(name=in_district).first()
         if dis:
