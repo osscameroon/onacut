@@ -156,6 +156,8 @@ def create_alerts():
             db.session.commit()
             alert.city_id = city.id
 
+        alert.longitude = point["lon"] if point else 0.0
+        alert.lattitude = point["lat"] if point else 0.0
         in_district = data["quartier"].strip().lower()
         dis = District.query.filter_by(name=in_district).first()
         if dis:
