@@ -59,8 +59,6 @@ const StreetMap = () => {
     let [listQuartier, setListQuartier]: any = useState([]);
     const myCities: any = useRecoilValue(getCities)?.data;
 
-    console.log("MY CITIES=>", myCities);
-
     if (v > 9) {
         return (
             <MapContainer

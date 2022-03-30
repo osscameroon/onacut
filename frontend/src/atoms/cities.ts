@@ -2,6 +2,7 @@ import axios from "axios";
 import { atom, selector } from "recoil"
 import { recoilPersist } from 'recoil-persist'
 const { persistAtom } = recoilPersist()
+import { API_BASE_URL } from "../config";
 
 
 export const cityState = atom({
@@ -18,7 +19,7 @@ export const getCities = selector({
             return null
         }
         return axios.get(
-            "http://localhost:5000/api/cities"
+            API_BASE_URL+"/cities"
         );
     }
 })
