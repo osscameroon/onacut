@@ -17,6 +17,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { zoomLevelState } from "../../atoms/zom_leve";
 import { Modal } from "../../modals/Modals";
 import { panneBtnState } from "../../atoms/panne_btn";
+import { getCities } from "../../atoms/cities";
 
 function MyComponent() {
     const [zoomLevel, setZoomLevel] = useRecoilState(zoomLevelState); // initial zoom level provided for MapContainer
@@ -56,6 +57,9 @@ const StreetMap = () => {
     let [ville, setVille]: any = useState("");
     let [numAlert, setNumAlert]: any = useState(0);
     let [listQuartier, setListQuartier]: any = useState([]);
+    const myCities: any = useRecoilValue(getCities)?.data;
+
+    console.log("MY CITIES=>", myCities);
 
     if (v > 9) {
         return (
@@ -123,24 +127,24 @@ const StreetMap = () => {
                     attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
                     url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
                 />
-                {LIST_VILLE.map((item: any, index: any) => (
+                {myCities.map((item: any, index: any) => (
                     <Marker
                         eventHandlers={{
                             click: () => {
-                                setVille(() => (ville = item.id));
-                                setNumAlert(() => (numAlert = item.name));
+                                setVille(() => (ville = item.name));
+                                setNumAlert(() => (numAlert = item.num_alerts));
                                 setPanneBtn(() => (panneBtn = 0));
                                 setListQuartier(
                                     () =>
                                         (listQuartier =
-                                            item.quartiers.length === 0
+                                            item.alert_districts.length === 0
                                                 ? "Vide"
-                                                : item.quartiers)
+                                                : item.alert_districts)
                                 );
                                 setShow(true);
                             },
                         }}
-                        position={item.longlat}
+                        position={[item.lattitude, item.longitude]}
                         icon={lightBolt}
                         key={index}
                     >
@@ -170,7 +174,7 @@ const StreetMap = () => {
                                 }}
                                 className="text-xs"
                             >
-                                {item.name}
+                                {item.num_alerts}
                             </span>
                         </Tooltip>
                     </Marker>
