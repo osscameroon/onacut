@@ -1,0 +1,19 @@
+FROM node:12.22-buster
+
+# set the working directory in the container
+RUN mkdir /app
+RUN chmod 777 /app
+WORKDIR /app
+
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH=/app/node_modules/.bin:$PATH
+ENV CHOKIDAR_USEPOLLING=true
+ENV NODE_ENV=dev
+ENV CHOKIDAR_USEPOLLING=true
+
+COPY package.json .
+RUN yarn install --silent
+RUN yarn global add react-scripts@3.4.1 --silent
+
+
+CMD ["yarn", "start"]
