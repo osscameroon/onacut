@@ -1,0 +1,27 @@
+FROM python:3.8.1-slim-buster
+
+RUN addgroup --system onacut && adduser --system onacut --ingroup onacut
+
+RUN apt-get update && apt-get install -y curl gnupg2
+
+# set the working directory in the container
+RUN mkdir /app
+RUN chmod 777 /app
+WORKDIR /app
+
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# copy required files from host to container
+COPY requirements.txt .
+
+RUN ls /app
+
+# install dependencies
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+USER onacut
+
+EXPOSE 5000

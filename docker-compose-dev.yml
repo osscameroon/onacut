@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  onacut_backend_dev:
+    container_name: onacut_backend_dev
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./backend:/app
+    tty: true
+    ports:
+      - "5000:5000"
+    command: python server.py
+    env_file:
+      - ./backend/.env
+
+  onacut_frontend_dev:
+    container_name: onacut_frontend_dev
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend:/app
+    command: sh -c "npm install && npm run start"
+    stdin_open: true
+    tty: true
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./frontend/.env.dev
