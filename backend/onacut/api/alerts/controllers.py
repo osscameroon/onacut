@@ -3,10 +3,11 @@ from flask_apispec import doc, marshal_with, use_kwargs
 from flask_apispec.views import MethodResource
 from flask_restful import Resource
 
+from onacut import db
 from onacut.models import Alert, City, District, Region
 
 from .fields import AlertGetResponseSchema
-from .parsers import AlertGetParser, alert_get_parser
+from .parsers import AlertGetParser, alert_get_parser, alert_post_parser
 
 
 class AlertsApi(MethodResource, Resource):
@@ -50,3 +51,42 @@ class AlertsApi(MethodResource, Resource):
             alerts = alerts.filter_by(district_id=district.id)
 
         return alerts.all(), 200
+    
+    def post(self):
+        args = alert_post_parser.parse_args()
+
+        city = City.query.filter_by(name=args["city"].lower()).first()
+        if not city:
+            city = City()
+            city.name = args["city"].lower()
+            db.session.add(city)
+
+        district = District.query.filter_by(name=args["district"].lower()).first()
+        if not district:
+            district = District()
+            district.name = args["district"].lower()
+            db.session.add(district)
+
+        region = Region.query.filter_by(name=args["region"].lower()).first()
+        if not region:
+            region = Region()
+            region.name = args["region"].lower()
+            db.session.add(region)
+    
+        try:
+            alert = Alert()
+            alert.observations = args["observations"]
+            alert.date = args["date"]
+            alert.begin_time = args["begin_time"]
+            alert.end_time = args["end_time"]
+            alert.longitude = args["longitude"]
+            alert.lattitude = args["latitude"]
+            alert.city_id = city.id
+            alert.district_id = district.id
+            alert.region_id = region.id
+
+            db.session.add(alert)
+            db.session.commit()
+            return True, 201
+        except:
+            return False, 500
