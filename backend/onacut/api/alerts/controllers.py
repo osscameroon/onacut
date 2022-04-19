@@ -6,7 +6,7 @@ from flask_restful import Resource
 from onacut import db
 from onacut.models import Alert, City, District, Region
 
-from .fields import AlertGetResponseSchema
+from .fields import AlertGetResponseSchema, AlertPostResponseSchema
 from .parsers import AlertGetParser, alert_get_parser, alert_post_parser
 
 
@@ -52,6 +52,9 @@ class AlertsApi(MethodResource, Resource):
 
         return alerts.all(), 200
     
+    @doc(description="POST an Alert.", tags=["Alerts"])
+    @use_kwargs(AlertGetParser, location=("json"))
+    @marshal_with(AlertPostResponseSchema())
     def post(self):
         args = alert_post_parser.parse_args()
 
@@ -87,6 +90,6 @@ class AlertsApi(MethodResource, Resource):
 
             db.session.add(alert)
             db.session.commit()
-            return True, 201
+            return {"ok": True}, 201
         except:
-            return False, 500
+            return {"ok": False}, 500
