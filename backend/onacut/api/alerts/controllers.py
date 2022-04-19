@@ -7,7 +7,7 @@ from onacut import db
 from onacut.models import Alert, City, District, Region
 
 from .fields import AlertGetResponseSchema, AlertPostResponseSchema
-from .parsers import AlertGetParser, alert_get_parser, alert_post_parser
+from .parsers import AlertGetParser, AlertPostParser, alert_get_parser, alert_post_parser
 
 
 class AlertsApi(MethodResource, Resource):
@@ -53,7 +53,7 @@ class AlertsApi(MethodResource, Resource):
         return alerts.all(), 200
     
     @doc(description="POST an Alert.", tags=["Alerts"])
-    @use_kwargs(AlertGetParser, location=("json"))
+    @use_kwargs(AlertPostParser, location=("json"))
     @marshal_with(AlertPostResponseSchema())
     def post(self):
         args = alert_post_parser.parse_args()

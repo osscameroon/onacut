@@ -28,10 +28,10 @@ class AlertPostParser(Schema):
         required=True, description="Date of the new alert."
     )
     begin_time = fields.Time(
-        required=True, description="Begin's Tiime of the new alert."
+        format="%H:%M:%S", required=True, description="Begin time of the new alert."
     )
     end_time = fields.Time(
-        required=True, description="End's Time of the new alert."
+        format="%H:%M:%S", required=True, description="End time of the new alert."
     )
     longitude = fields.Float(
         required=True, description="Longitude of the new alert."
@@ -40,10 +40,10 @@ class AlertPostParser(Schema):
         required=True, description="Latitude of the new alert."
     )
     city = fields.String(
-        required=False, description="City of the new alert."
+        required=True, description="City of the new alert."
     )
     district = fields.String(
-        required=False, description="District of the new alert."
+        required=True, description="District of the new alert."
     )
     region = fields.String(
         required=True, description="Region of the new alert."
