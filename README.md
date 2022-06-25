@@ -15,7 +15,7 @@ python3 server.py
 ```
 
 
-## Project setup
+## Project setup frontend
 To launch the frontend, we need `Node` installed and `npm/yarn` and then go to the frontend folder and follow these steps
 
 - Install the dependencies
