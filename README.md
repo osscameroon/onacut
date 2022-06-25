@@ -36,10 +36,10 @@ npm run build or yarn build
 NB: To launch the `frontend`, you should launch the `backend` first.
 
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
 ### Screenshots
+
+Illustrative video of the project
+
 
 https://user-images.githubusercontent.com/34966088/158440164-0ac75a29-7a5e-49fc-9196-ec6b8c9b8f1c.mp4
 
