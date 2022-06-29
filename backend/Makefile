@@ -23,7 +23,7 @@ install-dev-deps: install-deps $(CONFIG_FILE)
 
 ##run: run the api locally
 run: install-deps
-	$(PYTHON) manage.py run
+	$(PYTHON) server.py run
 
 lint: venv
 	$(PYTHON) -m black onacut tests
