@@ -1,0 +1,7 @@
+# for tests
+pytest
+
+# for lint
+isort
+black
+flake8
