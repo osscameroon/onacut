@@ -8,6 +8,7 @@ venv: $(VENVPATH)/bin/activate
 $(VENVPATH)/bin/activate: requirements.txt
 	test -d $(VENVPATH) || virtualenv -p python3 $(VENVPATH); \
 	. $(VENVPATH)/bin/activate; \
+	pip install -U pip; \
 	pip install -r requirements.txt; \
 	touch $(VENVPATH)/bin/activate;
 
@@ -24,6 +25,12 @@ install-dev-deps: install-deps $(CONFIG_FILE)
 ##run: run the api locally
 run: install-deps
 	$(PYTHON) server.py run
+
+docker-build:
+	docker build --tag onacut-back:latest -f Dockerfile .
+
+docker-run: docker-build
+	docker run -p 5000:5000 -it onacut-back:latest
 
 lint: venv
 	$(PYTHON) -m black onacut tests

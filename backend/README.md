@@ -10,6 +10,8 @@ make install-deps
 
 ### HOW TO LAUNCH
 
+#### DEV
+
 ```
 make run
 
@@ -19,3 +21,13 @@ make test
 # formating
 make lint
 ```
+
+#### PROD
+
+Or Using Docker
+
+```
+# This will install and run your project on port 5000
+make docker-run
+```
+
