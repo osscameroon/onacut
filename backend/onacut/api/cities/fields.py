@@ -15,5 +15,5 @@ class CityGetResponseSchema(Schema):
     longitude = fields.Float()
     lattitude = fields.Float()
     num_alerts = fields.Function(lambda x: len(x.alerts))
-    alert_districts= fields.Function(filter_districts)
+    alert_districts = fields.Function(filter_districts)
     locations = fields.List(fields.Nested(LocationGetResponseSchema))

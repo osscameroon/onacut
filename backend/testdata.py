@@ -41,9 +41,11 @@ def convert_to_seconds(s):
 def filter_cameron_points(points):
     results = []
     for point in points:
-        if "cameroun" in point["display_name"].lower() \
-            or "cameroon" in point["display_name"].lower() \
-            or "kamerun" in point["display_name"].lower():
+        if (
+            "cameroun" in point["display_name"].lower()
+            or "cameroon" in point["display_name"].lower()
+            or "kamerun" in point["display_name"].lower()
+        ):
             results.append(point)
     return results
 
