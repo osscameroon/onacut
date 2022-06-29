@@ -7,6 +7,3 @@ Flask-SQLAlchemy==2.5.1
 Flask-Cors==3.0.10
 psycopg2-binary==2.9.3
 python-dotenv==0.19.2
-isort==5.10.1
-black==22.1.0
-flake8flake8==4.0.1
