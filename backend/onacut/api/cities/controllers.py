@@ -3,6 +3,7 @@ from flask_apispec import doc, marshal_with, use_kwargs
 from flask_apispec.views import MethodResource
 from flask_restful import Resource
 
+import werkzeug
 from onacut.models import City
 
 from .fields import CityGetResponseSchema
@@ -14,14 +15,18 @@ class CitiesApi(MethodResource, Resource):
     @use_kwargs(CityGetParser, location=("json"))
     @marshal_with(CityGetResponseSchema(many=True))
     def get(self):
-        args = city_get_parser.parse_args()
-        city_id = args["id"]
-        if city_id:
-            city = City.query.get(city_id)
-            if not city:
-                abort(404)
-            return [city], 200
+        try:
+            args = city_get_parser.parse_args()
+            city_id = args["id"]
+            if city_id:
+                city = City.query.get(city_id)
+                if not city:
+                    abort(404)
+                return [city], 200
 
-        cities = City.query.all()
+            cities = City.query.all()
+        except werkzeug.exceptions.BadRequest:
+            # that's means no arguments got passed
+            cities = []
 
         return cities, 200
