@@ -28,7 +28,8 @@ class CitiesApi(MethodResource, Resource):
             return cities, 200
 
         except BadRequest:
-            # that's means no arguments got passed
+            # that's means no arguments got passed or a weird argument was
+            # passed so that the json parsing crashed
             cities = City.query.all()
 
         return cities, 200
