@@ -1,10 +1,10 @@
 from flask_apispec.extension import FlaskApiSpec
 from flask_restful import Api
 
-from .home.controllers import Home
 from .alerts.controllers import AlertsApi
 from .cities.controllers import CitiesApi
 from .district.controllers import DistrictsApi
+from .home.controllers import Home
 from .regions.controllers import RegionsApi
 
 api = Api()
