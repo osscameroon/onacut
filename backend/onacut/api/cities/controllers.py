@@ -18,17 +18,19 @@ class CitiesApi(MethodResource, Resource):
         cities = []
         try:
             args = city_get_parser.parse_args()
-            city_id = args["id"]
+            city_id = args.get("id", None)
             if city_id:
                 city = City.query.get(city_id)
                 if not city:
                     abort(404)
                 return [city], 200
 
+            cities = City.query.all()
             return cities, 200
 
         except BadRequest:
-            # that's means no arguments got passed or a weird argument was
+            # FIXME , this is a temp solution 9we should not return results
+            # on bad request +that's means no arguments got passed or a weird argument was
             # passed so that the json parsing crashed
             cities = City.query.all()
 
