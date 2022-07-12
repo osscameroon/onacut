@@ -35,7 +35,7 @@ export const City = (props: any) => {
                     />
                 </div>
                 <p className="text-white">
-                    {props.alert_count}
+                    {props.alert_count ? props.alert_count : "-"}
                 </p>
             </div>
         </div>
