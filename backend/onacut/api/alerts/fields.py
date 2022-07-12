@@ -14,3 +14,7 @@ class AlertGetResponseSchema(Schema):
     region = fields.Function(lambda x: x.region.name)
     city = fields.Function(lambda x: x.city.name)
     district = fields.Function(lambda x: x.district.name)
+
+
+class AlertPostResponseSchema(Schema):
+    ok = fields.Boolean()
