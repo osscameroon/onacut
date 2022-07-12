@@ -27,10 +27,10 @@ run: install-deps
 	$(PYTHON) server.py run
 
 docker-build:
-	docker build --tag onacut-back:latest -f Dockerfile .
+	docker build --tag onacut_back:latest -f Dockerfile .
 
 docker-run: docker-build
-	docker run -p 5000:5000 -it onacut-back:latest
+	docker run -p 5000:5000 -it onacut_back:latest
 
 lint: venv
 	$(PYTHON) -m black onacut tests
