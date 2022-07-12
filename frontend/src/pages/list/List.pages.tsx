@@ -48,11 +48,7 @@ const List = () => {
         setRegion((region) => (region = uniqueRegion));
     }, []);
     const filteredRegions = filteRegions(region, searchQuery);
-    let getCitiesData = myCities.map((item: any) => (
-                <p className={'text-white'}>
-                    {item.num_alerts}
-                </p>
-            ));
+    let getCitiesData = myCities.map((item: any) => <p className="text-white">{item.num_alerts}</p>);
     return (
         <div className="site__list bg-cover w-auto h-screen ">
             <div className="px-4 md:px-20 pt-5 md:pt-0">
