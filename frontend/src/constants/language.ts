@@ -18,11 +18,15 @@ export const LANGUAGE = {
     list: {
         title: "Troubles actuels",
         search: "Entrez la region",
-        city: "Entrez la ville",
+        city: "Entrer votre quartier",
     },
     notfound: {
         homePage: "Acceder a la page d'accueil"
     },
+    button: {
+        location: "show In Map"
+    },
     loading: "Chargement...",
     empty: "Aucune alerte pour cette region"
+
 }
