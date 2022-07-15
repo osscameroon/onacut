@@ -21,14 +21,13 @@ const Detail = () => {
         if (!query) {
             return cities;
         }
-
         return cities.filter((region: any) => {
             const cityName = region.district.toLowerCase();
             return cityName.includes(query);
         });
     };
     const title: any = localStorage.getItem("myRegionName");
-    const filteredCities = filteCities(details?.data, searchQuery);
+    const filteredCities = filteCities(details.data, searchQuery);
     if (details?.status === 200) {
         if (details?.data.length === 0) {
             return (
@@ -114,6 +113,8 @@ const Detail = () => {
                                 <CityDetail
                                     key={index}
                                     ville={item?.city}
+                                    longitude = {item?.longitude}
+                                    lattitude = {item?.lattitude}                                
                                     observations={item?.observations}
                                     calendar={item?.date}
                                     quartier={item?.district}
