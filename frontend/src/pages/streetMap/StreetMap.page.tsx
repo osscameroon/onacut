@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import L from "leaflet";
+import L, { latLng } from "leaflet";
 import bolt from "../../assets/img/electricity.png";
 import "./StreetMap.css";
 import {
@@ -20,6 +20,9 @@ import { panneBtnState } from "../../atoms/panne_btn";
 import { getCities } from "../../atoms/cities";
 
 function MyComponent() {
+    const queryParams = new URLSearchParams(window.location.search)
+    const lat = queryParams.get("lattitude");
+    const long = queryParams.get("longitude");
     const [zoomLevel, setZoomLevel] = useRecoilState(zoomLevelState); // initial zoom level provided for MapContainer
     const mapEvents = useMapEvents({
         zoomend: () => {
