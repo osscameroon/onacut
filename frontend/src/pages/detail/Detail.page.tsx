@@ -113,8 +113,8 @@ const Detail = () => {
                                 <CityDetail
                                     key={index}
                                     ville={item?.city}
-                                    longitude = {item?.longitude}
-                                    lattitude = {item?.lattitude}                                
+                                    long={item?.longitude}
+                                    lat={item?.lattitude}                                
                                     observations={item?.observations}
                                     calendar={item?.date}
                                     quartier={item?.district}

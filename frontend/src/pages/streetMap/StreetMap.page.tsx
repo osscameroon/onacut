@@ -49,10 +49,24 @@ const lightBolt = L.icon({
 });
 
 const StreetMap = (props: any) => {
+    let centerOn: any = LIST_VILLE[9].longlat;
+
     const queryParams = new URLSearchParams(window.location.search)
-    const lat = queryParams.get("lattitude");
-    const long = queryParams.get("longitude");
-    const yaounde: any = LIST_VILLE[9].longlat;
+    const lat = queryParams.get("lat");
+    const long = queryParams.get("long");
+
+    if (lat && long ){
+        const lat_f = parseFloat(lat)
+        const long_f = parseFloat(long)
+        if (lat_f > 80 || long_f > 80){
+            alert("these coordinates are not exact !")
+        }else{
+            centerOn = [lat_f, long_f] 
+        }
+    }
+
+    console.log('>>>> ', centerOn)
+
     const animateRef = useRef(false);
     const v = useRecoilValue(zoomLevelState);
     const [show, setShow] = useState(false);
@@ -61,16 +75,14 @@ const StreetMap = (props: any) => {
     let [numAlert, setNumAlert]: any = useState(0);
     let [listQuartier, setListQuartier]: any = useState([]);
     const myCities: any = useRecoilValue(getCities)?.data;
-    const nameOfCity = {longlat: [props.lat,props.long] }
 
     if (v > 9) {
         return (
             <MapContainer
                 className="z-0"
                 style={{ height: "100vh" }}
-                center={yaounde}
+                center={centerOn}
                 zoom={v}
-                centerId={nameOfCity}
                 zoomControl={false}
                 scrollWheelZoom={true}
             >
@@ -120,7 +132,7 @@ const StreetMap = (props: any) => {
             <MapContainer
                 className="z-0"
                 style={{ height: "100vh" }}
-                center={yaounde}
+                center={centerOn}
                 zoom={v}
                 zoomControl={false}
                 scrollWheelZoom={true}
