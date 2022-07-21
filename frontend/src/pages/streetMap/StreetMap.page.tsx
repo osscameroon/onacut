@@ -20,9 +20,6 @@ import { panneBtnState } from "../../atoms/panne_btn";
 import { getCities } from "../../atoms/cities";
 
 function MyComponent() {
-    const queryParams = new URLSearchParams(window.location.search)
-    const lat = queryParams.get("lattitude");
-    const long = queryParams.get("longitude");
     const [zoomLevel, setZoomLevel] = useRecoilState(zoomLevelState); // initial zoom level provided for MapContainer
     const mapEvents = useMapEvents({
         zoomend: () => {
@@ -51,7 +48,10 @@ const lightBolt = L.icon({
     iconSize: [30, 30],
 });
 
-const StreetMap = () => {
+const StreetMap = (props: any) => {
+    const queryParams = new URLSearchParams(window.location.search)
+    const lat = queryParams.get("lattitude");
+    const long = queryParams.get("longitude");
     const yaounde: any = LIST_VILLE[9].longlat;
     const animateRef = useRef(false);
     const v = useRecoilValue(zoomLevelState);
@@ -61,6 +61,7 @@ const StreetMap = () => {
     let [numAlert, setNumAlert]: any = useState(0);
     let [listQuartier, setListQuartier]: any = useState([]);
     const myCities: any = useRecoilValue(getCities)?.data;
+    const nameOfCity = {longlat: [props.lat,props.long] }
 
     if (v > 9) {
         return (
@@ -69,6 +70,7 @@ const StreetMap = () => {
                 style={{ height: "100vh" }}
                 center={yaounde}
                 zoom={v}
+                centerId={nameOfCity}
                 zoomControl={false}
                 scrollWheelZoom={true}
             >
