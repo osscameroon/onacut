@@ -64,9 +64,6 @@ const StreetMap = (props: any) => {
             centerOn = [lat_f, long_f] 
         }
     }
-
-    console.log('>>>> ', centerOn)
-
     const animateRef = useRef(false);
     const v = useRecoilValue(zoomLevelState);
     const [show, setShow] = useState(false);
