@@ -24,7 +24,7 @@ export const LANGUAGE = {
         homePage: "Acceder a la page d'accueil"
     },
     button: {
-        location: "show In Map"
+        location: "afficher sur la carte"
     },
     loading: "Chargement...",
     empty: "Aucune alerte pour cette region"
