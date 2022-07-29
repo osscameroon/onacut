@@ -11,16 +11,15 @@ txt_to_json () {
     paste -d ':' CMNAME.txt CMASCINAME.txt CMALTERNATIVENAME.txt CMLATITUDE.txt CMLONGITUDE.txt > CMGEOFinal.txt
     # transform
     jq -c -Rs '[ split("\n")[] |
-                    select(length > 0) |
-                    split(":") |
-                    {
-                        name: .[0],
-                        asciiname: .[1],
-                        alternativenames: .[2],
-                        lat: .[3],
-                        long: .[4]
-                    }
-                ]' CMGEOFinal.txt > list_geo_cm.json
+                 select(length > 0) |
+                 split(":") | {
+                    name: .[0],
+                    asciiname: .[1],
+                    alternativenames: .[2],
+                    lat: .[3],
+                    long: .[4]
+                 }
+               ]' CMGEOFinal.txt > list_geo_cm.json
 
     rm CMNAME.txt CMALTERNATIVENAME.txt CMASCINAME.txt CMLATITUDE.txt CMLONGITUDE.txt CMGEOFinal.txt
 }
