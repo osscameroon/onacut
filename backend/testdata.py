@@ -147,6 +147,7 @@ def create_alerts():
     for data in datas:
         alert = Alert()
         alert.observations = data["observations"]
+        alert.type = "electricity"
         alert.date = datetime.fromisoformat(data["prog_date"])
         begin_time = data["prog_heure_debut"]
         end_time = data["prog_heure_fin"]

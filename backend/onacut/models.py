@@ -83,6 +83,7 @@ class Alert(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     observations = db.Column(db.String(255))
+    type = db.Column(db.String(50), nullable=False)
     date = db.Column(db.Date(), nullable=False)
     begin_time = db.Column(db.Time(), nullable=False)
     end_time = db.Column(db.Time(), nullable=False)
