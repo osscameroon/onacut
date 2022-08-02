@@ -26,6 +26,12 @@ export const LANGUAGE = {
     button: {
         location: "afficher sur la carte"
     },
+    alert:{
+        notification:"Ce site utilise des cookies pour rendre votre visite sur notre site aussi agréable que possible. Nous utilisons votre emplacement pour vous montrer les rapports de votre région.",
+        info:"Informations officielles sur Interférences des opérateurs de réseau",
+        warning: "Ce problème vient généralement du fait que le propriétaire ne l’a partagé qu’avec un petit groupe de personnes, a modifié qui pouvait le voir ou l’a supprimé.",
+        notavailable: "Ce contenu n’est pas disponible pour le moment",
+    },
     loading: "Chargement...",
     empty: "Aucune alerte pour cette region"
 
