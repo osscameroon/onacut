@@ -23,14 +23,14 @@ const HomeModal = () => {
             <div className="h-80 bg-gray-700 w-96 p-5">
                 <MyText
                     variant="title"
-                    myText="Informations officielles sur Interférences des opérateurs de réseau "
+                    myText={LANGUAGE.alert.info}
                     myTextColor="text-white"
                     myTextAlign="text-center"
                 />
                 <div className="py-2" />
                 <MyText
                     variant="item"
-                    myText="Ce site utilise des cookies pour rendre votre visite sur notre site aussi agréable que possible. Nous utilisons votre emplacement pour vous montrer les rapports de votre région. "
+                    myText={LANGUAGE.alert.notification}
                     myTextColor="text-white"
                     myTextAlign="text-center"
                 />

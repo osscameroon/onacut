@@ -11,13 +11,13 @@ export const NotFound = () => {
             <div className="w-full md:w-1/3 py-6">
                 <MyText
                     variant="title"
-                    myText={`Ce contenu n’est pas disponible pour le moment`}
+                    myText={LANGUAGE.alert.notavailable}
                     myTextColor="text-ind"
                     myTextAlign="text-center"
                 />
                 <MyText
                     variant="normal"
-                    myText={`Ce problème vient généralement du fait que le propriétaire ne l’a partagé qu’avec un petit groupe de personnes, a modifié qui pouvait le voir ou l’a supprimé.`}
+                    myText={LANGUAGE.alert.warning}
                     myTextColor="text-ind"
                     myTextAlign="text-center"
                 />

@@ -8,7 +8,7 @@ export const ModalItems = (props: any) => {
             </div>
             <div className="modal__item-text pl-4 w-3/4">
                 <p
-                    style={{ fontFamily: " 'Varela Round', sans-serif" }}
+                    style={{ fontFamily: " 'Varela Round', sans-serif", wordSpacing: "4px"}}
                     className={`text-sm justify-center py-2  text-gray-200 overflow-auto flex h-${props.h} uppercase px-4`}
                 >
                     {props.text}
