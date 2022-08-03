@@ -6,6 +6,7 @@ from marshmallow import Schema, fields
 class AlertGetResponseSchema(Schema):
     id = fields.Integer()
     observations = fields.String()
+    type = fields.String()
     date = fields.String()
     begin_time = fields.String()
     end_time = fields.String()
