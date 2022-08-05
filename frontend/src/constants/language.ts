@@ -6,7 +6,7 @@ export const LANGUAGE = {
         title: "Où est la panne de courant actuelle? Carte des opérateurs de réseau",
         panne: "Panne électrique",
         signalerPanne: "Signaler une panne de courant",
-        language: 'FR/EN',
+        language: 'FR / EN',
     },
     homeModal: {
         accept: "J'accepte"
