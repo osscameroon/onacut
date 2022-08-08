@@ -4,6 +4,7 @@ import Conseils from "../../pages/advices/Advices";
 import Detail from "../../pages/detail/Detail.page";
 import Home from "../../pages/home/Home.pages";
 import List from "../../pages/list/List.pages";
+import {AddAlert} from "../../pages/addAlert/addAlert";
 
 export const AppNavigation = () => {
     return (
@@ -12,6 +13,7 @@ export const AppNavigation = () => {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/conseils" component={Conseils} />
                 <Route exact path="/lists" component={List} />
+                <Route exact path="/alert" component={AddAlert} />
                 <Route exact path="/details/:region" component={Detail} />
             </Switch>
         </BrowserRouter>
