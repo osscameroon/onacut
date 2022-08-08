@@ -11,16 +11,16 @@ import {NotFound} from "../../components/notFound/NotFound.component";
 import {Link} from "react-router-dom";
 import accueil from "../../assets/img/accueil.png";
 import {getCities} from "../../atoms/cities";
+import {getAlerts} from "../../atoms/alerts";
+
 
 const List = () => {
     const {search} = window.location;
     const query = new URLSearchParams(search).get("s");
     const [searchQuery, setSearchQuery] = useState(query || "");
     const myRegions: any = useRecoilValue(getRegions);
-    const alerts: any = useRecoilValue(alertsState);
     const [alert, setAlert] = useRecoilState(alertsState);
     const [region, setRegion] = useRecoilState(regionState);
-    const myCities: any = useRecoilValue(getCities)?.data;
     const printByRegion = (name: any): any => {
         return myRegions?.data.filter((alert: any) => alert.name === name);
     };
@@ -48,7 +48,6 @@ const List = () => {
         setRegion((region) => (region = uniqueRegion));
     }, []);
     const filteredRegions = filteRegions(region, searchQuery);
-    let getCitiesData = myCities.map((item: any) => <p className="text-white">{item.num_alerts}</p>);
     return (
         <div className="site__list bg-cover w-auto h-screen ">
             <div className="px-4 md:px-20 pt-5 md:pt-0">
@@ -86,7 +85,7 @@ const List = () => {
                                         region={item?.name}
                                         myMb="border-b"
                                         country={item?.name}
-                                        alert_count={getCitiesData[item?.id]}
+                                        alert_count={item?.num_alerts}
                                     />
                                 )
                             }
