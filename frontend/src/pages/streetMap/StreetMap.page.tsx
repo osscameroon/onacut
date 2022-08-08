@@ -11,7 +11,6 @@ import {
     Marker,
     useMapEvents,
 } from "react-leaflet";
-import { LIST_VILLE } from "../../scripts/list_ville";
 import { LIST_QUARTIER } from "../../scripts/list_quartier";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { zoomLevelState } from "../../atoms/zom_leve";
@@ -49,19 +48,19 @@ const lightBolt = L.icon({
 });
 
 const StreetMap = (props: any) => {
-    let centerOn: any = LIST_VILLE[9].longlat;
 
     const queryParams = new URLSearchParams(window.location.search)
     const lat = queryParams.get("lat");
     const long = queryParams.get("long");
-
+    const myCities: any = useRecoilValue(getCities)?.data;
+    let centerOn: any = [myCities[7]['locations'][0]['longitude'], myCities[7]['locations'][0]['lattitude']];
     if (lat && long ){
         const lat_f = parseFloat(lat)
         const long_f = parseFloat(long)
         if (lat_f > 80 || long_f > 80){
             alert("these coordinates are not exact !")
         }else{
-            centerOn = [lat_f, long_f] 
+            centerOn = [lat_f, long_f]
         }
     }
     const animateRef = useRef(false);
@@ -71,7 +70,6 @@ const StreetMap = (props: any) => {
     let [ville, setVille]: any = useState("");
     let [numAlert, setNumAlert]: any = useState(0);
     let [listQuartier, setListQuartier]: any = useState([]);
-    const myCities: any = useRecoilValue(getCities)?.data;
 
     if (v > 9) {
         return (
@@ -85,7 +83,8 @@ const StreetMap = (props: any) => {
             >
                 <MyComponent />
                 <TileLayer
-                    attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+                    attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy;
+                    <a href="http://cartodb.com/attributions">CartoDB</a>'
                     url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
                 />
                 {LIST_QUARTIER.map((item: any, index: any) => (
