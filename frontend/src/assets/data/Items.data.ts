@@ -3,7 +3,7 @@ import home from "../img/home.png"
 import conseils from "../img/conseils.png"
 import listes from "../img/liste.png"
 import language from "../img/language.png"
-import report from '../img/bolt.svg'
+import report from '../img/alert.png'
 
 export const ITEMS = [
     {
