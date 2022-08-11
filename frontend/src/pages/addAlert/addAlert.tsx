@@ -6,7 +6,6 @@ import accueil from "../../assets/img/accueil.png";
 import { LANGUAGE } from "../../constants/language";
 import { useRecoilValue } from "recoil";
 import { getDetails } from "../../atoms/details";
-import position from "../../assets/img/position.png";
 import { getRegions } from "../../atoms/regions";
 import { MyText } from "../../components/myText/MyText.component";
 import {Footer} from "../../components/footer/Footer.component";
@@ -127,9 +126,8 @@ export const AddAlert = () => {
                                     <p className="w-full text-sm font-normal text-left text-gray-200 md:text-lg md:w-3/4">
                                         {LANGUAGE.list.city}
                                     </p>
-                                    <div className="flex w-full md:w-3/4">
                                         <select
-                                            className="w-full mt-2 mb-4 border border-grayC rounded-md md:mb-16 md:w-11/12"
+                                            className="w-full mt-2 mb-4 border border-grayC rounded-md md:mb-16 md:w-3/4"
                                             style={{ height: "61px" }}
                                             name=""
                                             id="quartier"
@@ -156,15 +154,6 @@ export const AddAlert = () => {
                                                 }
                                             )}
                                         </select>
-                                        <div className="flex items-center justify-center w-12 h-12 mt-3 ml-6 rounded-full">
-                                            <Link to="#">
-                                                <img
-                                                    src={position}
-                                                    className="w-6 h-6"
-                                                />
-                                            </Link>
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <div className="flex flex-col items-center justify-around">
@@ -176,8 +165,8 @@ export const AddAlert = () => {
                                         className="w-full p-3 mt-2 mb-4 border border-grayC rounded-md md:mb-16 md:w-3/4"
                                         name=""
                                         id="panne"
-                                        cols={30}
-                                        rows={10}
+                                        cols={20}
+                                        rows={5}
                                     ></textarea>
                                 </div>
                             </div>
