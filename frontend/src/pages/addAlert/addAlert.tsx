@@ -9,6 +9,7 @@ import { getDetails } from "../../atoms/details";
 import position from "../../assets/img/position.png";
 import { getRegions } from "../../atoms/regions";
 import { MyText } from "../../components/myText/MyText.component";
+import {Footer} from "../../components/footer/Footer.component";
 
 export const AddAlert = () => {
     const details: any = useRecoilValue(getDetails);
@@ -195,6 +196,7 @@ export const AddAlert = () => {
                     </form>
                 </div>
             </div>
+						<Footer />
         </div>
     );
 };
