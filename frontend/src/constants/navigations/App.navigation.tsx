@@ -13,7 +13,7 @@ export const AppNavigation = () => {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/conseils" component={Conseils} />
                 <Route exact path="/lists" component={List} />
-                <Route exact path="/alert" component={AddAlert} />
+                <Route exact path="/add-alert" component={AddAlert} />
                 <Route exact path="/details/:region" component={Detail} />
             </Switch>
         </BrowserRouter>
