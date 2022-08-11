@@ -58,7 +58,9 @@ const Home = () => {
                                     alt=""
                                     className="w-6 h-6 mr-2"
                                 />
-                                {LANGUAGE.home.signalerPanne}
+                                <Link to={'/alert'}>
+                                    {LANGUAGE.home.signalerPanne}
+                                </Link>
                             </p>
                         </div>
                     </div>
@@ -112,7 +114,9 @@ const Home = () => {
                                     alt=""
                                     className="w-6 h-6 mr-2"
                                 />
-                                {LANGUAGE.home.signalerPanne}
+                                <Link to={'/alert'}>
+                                    {LANGUAGE.home.signalerPanne}
+                                </Link>
                             </p>
                         </div>
                     </div>
