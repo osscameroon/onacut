@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import { AppNavigation } from "./constants/navigations/App.navigation";
 import { RecoilRoot } from "recoil";
 import { LANGUAGE } from "./constants/language";
+import './i18nextInit';
 
 ReactDOM.render(
     <React.StrictMode>
