@@ -12,6 +12,7 @@ import {Link} from "react-router-dom";
 import accueil from "../../assets/img/accueil.png";
 import {getCities} from "../../atoms/cities";
 import {getAlerts} from "../../atoms/alerts";
+import {Footer} from "../../components/footer/Footer.component";
 
 
 const List = () => {
@@ -49,10 +50,10 @@ const List = () => {
     }, []);
     const filteredRegions = filteRegions(region, searchQuery);
     return (
-        <div className="site__list bg-cover w-auto h-screen ">
-            <div className="px-4 md:px-20 pt-5 md:pt-0">
+        <div className="w-auto h-screen bg-cover site__list ">
+            <div className="px-4 pt-5 md:px-20 md:pt-0">
                 <div className="container mx-auto">
-                    <header className="site__lists-header flex justify-between items-center">
+                    <header className="flex items-center justify-between site__lists-header">
                         <MyDrawer/>
                         <Link to="/">
                             <button className="flex items-center">
@@ -65,7 +66,7 @@ const List = () => {
                             </button>
                         </Link>
                     </header>
-                    <main className="site__main pt-8 md:pt-20 px-4 pb-6 md:px-40">
+                    <main className="px-4 pt-8 pb-6 site__main md:pt-20 md:px-40">
                         <Search
                             placeholder={LANGUAGE.list.search}
                             searchQuery={searchQuery}
@@ -91,6 +92,7 @@ const List = () => {
                             }
                         )}
                     </main>
+										<Footer />
                 </div>
             </div>
         </div>

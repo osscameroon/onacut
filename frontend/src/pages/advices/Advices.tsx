@@ -2,6 +2,7 @@ import React from "react";
 import { LINKS } from "../../assets/data/Links.data";
 import { Accordion } from "../../components/accordion/Accordion.component";
 import { MyDrawer } from "../../components/drawer/Drawer.component";
+import {Footer} from "../../components/footer/Footer.component";
 import { MyText } from "../../components/myText/MyText.component";
 import { LANGUAGE } from "../../constants/language";
 
@@ -38,6 +39,7 @@ const Advices = () => {
                     </main>
                 </div>
             </div>
+						<Footer />
         </div>
     );
 };
