@@ -1,12 +1,14 @@
+import i18n from "../i18n";
+
 export const LANGUAGE = {
+ 
     home: {
-        home: "Page d'accueil",
+        home: i18n.t("Page d'accueil"),
         info: "Conseils et informations",
         vue: "Vue liste",
         title: "Où est la panne de courant actuelle? Carte des opérateurs de réseau",
         panne: "Panne électrique",
         signalerPanne: "Signaler une panne de courant",
-        language: 'FR/EN',
     },
     homeModal: {
         accept: "J'accepte"
