@@ -20,9 +20,4 @@ export const ITEMS = [
     name: LANGUAGE.home.vue,
     link: "/lists"
   },
-  {
-    icon: language,
-    name: LANGUAGE.home.language,
-    link: ""
-  },
 ]
