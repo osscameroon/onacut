@@ -3,9 +3,10 @@ import { useModal } from "react-hooks-use-modal";
 import { useRecoilState } from "recoil";
 import { modalState } from "../../atoms/modal";
 import { MyText } from "../../components/myText/MyText.component";
-import { LANGUAGE } from "../../constants/language";
+import { useTranslation } from "react-i18next";
 
 const HomeModal = () => {
+    const { t } = useTranslation();
     let [Modal, open, close, isOpen] = useModal("root", {
         preventScroll: true,
         closeOnOverlayClick: false,
@@ -23,14 +24,14 @@ const HomeModal = () => {
             <div className="h-80 bg-gray-700 w-96 p-5">
                 <MyText
                     variant="title"
-                    myText={LANGUAGE.alert.info}
+                    myText={t("info")}
                     myTextColor="text-white"
                     myTextAlign="text-center"
                 />
                 <div className="py-2" />
                 <MyText
                     variant="item"
-                    myText={LANGUAGE.alert.notification}
+                    myText={t("notification")}
                     myTextColor="text-white"
                     myTextAlign="text-center"
                 />
@@ -44,7 +45,7 @@ const HomeModal = () => {
                         style={{ fontFamily: " 'Varela Round', sans-serif" }}
                         className="flex cursor-pointer px-4 py-1 text-sm text-center text-gray-200"
                     >
-                        {LANGUAGE.homeModal.accept}
+                       {t("accept")}
                     </p>
                 </div>
             </div>
