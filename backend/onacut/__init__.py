@@ -18,8 +18,10 @@ else:
     app.config.from_object(DevConfig)
 
 cors = CORS(app)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 migrate = Migrate(app, db, render_as_batch=True)
+
 
 from onacut.api import create_module as api_create_module
 
