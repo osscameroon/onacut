@@ -18,6 +18,7 @@ else:
     app.config.from_object(DevConfig)
 
 cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 migrate = Migrate(app, db, render_as_batch=True)
