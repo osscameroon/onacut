@@ -19,7 +19,7 @@ class AlertsApi(MethodResource, Resource):
     def get(self):
 
         alert_id = request.args.get("id", None)
-        region_name = request.args.get("region", None)0
+        region_name = request.args.get("region", None)
         city_name = request.args.get("city", None)
         district_name = request.args.get("district", None)
 
@@ -61,12 +61,14 @@ class AlertsApi(MethodResource, Resource):
             district_id=request.json['district_id'],
             type=request.json['type'],
             observations=request.json['observations'],
-            lattitude=request.json['latitude'],
+            lattitude=request.json['lattitude'],
             longitude=request.json['longitude'],
             date=datetime.datetime.now().date(),
             begin_time=datetime.datetime.now().time(),
             end_time=datetime.datetime.now().time()
         )
+
+        print(alert)
 
         db.session.add(alert)
         db.session.commit()
