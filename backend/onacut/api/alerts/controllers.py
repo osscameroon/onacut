@@ -55,56 +55,26 @@ class AlertsApi(MethodResource, Resource):
         return alerts.all(), 200
 
     def post(self):
+
         alert = Alert(
-            region_id=request.json['region_id'],
-            city_id=request.json['city_id'],
-            district_id=request.json['district_id'],
-            type=request.json['type'],
-            observations=request.json['observations'],
-            lattitude=request.json['lattitude'],
-            longitude=request.json['longitude'],
-            date=datetime.datetime.now().date(),
-            begin_time=datetime.datetime.now().time(),
-            end_time=datetime.datetime.now().time()
+            **request.json,
+            **{
+                "date": datetime.datetime.now().date(),
+                "begin_time": datetime.datetime.now().time(),
+                "end_time": datetime.datetime.now().time(),
+            }
         )
-
-        print(alert)
-
         db.session.add(alert)
         db.session.commit()
         return {
-            "message": "Success"
+            "message": "New Alert created",
         }
 
     def put(self, alert_id):
-        alerts = Alert.query.all()
-        if alert_id not in alerts:
-            return {
-                "message": f"Error the alert with ID { alert_id } doesn't exit"
-            }
-        alert = alerts[alert_id]
-        if 'observations' in request.json:
-            alert['observations'] = request.json['observations']
-        if 'type' in request.json:
-            alert['type'] = request.json['type']
-        if 'date' in request.json:
-            alert['date'] = request.json['date']
-        if 'begin_time' in request.json:
-            alert['begin_time'] = request.json['begin_time']
-        if 'end_time' in request.json:
-            alert['end_time'] = request.json['end_time']
-        if 'longitude' in request.json:
-            alert['longitude'] = request.json['longitude']
-        if 'lattitude' in request.json:
-            alert['lattitude'] = request.json['lattitude']
-        if 'region_id' in request.json:
-            alert['region_id'] = request.json['region_id']
-        if 'city_id' in request.json:
-            alert['city_id'] = request.json['city_id']
-        if 'district_id' in request.json:
-            alert['district_id'] = request.json['district_id']
+        db.session.query(Alert).filter(Alert.id == alert_id).update(request.json)
+        db.session.commit()
         return {
             200: {
-                "message": "Successfully edited the alert"
+                "message": "Successfully updated the alert"
             }
         }
