@@ -4,14 +4,15 @@ import { regionState } from "../../atoms/regions";
 import { City } from "../../components/city/City.component";
 import { MyDrawer } from "../../components/drawer/Drawer.component";
 import { Search } from "../../components/search/Search.component";
-import { LANGUAGE } from "../../constants/language";
 import { alertsState } from "../../atoms/alerts";
 import { getRegions } from "../../atoms/regions";
 import { NotFound } from "../../components/notFound/NotFound.component";
 import { Link } from "react-router-dom";
 import accueil from "../../assets/img/accueil.png";
+import { useTranslation } from "react-i18next";
 
 const List = () => {
+    const { t } = useTranslation();
     const { search } = window.location;
     const query = new URLSearchParams(search).get("s");
     const [searchQuery, setSearchQuery] = useState(query || "");
@@ -43,7 +44,7 @@ const List = () => {
         });
     };
     useEffect(() => {
-        setRegion((region) => (region = uniqueRegion));
+        setRegion((region) => (region = (uniqueRegion)));
     }, []);
     const filteredRegions = filteRegions(region, searchQuery);
     return (
@@ -64,7 +65,7 @@ const List = () => {
                     </header>
                     <main className="site__main pt-8 md:pt-20 px-4 pb-6 md:px-40">
                         <Search
-                            placeholder={LANGUAGE.list.search}
+                            placeholder={t("search")}
                             searchQuery={searchQuery}
                             setSearchQuery={setSearchQuery}
                         />

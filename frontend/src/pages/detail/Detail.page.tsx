@@ -5,14 +5,15 @@ import { MyText } from "../../components/myText/MyText.component";
 import home from "../../assets/img/hotel.png";
 import lists from "../../assets/img/list.png";
 import { Search } from "../../components/search/Search.component";
-import { LANGUAGE } from "../../constants/language";
 import { Link } from "react-router-dom";
 import boxImg from "../../assets/img/box.png";
 import { getDetails } from "../../atoms/details";
 import { useRecoilValue } from "recoil";
 import { NotFound } from "../../components/notFound/NotFound.component";
+import { useTranslation } from "react-i18next";
 
 const Detail = () => {
+    const { t } = useTranslation();
     const { search } = window.location;
     const details: any = useRecoilValue(getDetails);
     const query = new URLSearchParams(search).get("s");
@@ -49,7 +50,7 @@ const Detail = () => {
                             <main className="site__main pt-8 md:pt-20 px-4 pb-6 md:px-40 z-0">
                                 <div className=" sticky z-50 top-0 left-0">
                                     <Search
-                                        placeholder={LANGUAGE.list.city}
+                                        placeholder={t("city")}
                                         searchQuery={searchQuery}
                                         setSearchQuery={setSearchQuery}
                                     />
@@ -63,7 +64,7 @@ const Detail = () => {
                                         }}
                                         className="text-white pt-4"
                                     >
-                                        {LANGUAGE.empty}
+                                        {t("empty")}
                                     </p>
                                 </div>
                             </main>
@@ -91,7 +92,7 @@ const Detail = () => {
                         <main className="site__main pt-8 md:pt-20 px-4 pb-6 md:px-40 z-0">
                             <div className=" sticky z-50 top-0 left-0">
                                 <Search
-                                    placeholder={LANGUAGE.list.city}
+                                    placeholder={t("city")}
                                     searchQuery={searchQuery}
                                     setSearchQuery={setSearchQuery}
                                 />

@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 import "react-modern-drawer/dist/index.css";
 import { MyDrawer } from "../../components/drawer/Drawer.component";
-import { LANGUAGE } from "../../constants/language";
 import bolt from "../../assets/img/bolt.png";
 import { Link } from "react-router-dom";
 import HomeModal from "../homeModal/HomeModal.pages";
 import StreetMap from "../streetMap/StreetMap.page";
 import { useRecoilValue } from "recoil";
 import { panneBtnState } from "../../atoms/panne_btn";
+import LanguageSelector from "../../languageSelect";
+import { useTranslation } from "react-i18next";
 
 const Home = () => {
+    const { t } = useTranslation();
     let open = localStorage.getItem("modalValue");
     let panneBtnZIndex = useRecoilValue(panneBtnState);
     useEffect(() => {
-        document.title = LANGUAGE.home.title;
+        document.title = t("title")
     });
     if (open === null) {
         return (
@@ -37,7 +39,7 @@ const Home = () => {
                                             alt=""
                                             className="w-6 h-6 mr-2"
                                         />
-                                        {LANGUAGE.home.panne}
+                                       {t("panel")}
                                     </p>
                                 </Link>
                             </div>
@@ -58,7 +60,7 @@ const Home = () => {
                                     alt=""
                                     className="w-6 h-6 mr-2"
                                 />
-                                {LANGUAGE.home.signalerPanne}
+                               {t("reportOutage")}
                             </p>
                         </div>
                     </div>
@@ -75,6 +77,10 @@ const Home = () => {
                     <div className="container mx-auto">
                         <div className="flex justify-center items-center">
                             <MyDrawer justify="start" />
+                            <div  className="text-white">
+                                <LanguageSelector/>
+                            </div>
+                            
                             <div className="site__btn-panne md:ml-20 bg-ind px-2 rounded-3xl mt-3 py-2 ml-4">
                                 <Link to="/lists">
                                     <p
@@ -89,7 +95,7 @@ const Home = () => {
                                             alt=""
                                             className="w-6 h-6 mr-2"
                                         />
-                                        {LANGUAGE.home.panne}
+                                        {t("panel")}
                                     </p>
                                 </Link>
                             </div>
@@ -112,7 +118,7 @@ const Home = () => {
                                     alt=""
                                     className="w-6 h-6 mr-2"
                                 />
-                                {LANGUAGE.home.signalerPanne}
+                               {t("reportOutage")}
                             </p>
                         </div>
                     </div>
