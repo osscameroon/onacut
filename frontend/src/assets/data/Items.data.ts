@@ -5,19 +5,29 @@ import listes from "../img/liste.png"
 import language from "../img/language.png"
 
 export const ITEMS = [
-  {
-    icon: home,
-    name: LANGUAGE.home.home,
-    link: "/"
-  },
-  {
-    icon: conseils,
-    name: LANGUAGE.home.info,
-    link: "/conseils"
-  },
-  {
-    icon: listes,
-    name: LANGUAGE.home.vue,
-    link: "/lists"
-  },
-]
+    {
+        icon: home,
+        name: LANGUAGE.home.home,
+        link: "/",
+    },
+    {
+        icon: conseils,
+        name: LANGUAGE.home.info,
+        link: "/conseils",
+    },
+    {
+        icon: listes,
+        name: LANGUAGE.home.vue,
+        link: "/lists",
+    },
+    {
+        icon: report,
+        name: LANGUAGE.home.signalerPanne,
+        link: "/add-alert",
+    },
+    {
+        icon: language,
+        name: LANGUAGE.home.language,
+        link: "",
+    },
+];

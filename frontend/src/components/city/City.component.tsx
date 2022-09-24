@@ -34,6 +34,9 @@ export const City = (props: any) => {
                         myTextColor="text-ind"
                     />
                 </div>
+                <p className="text-white">
+                    {props.alert_count}
+                </p>
             </div>
         </div>
     );

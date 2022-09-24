@@ -41,6 +41,6 @@ NB: To launch the `frontend`, you should launch the `backend` first.
 Illustrative video of the project
 
 
-https://user-images.githubusercontent.com/34966088/158440164-0ac75a29-7a5e-49fc-9196-ec6b8c9b8f1c.mp4
+https://user-images.githubusercontent.com/34966088/184613415-25c245b6-74f5-4197-8b62-f737fa000d86.mp4
 
 

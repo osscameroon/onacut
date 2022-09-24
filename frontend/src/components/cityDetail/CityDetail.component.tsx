@@ -60,8 +60,8 @@ export const CityDetail = (props: any) => {
                     />
                 </div>
             </div>
-            <div className="mt-4 py-2 bg-ind rounded-3xl flex items-center justify-center "onClick={props.myClick}>
-              <Link 
+            <div className="mt-4 py-2 bg-ind rounded-3xl flex items-center justify-center" onClick={props.myClick}>
+              <Link
                      to={`/?lat=${props.lat
                         }&long=${props.long}`}>
               <button className="px-4 text-white">

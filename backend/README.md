@@ -1,6 +1,12 @@
 ## ONACUT-BACKEND
 
 
+## REQUIREMENTS
+
+- python (3.x recommended) & pip (>= 22 recommended)
+- docker
+- make (a command line tool to run Makefile commands)
+
 ### HOW TO SET UP
 
 ```
