@@ -1,6 +1,5 @@
 import React from "react";
 import search from "../../assets/img/search.png";
-import { LANGUAGE } from "../../constants/language";
 
 export const Search = (props: any) => {
     return (

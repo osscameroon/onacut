@@ -10,12 +10,14 @@ import {getRegions} from "../../atoms/regions";
 import {NotFound} from "../../components/notFound/NotFound.component";
 import {Link} from "react-router-dom";
 import accueil from "../../assets/img/accueil.png";
+import { useTranslation } from "react-i18next";
 import {getCities} from "../../atoms/cities";
 import {getAlerts} from "../../atoms/alerts";
 import {Footer} from "../../components/footer/Footer.component";
 
 
 const List = () => {
+    const { t } = useTranslation();
     const {search} = window.location;
     const query = new URLSearchParams(search).get("s");
     const [searchQuery, setSearchQuery] = useState(query || "");
@@ -46,7 +48,7 @@ const List = () => {
         });
     };
     useEffect(() => {
-        setRegion((region) => (region = uniqueRegion));
+        setRegion((region) => (region = (uniqueRegion)));
     }, []);
     const filteredRegions = filteRegions(region, searchQuery);
     return (
@@ -68,7 +70,7 @@ const List = () => {
                     </header>
                     <main className="px-4 pt-8 pb-6 site__main md:pt-20 md:px-40">
                         <Search
-                            placeholder={LANGUAGE.list.search}
+                            placeholder={t("search")}
                             searchQuery={searchQuery}
                             setSearchQuery={setSearchQuery}
                         />

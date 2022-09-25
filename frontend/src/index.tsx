@@ -4,21 +4,22 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { AppNavigation } from "./constants/navigations/App.navigation";
 import { RecoilRoot } from "recoil";
-import { LANGUAGE } from "./constants/language";
+import './i18n';
+import i18n from "./i18n";
 
 ReactDOM.render(
     <React.StrictMode>
-        <Suspense
+        <React.Suspense
             fallback={
                 <p className="text-gray-300 flex justify-center items-center pt-40 md:pt-52">
-                    {LANGUAGE.loading}
+                   {i18n.t('loading')}
                 </p>
             }
         >
             <RecoilRoot>
                 <AppNavigation />
             </RecoilRoot>
-        </Suspense>
+        </React.Suspense>
     </React.StrictMode>,
     document.getElementById("root")
 );

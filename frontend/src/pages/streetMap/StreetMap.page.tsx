@@ -16,6 +16,7 @@ import { zoomLevelState } from "../../atoms/zom_leve";
 import { Modal } from "../../modals/Modals";
 import { panneBtnState } from "../../atoms/panne_btn";
 import { getCities } from "../../atoms/cities";
+import LanguageSelect from "../../languageSelect";
 import {getDetails} from "../../atoms/details";
 
 function MyComponent() {
@@ -93,6 +94,7 @@ const StreetMap = (props: any) => {
                 zoomControl={false}
                 scrollWheelZoom={true}
             >
+                   <LanguageSelect  />
                 <MyComponent />
                 <TileLayer
                     url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
@@ -142,7 +144,7 @@ const StreetMap = (props: any) => {
                 zoom={v}
                 zoomControl={false}
                 scrollWheelZoom={true}
-            >
+            >  
                 <MyComponent />
                 <TileLayer
                     attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>
@@ -200,7 +202,7 @@ const StreetMap = (props: any) => {
                             </span>
                         </Tooltip>
                     </Marker>
-                ))}
+                ))}   
                 <ZoomControl position="bottomright" />
             </MapContainer>
         );
