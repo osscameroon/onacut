@@ -13,7 +13,8 @@ router = APIRouter(
 
 @router.get("/")
 async def read_districts(db: Session = Depends(get_db)):
-    return []
+    data = db.query(DistrictModel).all()
+    return data
 
 
 @router.get("/{district_id}")
