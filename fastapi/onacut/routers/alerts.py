@@ -1,6 +1,8 @@
-from fastapi import APIRouter
-
-from ..schemas.alert import Alert as AlertSchema 
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+from ..schemas.alert import Alert as AlertSchema
+from ..models import Alert as AlertModel
+from ..dependencies import get_db
 
 router = APIRouter(
     prefix="/alerts",
@@ -10,8 +12,9 @@ router = APIRouter(
 
 
 @router.get("/")
-async def read_alerts():
-    return []
+async def read_alerts(db: Session = Depends(get_db)):
+    data = db.query(AlertModel).all()
+    return data
 
 
 @router.get("/{alert_id}")
