@@ -10,7 +10,7 @@ router = APIRouter(
 
 
 @router.get("/")
-async def read_cities():
+async def read_cities(db: Session = Depends(get_db)):
     return []
 
 
