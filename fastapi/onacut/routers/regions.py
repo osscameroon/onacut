@@ -19,7 +19,8 @@ async def read_regions(db: Session = Depends(get_db)):
 
 @router.get("/{region_id}")
 async def get_region(region_id: int, db: Session = Depends(get_db)):
-    return {}
+    data = db.query(RegionModel).filter_by(id=region_id).first()
+    return data
 
 
 @router.post(
