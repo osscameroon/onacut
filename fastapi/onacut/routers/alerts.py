@@ -18,7 +18,7 @@ async def read_alerts(db: Session = Depends(get_db)):
 
 
 @router.get("/{alert_id}")
-async def get_alert(alert_id: int):
+async def get_alert(alert_id: int, db: Session = Depends(get_db)):
     return {}
 
 
@@ -27,7 +27,7 @@ async def get_alert(alert_id: int):
     tags=["alerts"],
     responses={403: {"description": "Operation forbidden"}},
 )
-async def create_alert(alert: AlertSchema):
+async def create_alert(alert: AlertSchema, db: Session = Depends(get_db)):
     return {}
 
 
@@ -36,7 +36,11 @@ async def create_alert(alert: AlertSchema):
     tags=["alerts"],
     responses={403: {"description": "Operation forbidden"}},
 )
-async def update_alert(alert_id: int, alert: AlertSchema):
+async def update_alert(
+    alert_id: int,
+    alert: AlertSchema,
+    db: Session = Depends(get_db)
+):
     return {}
 
 
@@ -45,5 +49,5 @@ async def update_alert(alert_id: int, alert: AlertSchema):
     tags=["alerts"],
     responses={403: {"description": "Operation forbidden"}},
 )
-async def delete_alert(alert_id: int):
+async def delete_alert(alert_id: int, db: Session = Depends(get_db)):
     return {}

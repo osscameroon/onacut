@@ -1,6 +1,8 @@
-from fastapi import APIRouter
-
-from ..schemas.region import Region as RegionSchema 
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+from ..schemas.region import Region as RegionSchema
+from ..models import Region as RegionModel
+from ..dependencies import get_db
 
 router = APIRouter(
     prefix="/regions",
@@ -10,12 +12,12 @@ router = APIRouter(
 
 
 @router.get("/")
-async def read_regions():
+async def read_regions(db: Session = Depends(get_db)):
     return []
 
 
 @router.get("/{region_id}")
-async def get_region(region_id: int):
+async def get_region(region_id: int, db: Session = Depends(get_db)):
     return {}
 
 
@@ -24,7 +26,7 @@ async def get_region(region_id: int):
     tags=["regions"],
     responses={403: {"description": "Operation forbidden"}},
 )
-async def create_region(region: RegionSchema):
+async def create_region(region: RegionSchema, db: Session = Depends(get_db)):
     return {}
 
 
@@ -33,7 +35,11 @@ async def create_region(region: RegionSchema):
     tags=["regions"],
     responses={403: {"description": "Operation forbidden"}},
 )
-async def update_region(region_id: int, region: RegionSchema):
+async def update_region(
+    region_id: int,
+    region: RegionSchema,
+    db: Session = Depends(get_db)
+):
     return {}
 
 
@@ -42,5 +48,5 @@ async def update_region(region_id: int, region: RegionSchema):
     tags=["regions"],
     responses={403: {"description": "Operation forbidden"}},
 )
-async def delete_region(region_id: int):
+async def delete_region(region_id: int, db: Session = Depends(get_db)):
     return {}

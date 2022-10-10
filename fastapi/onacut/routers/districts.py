@@ -1,6 +1,8 @@
-from fastapi import APIRouter
-
-from ..schemas.districts import District as DistrictSchema 
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+from ..schemas.districts import District as DistrictSchema
+from ..models import District as DistrictModel
+from ..dependencies import get_db
 
 router = APIRouter(
     prefix="/districts",
@@ -10,12 +12,12 @@ router = APIRouter(
 
 
 @router.get("/")
-async def read_districts():
+async def read_districts(db: Session = Depends(get_db)):
     return []
 
 
 @router.get("/{district_id}")
-async def get_district(district_id: int):
+async def get_district(district_id: int, db: Session = Depends(get_db)):
     return {}
 
 
@@ -24,7 +26,7 @@ async def get_district(district_id: int):
     tags=["districts"],
     responses={403: {"description": "Operation forbidden"}},
 )
-async def create_district(district: DistrictSchema):
+async def create_district(district: DistrictSchema, db: Session = Depends(get_db)):
     return {}
 
 
@@ -33,7 +35,11 @@ async def create_district(district: DistrictSchema):
     tags=["districts"],
     responses={403: {"description": "Operation forbidden"}},
 )
-async def update_district(district_id: int, district: DistrictSchema):
+async def update_district(
+    district_id: int,
+    district: DistrictSchema,
+    db: Session = Depends(get_db)
+):
     return {}
 
 
@@ -42,5 +48,5 @@ async def update_district(district_id: int, district: DistrictSchema):
     tags=["districts"],
     responses={403: {"description": "Operation forbidden"}},
 )
-async def delete_district(district_id: int):
+async def delete_district(district_id: int, db: Session = Depends(get_db)):
     return {}

@@ -22,12 +22,12 @@ async def read_cities(db: Session = Depends(get_db)):
     tags=["cities"],
     responses={403: {"description": "Operation forbidden"}},
 )
-async def create_city(city: CitySchema):
+async def create_city(city: CitySchema, db: Session = Depends(get_db)):
     return {}
 
 
 @router.get("/{city_id}")
-async def get_city(city_id: int):
+async def get_city(city_id: int, db: Session = Depends(get_db)):
     return {}
 
 
@@ -36,7 +36,7 @@ async def get_city(city_id: int):
     tags=["cities"],
     responses={403: {"description": "Operation forbidden"}},
 )
-async def update_city(city_id: int):
+async def update_city(city_id: int, db: Session = Depends(get_db)):
     return {}
 
 
@@ -45,5 +45,5 @@ async def update_city(city_id: int):
     tags=["cities"],
     responses={403: {"description": "Operation forbidden"}},
 )
-async def delete_city(city_id: int):
+async def delete_city(city_id: int, db: Session = Depends(get_db)):
     return {}
