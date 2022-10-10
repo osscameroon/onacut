@@ -19,7 +19,8 @@ async def read_districts(db: Session = Depends(get_db)):
 
 @router.get("/{district_id}")
 async def get_district(district_id: int, db: Session = Depends(get_db)):
-    return {}
+    data = db.query(DistrictModel).filter_by(id=district_id).first()
+    return data
 
 
 @router.post(
