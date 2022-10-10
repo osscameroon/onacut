@@ -45,8 +45,8 @@ class Region(Base):
     cities = relationship("City", backref="region", lazy=True)
     alerts = relationship("Alert", backref="region", lazy=True)
     locations = relationship(
-        "Location",
-        secondary=RegionLocation,
+        Location,
+        secondary="region_location",
         backref=backref("regions", lazy="dynamic"),
         lazy="dynamic",
     )
@@ -63,8 +63,8 @@ class City(Base):
     districts = relationship("District", backref="city", lazy=True)
     alerts = relationship("Alert", backref="city", lazy=True)
     locations = relationship(
-        "Location",
-        secondary=CityLocation,
+        Location,
+        secondary="city_location",
         backref=backref("cities", lazy="dynamic"),
         lazy="dynamic",
     )
@@ -78,8 +78,8 @@ class District(Base):
     city_id = Column(Integer, ForeignKey("city.id"))
     alerts = relationship("Alert", backref="district", lazy=True)
     locations = relationship(
-        "Location",
-        secondary=DistrictLocation,
+        Location,
+        secondary="district_location",
         backref=backref("districts", lazy="dynamic"),
         lazy="dynamic",
     )
