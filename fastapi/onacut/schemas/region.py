@@ -6,3 +6,4 @@ from datetime import datetime
 class Region(BaseModel):
     id: int
     name: str
+    total_alerts: int

@@ -8,3 +8,4 @@ class City(BaseModel):
     region_id: int
     longitude: float
     lattitude: float
+    total_alerts: int
