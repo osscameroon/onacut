@@ -6,23 +6,24 @@ from datetime import datetime
 from .database import Base
 
 
-RegionLocation = Table(
-    "region_location",
-    Column("location_id", Integer, ForeignKey("location.id")),
-    Column("region_id", Integer, ForeignKey("region.id")),
-)
+class RegionLocation(Base):
+    __tablename__ = "region_location"
 
-CityLocation = Table(
-    "city_location",
-    Column("location_id", Integer, ForeignKey("location.id")),
-    Column("city_id", Integer, ForeignKey("city.id")),
-)
+    location_id = Column(Integer, ForeignKey("location.id"), primary_key = True)
+    region_id = Column(Integer, ForeignKey("region.id"), primary_key = True)
 
-DistrictLocation = Table(
-    "district_location",
-    Column("location_id", Integer, ForeignKey("location.id")),
-    Column("district_id", Integer, ForeignKey("district.id")),
-)
+class CityLocation(Base):
+    __tablename__ = "city_location"
+
+    location_id = Column(Integer, ForeignKey("location.id"), primary_key = True)
+    city_id = Column(Integer, ForeignKey("city.id"), primary_key = True)
+
+
+class DistrictLocation(Base):
+    __tablename__ = "district_location"
+
+    location_id = Column(Integer, ForeignKey("location.id"), primary_key = True)
+    district_id = Column(Integer, ForeignKey("district.id"), primary_key = True)
 
 
 class Location(Base):
