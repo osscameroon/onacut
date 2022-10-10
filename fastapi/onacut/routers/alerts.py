@@ -19,7 +19,8 @@ async def read_alerts(db: Session = Depends(get_db)):
 
 @router.get("/{alert_id}")
 async def get_alert(alert_id: int, db: Session = Depends(get_db)):
-    return {}
+    data = db.query(AlertModel).filter_by(id=alert_id).first()
+    return data
 
 
 @router.post(
