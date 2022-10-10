@@ -28,7 +28,8 @@ async def create_city(city: CitySchema, db: Session = Depends(get_db)):
 
 @router.get("/{city_id}")
 async def get_city(city_id: int, db: Session = Depends(get_db)):
-    return {}
+    data = db.query(CityModel).filter_by(id=city_id).first()
+    return data
 
 
 @router.put(
