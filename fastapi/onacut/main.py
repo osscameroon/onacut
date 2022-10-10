@@ -1,4 +1,4 @@
-from fastapi import Depends, FastAPI
+from fastapi import FastAPI
 from .routers.cities import router as cities_router
 from .routers.alerts import router as alerts_router
 from .routers.districts import router as districts_router
@@ -14,5 +14,4 @@ app.include_router(regions_router)
 
 @app.get("/")
 async def root():
-    return {"message": "Hello Bigger Applications!"}
-
+    return {"message": "Onacut Backend made with FastApi"}
