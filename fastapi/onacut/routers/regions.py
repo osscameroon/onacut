@@ -13,7 +13,8 @@ router = APIRouter(
 
 @router.get("/")
 async def read_regions(db: Session = Depends(get_db)):
-    return []
+    data = db.query(RegionModel).all()
+    return data
 
 
 @router.get("/{region_id}")
