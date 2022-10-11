@@ -1,6 +1,5 @@
 from typing import List, Union
 from pydantic import BaseModel
-from datetime import datetime
 
 from .city import City as CitySchema
 from .alert import Alert as AlertSchema
