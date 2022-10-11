@@ -1,6 +1,9 @@
+from typing import List
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from ..schemas.region import Region as RegionSchema
+from ..schemas.region import (Region as RegionSchema,
+                              RegionCreate as RegionCreateSchema,
+                              RegionUpdate as RegionUpdateSchema)
 from ..models import Region as RegionModel
 from ..dependencies import get_db
 
@@ -11,13 +14,21 @@ router = APIRouter(
 )
 
 
-@router.get("/")
+@router.get(
+    "/",
+    response_model=List[RegionSchema],
+    responses={403: {"description": "Operation forbidden"}}
+)
 async def read_regions(db: Session = Depends(get_db)):
     data = db.query(RegionModel).all()
     return data
 
 
-@router.get("/{region_id}")
+@router.get(
+    "/{region_id}",
+    response_model=RegionSchema,
+    responses={403: {"description": "Operation forbidden"}}
+)
 async def get_region(region_id: int, db: Session = Depends(get_db)):
     data = db.query(RegionModel).filter_by(id=region_id).first()
     return data
@@ -25,21 +36,24 @@ async def get_region(region_id: int, db: Session = Depends(get_db)):
 
 @router.post(
     "/",
-    tags=["regions"],
-    responses={403: {"description": "Operation forbidden"}},
+    response_model=RegionSchema,
+    responses={403: {"description": "Operation forbidden"}}
 )
-async def create_region(region: RegionSchema, db: Session = Depends(get_db)):
+async def create_region(
+    region: RegionCreateSchema,
+    db: Session = Depends(get_db)
+):
     return {}
 
 
 @router.put(
     "/{region_id}",
-    tags=["regions"],
+    response_model=RegionSchema,
     responses={403: {"description": "Operation forbidden"}},
 )
 async def update_region(
     region_id: int,
-    region: RegionSchema,
+    region: RegionUpdateSchema,
     db: Session = Depends(get_db)
 ):
     return {}

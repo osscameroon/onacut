@@ -1,6 +1,9 @@
+from typing import List
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from ..schemas.districts import District as DistrictSchema
+from ..schemas.districts import (District as DistrictSchema,
+                                 DistrictCreate as DistrictCreateSchema,
+                                 DistrictUpdate as DistrictUpdateSchema)
 from ..models import District as DistrictModel
 from ..dependencies import get_db
 
@@ -11,13 +14,21 @@ router = APIRouter(
 )
 
 
-@router.get("/")
+@router.get(
+    "/",
+    response_model=List[DistrictSchema],
+    responses={403: {"description": "Operation forbidden"}}
+)
 async def read_districts(db: Session = Depends(get_db)):
     data = db.query(DistrictModel).all()
     return data
 
 
-@router.get("/{district_id}")
+@router.get(
+    "/{district_id}",
+    response_model=DistrictSchema,
+    responses={403: {"description": "Operation forbidden"}}
+)
 async def get_district(district_id: int, db: Session = Depends(get_db)):
     data = db.query(DistrictModel).filter_by(id=district_id).first()
     return data
@@ -25,21 +36,24 @@ async def get_district(district_id: int, db: Session = Depends(get_db)):
 
 @router.post(
     "/",
-    tags=["districts"],
+    response_model=DistrictSchema,
     responses={403: {"description": "Operation forbidden"}},
 )
-async def create_district(district: DistrictSchema, db: Session = Depends(get_db)):
+async def create_district(
+    district: DistrictCreateSchema,
+    db: Session = Depends(get_db)
+):
     return {}
 
 
 @router.put(
     "/{district_id}",
-    tags=["districts"],
+    response_model=DistrictSchema,
     responses={403: {"description": "Operation forbidden"}},
 )
 async def update_district(
     district_id: int,
-    district: DistrictSchema,
+    district: DistrictUpdateSchema,
     db: Session = Depends(get_db)
 ):
     return {}
@@ -47,8 +61,10 @@ async def update_district(
 
 @router.delete(
     "/{district_id}",
-    tags=["districts"],
     responses={403: {"description": "Operation forbidden"}},
 )
-async def delete_district(district_id: int, db: Session = Depends(get_db)):
+async def delete_district(
+    district_id: int,
+    db: Session = Depends(get_db)
+):
     return {}
