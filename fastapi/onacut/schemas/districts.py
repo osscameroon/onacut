@@ -1,10 +1,23 @@
 from typing import List, Union
 from pydantic import BaseModel
-from datetime import datetime
+
+from .alert import Alert as AlertSchema
 
 
-class District(BaseModel):
-    id: int
+class DistrictBase(BaseModel):
     name: str
     city_id: int
-    total_alerts: int
+
+
+class DistrictCreate(DistrictBase):
+    pass
+
+
+class DistrictUpdate(DistrictBase):
+    id: int
+
+
+class District(DistrictBase):
+    id: int
+    total_alerts: Union[int, None] = None
+    alerts: Union[List[AlertSchema], None] = None
