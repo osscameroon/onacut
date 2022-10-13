@@ -31,8 +31,7 @@ def read_cities(db: Session = Depends(get_db)):
 )
 def get_city(city_id: int, db: Session = Depends(get_db)):
     data = db.query(CityModel).filter_by(id=city_id).first()
-    print(data)
-    return CitySchema.from_orm(data)
+    return data
 
 
 @router.post(
