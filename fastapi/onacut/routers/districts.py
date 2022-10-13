@@ -1,11 +1,14 @@
 from typing import List
-from fastapi import APIRouter, Depends
+
 from sqlalchemy.orm import Session
-from ..schemas.districts import (District as DistrictSchema,
-                                 DistrictCreate as DistrictCreateSchema,
-                                 DistrictUpdate as DistrictUpdateSchema)
-from ..models import District as DistrictModel
+
+from fastapi import APIRouter, Depends
+
 from ..dependencies import get_db
+from ..models import District as DistrictModel
+from ..schemas.districts import District as DistrictSchema
+from ..schemas.districts import DistrictCreate as DistrictCreateSchema
+from ..schemas.districts import DistrictUpdate as DistrictUpdateSchema
 
 router = APIRouter(
     prefix="/districts",
@@ -17,7 +20,7 @@ router = APIRouter(
 @router.get(
     "/",
     response_model=List[DistrictSchema],
-    responses={403: {"description": "Operation forbidden"}}
+    responses={403: {"description": "Operation forbidden"}},
 )
 def read_districts(db: Session = Depends(get_db)):
     data = db.query(DistrictModel).all()
@@ -27,7 +30,7 @@ def read_districts(db: Session = Depends(get_db)):
 @router.get(
     "/{district_id}",
     response_model=DistrictSchema,
-    responses={403: {"description": "Operation forbidden"}}
+    responses={403: {"description": "Operation forbidden"}},
 )
 def get_district(district_id: int, db: Session = Depends(get_db)):
     data = db.query(DistrictModel).filter_by(id=district_id).first()
@@ -39,10 +42,7 @@ def get_district(district_id: int, db: Session = Depends(get_db)):
     response_model=DistrictSchema,
     responses={403: {"description": "Operation forbidden"}},
 )
-def create_district(
-    district: DistrictCreateSchema,
-    db: Session = Depends(get_db)
-):
+def create_district(district: DistrictCreateSchema, db: Session = Depends(get_db)):
     return {}
 
 
@@ -52,9 +52,7 @@ def create_district(
     responses={403: {"description": "Operation forbidden"}},
 )
 def update_district(
-    district_id: int,
-    district: DistrictUpdateSchema,
-    db: Session = Depends(get_db)
+    district_id: int, district: DistrictUpdateSchema, db: Session = Depends(get_db)
 ):
     return {}
 
@@ -63,8 +61,5 @@ def update_district(
     "/{district_id}",
     responses={403: {"description": "Operation forbidden"}},
 )
-def delete_district(
-    district_id: int,
-    db: Session = Depends(get_db)
-):
+def delete_district(district_id: int, db: Session = Depends(get_db)):
     return {}
