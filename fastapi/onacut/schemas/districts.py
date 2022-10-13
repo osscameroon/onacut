@@ -21,3 +21,6 @@ class District(DistrictBase):
     id: int
     total_alerts: Union[int, None] = None
     alerts: Union[List[AlertSchema], None] = None
+
+    class Config:
+        orm_mode = True

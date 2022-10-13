@@ -26,9 +26,12 @@ class AlertUpdate(AlertBase):
     id: int
     longitude: Union[float, None] = None
     lattitude: Union[float, None] = None
-    end_time: Union[datetime, None] = None
+    end_time: Union[time, None] = None
 
 
 class Alert(AlertBase):
     id: int
-    end_time: Union[datetime, None] = None
+    end_time: Union[time, None] = None
+
+    class Config:
+        orm_mode = True

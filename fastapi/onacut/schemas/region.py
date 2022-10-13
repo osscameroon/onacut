@@ -24,3 +24,6 @@ class Region(RegionBase):
     total_alerts: Union[int, None] = None
     cities: Union[List[CitySchema], None] = None
     alerts: Union[List[AlertSchema], None] = None
+
+    class Config:
+        orm_mode = True

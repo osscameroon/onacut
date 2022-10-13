@@ -28,3 +28,6 @@ class City(CityBase):
     total_alerts: Union[int, None] = None
     alerts: Union[List[AlertSchema], None] = None
     districts: Union[List[DistrictSchema], None] = None
+
+    class Config:
+        orm_mode = True
