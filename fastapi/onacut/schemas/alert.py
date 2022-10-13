@@ -1,14 +1,14 @@
 from typing import Union
 from pydantic import BaseModel
-from datetime import datetime
+from datetime import datetime, date, time
 from pydantic_choices import choice
 
 
 class AlertBase(BaseModel):
     observations: str
     type: choice(["electricity", "water", "internet"])
-    date: datetime
-    begin_time: datetime
+    date: date
+    begin_time: time
     region_id: int
     longitude: float
     lattitude: float

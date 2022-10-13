@@ -19,9 +19,9 @@ router = APIRouter(
     response_model=List[CitySchema],
     responses={403: {"description": "Operation forbidden"}}
 )
-async def read_cities(db: Session = Depends(get_db)):
-    data = db.query(CityModel).all()
-    return data
+def read_cities(db: Session = Depends(get_db)):
+    datas = db.query(CityModel).all()
+    return datas
 
 
 @router.get(
@@ -29,9 +29,10 @@ async def read_cities(db: Session = Depends(get_db)):
     response_model=CitySchema,
     responses={403: {"description": "Operation forbidden"}}
 )
-async def get_city(city_id: int, db: Session = Depends(get_db)):
+def get_city(city_id: int, db: Session = Depends(get_db)):
     data = db.query(CityModel).filter_by(id=city_id).first()
-    return data
+    print(data)
+    return CitySchema.from_orm(data)
 
 
 @router.post(
@@ -39,7 +40,7 @@ async def get_city(city_id: int, db: Session = Depends(get_db)):
     response_model=CitySchema,
     responses={403: {"description": "Operation forbidden"}},
 )
-async def create_city(
+def create_city(
     city: CityCreateSchema,
     db: Session = Depends(get_db)
 ):
@@ -51,7 +52,7 @@ async def create_city(
     response_model=CitySchema,
     responses={403: {"description": "Operation forbidden"}},
 )
-async def update_city(
+def update_city(
     city_id: int,
     city: CityUpdateSchema,
     db: Session = Depends(get_db)
@@ -63,5 +64,5 @@ async def update_city(
     "/{city_id}",
     responses={403: {"description": "Operation forbidden"}},
 )
-async def delete_city(city_id: int, db: Session = Depends(get_db)):
+def delete_city(city_id: int, db: Session = Depends(get_db)):
     return {}

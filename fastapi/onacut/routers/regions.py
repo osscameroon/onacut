@@ -19,7 +19,7 @@ router = APIRouter(
     response_model=List[RegionSchema],
     responses={403: {"description": "Operation forbidden"}}
 )
-async def read_regions(db: Session = Depends(get_db)):
+def read_regions(db: Session = Depends(get_db)):
     data = db.query(RegionModel).all()
     return data
 
@@ -29,7 +29,7 @@ async def read_regions(db: Session = Depends(get_db)):
     response_model=RegionSchema,
     responses={403: {"description": "Operation forbidden"}}
 )
-async def get_region(region_id: int, db: Session = Depends(get_db)):
+def get_region(region_id: int, db: Session = Depends(get_db)):
     data = db.query(RegionModel).filter_by(id=region_id).first()
     return data
 
@@ -39,7 +39,7 @@ async def get_region(region_id: int, db: Session = Depends(get_db)):
     response_model=RegionSchema,
     responses={403: {"description": "Operation forbidden"}}
 )
-async def create_region(
+def create_region(
     region: RegionCreateSchema,
     db: Session = Depends(get_db)
 ):
@@ -51,7 +51,7 @@ async def create_region(
     response_model=RegionSchema,
     responses={403: {"description": "Operation forbidden"}},
 )
-async def update_region(
+def update_region(
     region_id: int,
     region: RegionUpdateSchema,
     db: Session = Depends(get_db)
@@ -64,5 +64,5 @@ async def update_region(
     tags=["regions"],
     responses={403: {"description": "Operation forbidden"}},
 )
-async def delete_region(region_id: int, db: Session = Depends(get_db)):
+def delete_region(region_id: int, db: Session = Depends(get_db)):
     return {}

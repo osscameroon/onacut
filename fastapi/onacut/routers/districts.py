@@ -19,7 +19,7 @@ router = APIRouter(
     response_model=List[DistrictSchema],
     responses={403: {"description": "Operation forbidden"}}
 )
-async def read_districts(db: Session = Depends(get_db)):
+def read_districts(db: Session = Depends(get_db)):
     data = db.query(DistrictModel).all()
     return data
 
@@ -29,7 +29,7 @@ async def read_districts(db: Session = Depends(get_db)):
     response_model=DistrictSchema,
     responses={403: {"description": "Operation forbidden"}}
 )
-async def get_district(district_id: int, db: Session = Depends(get_db)):
+def get_district(district_id: int, db: Session = Depends(get_db)):
     data = db.query(DistrictModel).filter_by(id=district_id).first()
     return data
 
@@ -39,7 +39,7 @@ async def get_district(district_id: int, db: Session = Depends(get_db)):
     response_model=DistrictSchema,
     responses={403: {"description": "Operation forbidden"}},
 )
-async def create_district(
+def create_district(
     district: DistrictCreateSchema,
     db: Session = Depends(get_db)
 ):
@@ -51,7 +51,7 @@ async def create_district(
     response_model=DistrictSchema,
     responses={403: {"description": "Operation forbidden"}},
 )
-async def update_district(
+def update_district(
     district_id: int,
     district: DistrictUpdateSchema,
     db: Session = Depends(get_db)
@@ -63,7 +63,7 @@ async def update_district(
     "/{district_id}",
     responses={403: {"description": "Operation forbidden"}},
 )
-async def delete_district(
+def delete_district(
     district_id: int,
     db: Session = Depends(get_db)
 ):
