@@ -79,10 +79,6 @@ const Home = () => {
                     <div className="container mx-auto">
                         <div className="flex items-center justify-center">
                             <MyDrawer justify="start" />
-                            <div  className="text-white">
-                                <LanguageSelector/>
-                            </div>
-                            
                             <div className="px-2 py-2 mt-3 ml-4 site__btn-panne md:ml-20 bg-ind rounded-3xl">
                                 <Link to="/lists">
                                     <p
@@ -100,6 +96,14 @@ const Home = () => {
                                         {t("panel")}
                                     </p>
                                 </Link>
+                            </div>
+                            <div style={{
+                                position: "fixed",
+                                top: 32,
+                                right: 32
+                            }}
+                            >
+                                <LanguageSelector/>
                             </div>
                         </div>
                     </div>

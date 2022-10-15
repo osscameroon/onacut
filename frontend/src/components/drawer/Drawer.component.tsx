@@ -1,13 +1,27 @@
-import React, { useState } from "react";
-import { ITEMS } from "../../assets/data/Items.data";
+import React, {useState} from "react";
+import {ITEMS} from "../../assets/data/Items.data";
 import Drawer from "react-modern-drawer";
 import menu from "../../assets/img/menu.png";
+import {useTranslation} from "react-i18next";
+import {Box} from "@mui/material";
+import {useHistory} from "react-router-dom";
 
 export const MyDrawer = (props: any) => {
+    const {t, i18n} = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
     const toggleDrawer = () => {
+        console.log("problem herer");
         setIsOpen((prevState) => !prevState);
     };
+
+    const router = useHistory();
+
+    const changeLanguage = () => {
+        i18n.changeLanguage(i18n.language == "en" ? "fr" : "en").then();
+    };
+
+
+
     return (
         <div
             className={`site__drawer p-2 flex items-center justify-${props.justify}`}
@@ -21,7 +35,7 @@ export const MyDrawer = (props: any) => {
             </button>
             <Drawer
                 size={350}
-                style={{ backgroundColor: "#FF4F00" }}
+                style={{backgroundColor: "#FF4F00"}}
                 open={isOpen}
                 onClose={toggleDrawer}
                 direction="left"
@@ -29,8 +43,12 @@ export const MyDrawer = (props: any) => {
                 <div className="p-4 md:p-10">
                     {ITEMS.map((i: any) => (
                         <div
+                            onClick={() => {
+                                toggleDrawer();
+                                router.push(i.link)
+                            }}
                             key={i?.name}
-                            style={{ borderColor: "#cecece" }}
+                            style={{borderColor: "#cecece", cursor: "pointer"}}
                             className="drawer__item border-b items-center flex pt-6 md:pt-10 pb-4"
                         >
                             <img
@@ -38,18 +56,41 @@ export const MyDrawer = (props: any) => {
                                 src={i.icon}
                                 className="w-7 h-auto"
                             />
-                            <a
+                            <div
                                 className="pl-4"
                                 style={{
                                     color: "#fefefe",
                                     fontFamily: " 'Varela Round', sans-serif",
                                 }}
-                                href={i.link}
                             >
-                                {i.name}
-                            </a>
+                                {t(i.name)}
+                            </div>
                         </div>
                     ))}
+
+                    <div
+                        onClick={() => {
+                            changeLanguage()
+                        }}
+                        style={{borderColor: "#cecece", cursor: "pointer"}}
+                        className="drawer__item border-b items-center flex pt-6 md:pt-10 pb-4"
+                    >
+                        <img
+                            alt="icon"
+                            src={"/img/language.png"}
+                            className="w-7 h-auto"
+                        />
+                        <Box
+
+                            className="pl-4"
+                            style={{
+                                color: "#fefefe",
+                                fontFamily: " 'Varela Round', sans-serif",
+                            }}
+                        >
+                            {t("drawer_menu_lang")}
+                        </Box>
+                    </div>
                 </div>
             </Drawer>
         </div>

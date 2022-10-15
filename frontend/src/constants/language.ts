@@ -1,14 +1,13 @@
 export const LANGUAGE = {
     home: {
-        home: "Page d'accueil",
-        info: "Conseils et informations",
-        vue: "Vue liste",
-        title: "Où est la panne de courant actuelle? Carte des opérateurs de réseau",
-        panne: "Panne électrique",
-        signalerPanne: "Signaler une panne de courant",
-        language: "FR / EN",
-        signalerDescription:
-            "Ajouter une panne sur la carte des gestionnaires de réseau",
+        home: "drawer_menu_home",
+        info: "drawer_menu_info",
+        vue: "drawer_menu_list_view",
+        title: "home_report_title",
+        panne: "drawer_menu_failure",
+        signalerPanne: "drawer_menu_report",
+        language: "drawer_menu_lang",
+        signalerDescription: "home_report_description",
     },
     homeModal: {
         accept: "J'accepte",
