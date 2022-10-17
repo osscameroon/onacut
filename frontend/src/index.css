@@ -2,3 +2,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    cursor: pointer;
+    gap: 12px;
+}
+
+.pagination a {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ff4e00;
+    color: #ff4e00;
+}
+
+.pagination__link {
+    font-weight: bold;
+}
+
+.pagination__link--active a {
+    color: #fff;
+    background: #ff4e00;
+}
+
+.pagination__link--disabled a {
+    color: rgb(198, 197, 202);
+    border: 1px solid rgb(198, 197, 202);
+}
+

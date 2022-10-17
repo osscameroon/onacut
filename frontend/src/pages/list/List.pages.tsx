@@ -1,29 +1,27 @@
 import React, {useEffect, useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
-import {regionState} from "../../atoms/regions";
+import {getRegions, regionState} from "../../atoms/regions";
 import {City} from "../../components/city/City.component";
 import {MyDrawer} from "../../components/drawer/Drawer.component";
 import {Search} from "../../components/search/Search.component";
-import {LANGUAGE} from "../../constants/language";
 import {alertsState} from "../../atoms/alerts";
-import {getRegions} from "../../atoms/regions";
-import {NotFound} from "../../components/notFound/NotFound.component";
 import {Link} from "react-router-dom";
 import accueil from "../../assets/img/accueil.png";
-import { useTranslation } from "react-i18next";
-import {getCities} from "../../atoms/cities";
-import {getAlerts} from "../../atoms/alerts";
+import {useTranslation} from "react-i18next";
 import {Footer} from "../../components/footer/Footer.component";
+import ReactPaginate from "react-paginate";
 
+const PER_PAGE = 5;
 
 const List = () => {
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     const {search} = window.location;
     const query = new URLSearchParams(search).get("s");
     const [searchQuery, setSearchQuery] = useState(query || "");
     const myRegions: any = useRecoilValue(getRegions);
     const [alert, setAlert] = useRecoilState(alertsState);
     const [region, setRegion] = useRecoilState(regionState);
+    const [currentPage, setCurrentPage] = useState(0);
     const printByRegion = (name: any): any => {
         return myRegions?.data.filter((alert: any) => alert.name === name);
     };
@@ -51,6 +49,20 @@ const List = () => {
         setRegion((region) => (region = (uniqueRegion)));
     }, []);
     const filteredRegions = filteRegions(region, searchQuery);
+
+    function handlePageClick({selected: selectedPage}: any) {
+        setCurrentPage(selectedPage);
+    }
+
+    const offset = currentPage * PER_PAGE;
+
+    const currentPageData = filteredRegions
+        .slice(offset, offset + PER_PAGE)
+        .map((item: any) => item);
+
+    const pageCount = Math.ceil(filteredRegions.length / PER_PAGE);
+
+
     return (
         <div className="w-auto h-screen bg-cover site__list ">
             <div className="px-4 pt-5 md:px-20 md:pt-0">
@@ -74,7 +86,7 @@ const List = () => {
                             searchQuery={searchQuery}
                             setSearchQuery={setSearchQuery}
                         />
-                        {filteredRegions.map((item: any) => {
+                        {currentPageData.map((item: any) => {
                                 return (
                                     <City
                                         key={item}
@@ -93,8 +105,23 @@ const List = () => {
                                 )
                             }
                         )}
+                        {
+                            currentPageData.length >= PER_PAGE &&
+                            <ReactPaginate
+                                previousLabel={"← Previous"}
+                                nextLabel={"Next →"}
+                                pageCount={pageCount}
+                                onPageChange={handlePageClick}
+                                containerClassName={"pagination"}
+                                previousLinkClassName={"pagination__link"}
+                                nextLinkClassName={"pagination__link"}
+                                disabledClassName={"pagination__link--disabled"}
+                                activeClassName={"pagination__link--active"}
+                            />
+                        }
+
                     </main>
-										<Footer />
+                    <Footer/>
                 </div>
             </div>
         </div>
