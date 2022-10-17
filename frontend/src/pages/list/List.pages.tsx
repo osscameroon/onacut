@@ -1,23 +1,18 @@
 import React, {useEffect, useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
-import {regionState} from "../../atoms/regions";
+import {getRegions, regionState} from "../../atoms/regions";
 import {City} from "../../components/city/City.component";
 import {MyDrawer} from "../../components/drawer/Drawer.component";
 import {Search} from "../../components/search/Search.component";
-import {LANGUAGE} from "../../constants/language";
 import {alertsState} from "../../atoms/alerts";
-import {getRegions} from "../../atoms/regions";
-import {NotFound} from "../../components/notFound/NotFound.component";
 import {Link} from "react-router-dom";
 import accueil from "../../assets/img/accueil.png";
-import { useTranslation } from "react-i18next";
-import {getCities} from "../../atoms/cities";
-import {getAlerts} from "../../atoms/alerts";
+import {useTranslation} from "react-i18next";
 import {Footer} from "../../components/footer/Footer.component";
 
 
 const List = () => {
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     const {search} = window.location;
     const query = new URLSearchParams(search).get("s");
     const [searchQuery, setSearchQuery] = useState(query || "");
@@ -94,7 +89,7 @@ const List = () => {
                             }
                         )}
                     </main>
-										<Footer />
+                    <Footer/>
                 </div>
             </div>
         </div>

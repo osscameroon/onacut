@@ -10,7 +10,6 @@ export const MyDrawer = (props: any) => {
     const {t, i18n} = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
     const toggleDrawer = () => {
-        console.log("problem herer");
         setIsOpen((prevState) => !prevState);
     };
 
