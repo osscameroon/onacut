@@ -1,27 +1,17 @@
-import React, { Suspense } from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import reportWebVitals from "./reportWebVitals";
-import { AppNavigation } from "./constants/navigations/App.navigation";
-import { RecoilRoot } from "recoil";
+import * as React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import {Router} from "react-router";
+import {createBrowserHistory} from 'history';
 import './i18n';
-import i18n from "./i18n";
+
+const history = createBrowserHistory();
 
 ReactDOM.render(
-    <React.StrictMode>
-        <React.Suspense
-            fallback={
-                <p className="text-gray-300 flex justify-center items-center pt-40 md:pt-52">
-                   {i18n.t('loading')}
-                </p>
-            }
-        >
-            <RecoilRoot>
-                <AppNavigation />
-            </RecoilRoot>
-        </React.Suspense>
-    </React.StrictMode>,
-    document.getElementById("root")
+    <React.Fragment>
+        <Router history={history}>
+            <App/>
+        </Router>
+    </React.Fragment>,
+    document.getElementById('root'),
 );
-
-reportWebVitals();

@@ -3,8 +3,8 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Conseils from "../../pages/advices/Advices";
 import Detail from "../../pages/detail/Detail.page";
 import {NotFound} from '../../components/notFound/NotFound.component';
-import Home from "../../pages/home/Home.pages";
-import List from "../../pages/list/List.pages";
+import Home from "../../pages/home/Home.page";
+import List from "../../pages/list/List.page";
 import {AddAlert} from "../../pages/addAlert/addAlert";
 
 export const AppNavigation = () => {

@@ -11,7 +11,7 @@ const LanguageSelector = () => {
 
     return (
         <Box
-            onClick={()=>{
+            onClick={() => {
                 changeLanguage()
             }}
             sx={{

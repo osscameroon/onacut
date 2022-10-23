@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import "./addAlert.css";
 import {MyDrawer} from "../../components/drawer/Drawer.component";
 import {Link} from "react-router-dom";
@@ -194,3 +194,6 @@ export const AddAlert = () => {
         </div>
     );
 };
+
+
+export default AddAlert
