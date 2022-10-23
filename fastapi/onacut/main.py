@@ -1,15 +1,15 @@
+from dotenv import load_dotenv
+
 from fastapi import FastAPI
 
-from dotenv import load_dotenv
 load_dotenv()
 
+from .database import engine
 from .models import Base
-from .routers.cities import router as cities_router
 from .routers.alerts import router as alerts_router
+from .routers.cities import router as cities_router
 from .routers.districts import router as districts_router
 from .routers.regions import router as regions_router
-from .database import engine
-
 
 Base.metadata.create_all(bind=engine)
 app = FastAPI()
