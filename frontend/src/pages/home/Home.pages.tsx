@@ -1,30 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect} from "react";
 import "react-modern-drawer/dist/index.css";
-import { MyDrawer } from "../../components/drawer/Drawer.component";
+import {MyDrawer} from "../../components/drawer/Drawer.component";
 import bolt from "../../assets/img/bolt.png";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import HomeModal from "../homeModal/HomeModal.pages";
 import StreetMap from "../streetMap/StreetMap.page";
-import { useRecoilValue } from "recoil";
-import { panneBtnState } from "../../atoms/panne_btn";
+import {useRecoilValue} from "recoil";
 import LanguageSelector from "../../languageSelect";
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
+import {panneBtnState} from "../../atoms";
+import {Header} from "../../components";
 
 const Home = () => {
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     let open = localStorage.getItem("modalValue");
     let panneBtnZIndex = useRecoilValue(panneBtnState);
+
     useEffect(() => {
         document.title = t("title")
     });
+
+
     if (open === null) {
         return (
             <div className="h-screen site">
-                <HomeModal />
+                <HomeModal/>
                 <div className="fixed z-10 px-4 pt-5 md:px-20 md:pt-0">
                     <div className="container mx-auto">
                         <div className="flex items-center justify-center">
-                            <MyDrawer justify="start" />
+                            <MyDrawer justify="start"/>
                             <div className="px-2 py-2 mt-3 ml-4 site__btn-panne md:ml-20 bg-ind rounded-3xl">
                                 <Link to="/lists">
                                     <p
@@ -39,7 +43,7 @@ const Home = () => {
                                             alt=""
                                             className="w-6 h-6 mr-2"
                                         />
-                                       {t("panel")}
+                                        {t("panel")}
                                     </p>
                                 </Link>
                             </div>
@@ -61,24 +65,25 @@ const Home = () => {
                                     className="w-6 h-6 mr-2"
                                 />
                                 <Link to={'/add-alert'}>
-                                   {t("reportOutage")}
+                                    {t("reportOutage")}
                                 </Link>
                             </p>
                         </div>
                     </div>
                 </div>
                 <main className="site__main">
-                    <StreetMap />
+                    <StreetMap/>
                 </main>
             </div>
         );
     } else {
         return (
-            <div className="h-screen site">
-                <div className="fixed z-10 px-4 pt-5 md:px-20 md:pt-0">
+            <div className="h-screen site relative">
+                <Header isHome/>
+                {/*<div className="fixed z-10 px-4 pt-5 md:px-20 md:pt-0">
                     <div className="container mx-auto">
                         <div className="flex items-center justify-center">
-                            <MyDrawer justify="start" />
+                            <MyDrawer justify="start"/>
                             <div className="px-2 py-2 mt-3 ml-4 site__btn-panne md:ml-20 bg-ind rounded-3xl">
                                 <Link to="/lists">
                                     <p
@@ -107,7 +112,7 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*/}
                 <div
                     className={`absolute bottom-0 z-${panneBtnZIndex} px-4 md:px-20 pb-4 `}
                 >
@@ -125,14 +130,14 @@ const Home = () => {
                                     className="w-6 h-6 mr-2"
                                 />
                                 <Link to={'/add-alert'}>
-                                   {t("reportOutage")}
+                                    {t("reportOutage")}
                                 </Link>
                             </p>
                         </div>
                     </div>
                 </div>
                 <main className="site__main">
-                    <StreetMap />
+                    <StreetMap/>
                 </main>
             </div>
         );
