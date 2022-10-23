@@ -50,9 +50,9 @@ const routesConfig: RouteConfig[] = [
                 exact: true,
                 component: lazy(() => import("pages/detail/Detail.page")),
             },
-            /*{
+            {
                 component: () => <Redirect to="/errors/error-404"/>,
-            },*/
+            },
         ],
     },
     {
@@ -60,7 +60,10 @@ const routesConfig: RouteConfig[] = [
         exact: true,
         component: lazy(() => import("pages/404")),
     },
-
+    {
+        path: "/*",
+        component: () => <Redirect to="/errors/error-404"/>,
+    },
 ];
 
 const renderRoutes = (routes: RouteConfig[]) => {

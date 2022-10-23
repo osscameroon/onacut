@@ -7,6 +7,7 @@ import {Footer} from "../components/footer/Footer.component";
 
 export const NotFound = () => {
     const {t} = useTranslation();
+    console.log("ici")
     return (
         <div className="flex flex-col items-center justify-center h-screen site__notFound">
             <img src={error} alt="error" className="w-auto h-1/4"/>
