@@ -5,18 +5,18 @@ import {Link} from "react-router-dom";
 import accueil from "../../assets/img/accueil.png";
 import {LANGUAGE} from "../../constants/language";
 import {useRecoilValue} from "recoil";
-import {getDetails} from "../../atoms/details";
-import {getRegions} from "../../atoms/regions";
 import {MyText} from "../../components/myText/MyText.component";
 import {Footer} from "../../components/footer/Footer.component";
 import {useTranslation} from "react-i18next";
+import AlertService from "../../services/api/AlertService";
+import CityService from "../../services/api/CityService";
 
 export const AddAlert = () => {
     const {t} = useTranslation();
-    const details: any = useRecoilValue(getDetails);
+    const details: any = useRecoilValue(AlertService.getDetails);
     const theDetails = details.data;
     const [theDetailsState, setTheDetailsState] = useState([]);
-    const regions: any = useRecoilValue(getRegions);
+    const regions: any = useRecoilValue(CityService.getRegions);
     const theRegions = regions.data;
     const [userChoice, setUserChoice] = useState(" ");
     const [stateOptions, setStateValues] = useState([]);

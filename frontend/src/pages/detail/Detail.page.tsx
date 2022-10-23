@@ -7,19 +7,19 @@ import lists from "../../assets/img/list.png";
 import {Search} from "../../components/search/Search.component";
 import {Link} from "react-router-dom";
 import boxImg from "../../assets/img/box.png";
-import {getDetails} from "../../atoms/details";
 import {useRecoilValue} from "recoil";
 import {NotFound} from "../../components/notFound/NotFound.component";
 import {useTranslation} from "react-i18next";
 import ReactPaginate from "react-paginate";
 import {Grid} from "@mui/material";
+import AlertService from "../../services/api/AlertService";
 
 const PER_PAGE = 9;
 
 const Detail = () => {
     const {t} = useTranslation();
     const {search} = window.location;
-    const details: any = useRecoilValue(getDetails);
+    const details: any = useRecoilValue(AlertService.getDetails);
     const query = new URLSearchParams(search).get("s");
     const [searchQuery, setSearchQuery] = useState(query || "");
     const [currentPage, setCurrentPage] = useState(0);

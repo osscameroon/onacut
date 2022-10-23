@@ -8,7 +8,7 @@ services:
         container_name: onacut_back
         build: ./backend
         ports:
-          - 5000:5000
+          - 8000:5000
         stdin_open: true 
 
     frontend:

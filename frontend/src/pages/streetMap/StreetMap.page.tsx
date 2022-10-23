@@ -12,12 +12,11 @@ import {
     useMapEvents,
 } from "react-leaflet";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { zoomLevelState } from "../../atoms/zom_leve";
 import { Modal } from "../../modals/Modals";
-import { panneBtnState } from "../../atoms/panne_btn";
-import { getCities } from "../../atoms/cities";
 import LanguageSelect from "../../languageSelect";
-import {getDetails} from "../../atoms/details";
+import {panneBtnState, zoomLevelState} from "../../atoms";
+import AlertService from "../../services/api/AlertService";
+import CityService from "../../services/api/CityService";
 
 function MyComponent() {
     const [zoomLevel, setZoomLevel] = useRecoilState(zoomLevelState); // initial zoom level provided for MapContainer
@@ -50,10 +49,10 @@ const lightBolt = L.icon({
 
 const StreetMap = (props: any) => {
     const queryParams = new URLSearchParams(window.location.search)
-    const myQuarters: any = useRecoilValue(getDetails)?.data;
+    const myQuarters: any = useRecoilValue(AlertService.getDetails)?.data;
     const lat = queryParams.get("lat");
     const long = queryParams.get("long");
-    const myCities: any = useRecoilValue(getCities)?.data;
+    const myCities: any = useRecoilValue(CityService.getCities)?.data;
     let centerOn: any = [myCities[7]['locations'][0]['longitude'], myCities[7]['locations'][0]['lattitude']];
     if (lat && long ){
         const lat_f = parseFloat(lat)
@@ -71,7 +70,7 @@ const StreetMap = (props: any) => {
     let [villi, setVille]: any = useState("");
     let [numAlert, setNumAlert]: any = useState(0);
     let [listQuartier, setListQuartier]: any = useState([]);
-    
+
     const qCount = new Map();
     myQuarters.forEach((quarter: any) => {
         const quarterName = quarter['district'];
@@ -144,7 +143,7 @@ const StreetMap = (props: any) => {
                 zoom={v}
                 zoomControl={false}
                 scrollWheelZoom={true}
-            >  
+            >
                 <MyComponent />
                 <TileLayer
                     attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>
@@ -202,7 +201,7 @@ const StreetMap = (props: any) => {
                             </span>
                         </Tooltip>
                     </Marker>
-                ))}   
+                ))}
                 <ZoomControl position="bottomright" />
             </MapContainer>
         );

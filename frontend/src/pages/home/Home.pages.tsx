@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 import HomeModal from "../homeModal/HomeModal.pages";
 import StreetMap from "../streetMap/StreetMap.page";
 import { useRecoilValue } from "recoil";
-import { panneBtnState } from "../../atoms/panne_btn";
 import LanguageSelector from "../../languageSelect";
 import { useTranslation } from "react-i18next";
+import {panneBtnState} from "../../atoms";
 
 const Home = () => {
     const { t } = useTranslation();
