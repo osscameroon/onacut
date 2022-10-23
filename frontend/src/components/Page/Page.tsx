@@ -2,9 +2,6 @@
 import React, {Fragment} from 'react';
 import {Helmet} from 'react-helmet';
 
-const NODE_ENV = process.env.NODE_ENV;
-const GA_MEASUREMENT_ID = process.env.REACT_APP_GA_MEASUREMENT_ID;
-
 interface PagePros {
     title: string;
     description?: string;
