@@ -1,15 +1,12 @@
 import React from 'react';
 import {Box} from "@mui/material";
-import {Header} from "components";
 
-interface MapLayoutProps {
+interface ApplicationLayoutProps {
     children: React.ReactNode;
 }
 
-const MapLayoutProps = (props: MapLayoutProps) => {
+const ApplicationLayout = (props: ApplicationLayoutProps) => {
     const {children} = props;
-
-
     return (
         <Box>
             {children}
@@ -18,4 +15,4 @@ const MapLayoutProps = (props: MapLayoutProps) => {
 
 }
 
-export default MapLayoutProps;
+export default ApplicationLayout;

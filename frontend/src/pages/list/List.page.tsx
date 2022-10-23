@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
-import {getRegions, regionState} from "../../atoms/regions";
 import {City} from "../../components/city/City.component";
 import {MyDrawer} from "../../components/drawer/Drawer.component";
 import {Search} from "../../components/search/Search.component";
-import {alertsState} from "../../atoms/alerts";
 import {Link} from "react-router-dom";
 import accueil from "../../assets/img/accueil.png";
 import {useTranslation} from "react-i18next";
 import {Footer} from "../../components/footer/Footer.component";
 import ReactPaginate from "react-paginate";
+import CityService, {regionState} from "../../services/api/CityService";
+import {alertsState} from "../../services/api/AlertService";
 
 const PER_PAGE = 5;
 
@@ -18,7 +18,7 @@ const List = () => {
     const {search} = window.location;
     const query = new URLSearchParams(search).get("s");
     const [searchQuery, setSearchQuery] = useState(query || "");
-    const myRegions: any = useRecoilValue(getRegions);
+    const myRegions: any = useRecoilValue(CityService.getRegions);
     const [alert, setAlert] = useRecoilState(alertsState);
     const [region, setRegion] = useRecoilState(regionState);
     const [currentPage, setCurrentPage] = useState(0);

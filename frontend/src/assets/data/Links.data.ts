@@ -1,22 +1,20 @@
-import i18n from "../../i18n";
-
 export const LINKS = [
-  {
-    title: i18n.t("adviceTitle2"),
-    content: [
-      i18n.t("adviceContent"),
-    ]
-  },
-  {
-    title:i18n.t( "adviceTitle3"),
-    content: [
-      i18n.t("adviceContent1"),
-    ]
-  },
-  {
-    title: i18n.t("adviceTitle4"),
-    content: [
-      i18n.t("adviceContent2"),
-    ]
-  }
+    {
+        title: "adviceTitle2",
+        content: [
+            "adviceContent",
+        ]
+    },
+    {
+        title: "adviceTitle3",
+        content: [
+            "adviceContent1",
+        ]
+    },
+    {
+        title: "adviceTitle4",
+        content: [
+            "adviceContent2",
+        ]
+    }
 ]

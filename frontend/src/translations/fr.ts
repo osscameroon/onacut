@@ -45,6 +45,6 @@ export default {
         "report_btn_submit": "Soummettre l'alerte",
         "global_label_select_placeholder": "Selectionner une option",
         "label_map": "Carte",
-        "menu_item_advice": "Conseils"
+        "menu_item_advice": "Conseil"
     }
 };

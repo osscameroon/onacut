@@ -1,8 +1,7 @@
-import { LANGUAGE } from "../../constants/language";
+import {LANGUAGE} from "../../constants/language";
 import home from "../img/home.png"
 import conseils from "../img/conseils.png"
 import listes from "../img/liste.png"
-import language from "../img/language.png"
 import report from "../img/alert.png"
 
 export const ITEMS = [
@@ -14,16 +13,16 @@ export const ITEMS = [
     {
         icon: conseils,
         name: LANGUAGE.home.info,
-        link: "/conseils",
+        link: "/app/advice",
     },
     {
         icon: listes,
         name: LANGUAGE.home.vue,
-        link: "/lists",
+        link: "/app/lists",
     },
     {
         icon: report,
         name: LANGUAGE.home.signalerPanne,
-        link: "/add-alert",
+        link: "/app/add-alert",
     },
 ];
