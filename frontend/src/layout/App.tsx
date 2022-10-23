@@ -7,6 +7,7 @@ interface ApplicationLayoutProps {
 
 const ApplicationLayout = (props: ApplicationLayoutProps) => {
     const {children} = props;
+    console.log("ococsdcsd")
     return (
         <Box>
             {children}

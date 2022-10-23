@@ -13,13 +13,16 @@ const routesConfig: RouteConfig[] = [
         component: () => <Redirect to="/home"/>,
     },
     {
-        path: "/",
+        path: "/home",
         layout: MapLayout,
         routes: [
             {
                 path: "/home",
                 exact: true,
                 component: lazy(() => import("pages/home/Home.page")),
+            },
+            {
+                component: () => <Redirect to="/errors/error-404"/>,
             },
         ],
     },
@@ -42,8 +45,22 @@ const routesConfig: RouteConfig[] = [
                 exact: true,
                 component: lazy(() => import("pages/addAlert/addAlert")),
             },
+            {
+                path: "/app/details/:region",
+                exact: true,
+                component: lazy(() => import("pages/detail/Detail.page")),
+            },
+            /*{
+                component: () => <Redirect to="/errors/error-404"/>,
+            },*/
         ],
     },
+    {
+        path: "/errors/error-404",
+        exact: true,
+        component: lazy(() => import("pages/404")),
+    },
+
 ];
 
 const renderRoutes = (routes: RouteConfig[]) => {

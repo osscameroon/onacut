@@ -8,7 +8,6 @@ import {Search} from "../../components/search/Search.component";
 import {Link} from "react-router-dom";
 import boxImg from "../../assets/img/box.png";
 import {useRecoilValue} from "recoil";
-import {NotFound} from "../../components/notFound/NotFound.component";
 import {useTranslation} from "react-i18next";
 import ReactPaginate from "react-paginate";
 import {Grid} from "@mui/material";
@@ -176,7 +175,7 @@ const Detail = () => {
             </div>
         );
     }
-    return <NotFound/>;
+    return <div/>
 };
 
 export default Detail;

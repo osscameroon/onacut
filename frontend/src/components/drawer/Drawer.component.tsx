@@ -20,7 +20,6 @@ export const MyDrawer = (props: any) => {
     };
 
 
-
     return (
         <div
             className={`site__drawer p-2 flex items-center justify-${props.justify}`}
@@ -43,6 +42,7 @@ export const MyDrawer = (props: any) => {
                     {ITEMS.map((i: any) => (
                         <div
                             onClick={() => {
+                                console.log(i.link)
                                 toggleDrawer();
                                 router.push(i.link)
                             }}
