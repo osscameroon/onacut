@@ -62,17 +62,7 @@ def create_alert(alert: AlertCreateSchema, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Bad district's id!")
 
     # create the new Alert
-    db_alert = AlertModel()
-    db_alert.observations = alert.observations
-    db_alert.type = alert.type
-    db_alert.longitude = alert.longitude
-    db_alert.lattitude = alert.lattitude
-    db_alert.date = alert.date
-    db_alert.begin_time = alert.begin_time
-    db_alert.end_time = alert.end_time
-    db_alert.region_id = alert.region_id
-    db_alert.city_id = alert.city_id
-    db_alert.district_id = alert.district_id
+    db_alert = AlertModel(**alert.dict())
 
     db.add(db_alert)
     db.commit()
