@@ -43,7 +43,11 @@ def get_region(region_id: int, db: Session = Depends(get_db)):
     responses={403: {"description": "Operation forbidden"}},
 )
 def create_region(region: RegionCreateSchema, db: Session = Depends(get_db)):
-    return {}
+    db_region = RegionModel(**region.dict())
+    db.add(db_region)
+    db.commit()
+    db.refresh(db_region)
+    return db_region
 
 
 @router.put(
