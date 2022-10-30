@@ -86,4 +86,9 @@ def update_alert(
     responses={403: {"description": "Operation forbidden"}},
 )
 def delete_alert(alert_id: int, db: Session = Depends(get_db)):
-    return {}
+    alert = db.query(AlertModel).filter_by(id=alert_id).first()
+    if not alert:
+        raise HTTPException(status_code=400, detail="Bad alert's id!")
+
+    db.delete(alert)
+    db.commit()
