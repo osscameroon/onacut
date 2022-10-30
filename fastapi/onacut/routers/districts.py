@@ -71,4 +71,9 @@ def update_district(
     responses={403: {"description": "Operation forbidden"}},
 )
 def delete_district(district_id: int, db: Session = Depends(get_db)):
-    return {}
+    district = db.query(DistrictModel).filter_by(id=district_id).first()
+    if not district:
+        raise HTTPException(status_code=400, detail="Bad district's id!")
+
+    db.delete(district)
+    db.commit()
