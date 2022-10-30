@@ -5,12 +5,10 @@ from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException
 
 from ..dependencies import get_db
-from ..models import (
-    Alert as AlertModel,
-    City as CityModel,
-    District as DistrictModel,
-    Region as RegionModel
-)
+from ..models import Alert as AlertModel
+from ..models import City as CityModel
+from ..models import District as DistrictModel
+from ..models import Region as RegionModel
 from ..schemas.alert import Alert as AlertSchema
 from ..schemas.alert import AlertCreate as AlertCreateSchema
 from ..schemas.alert import AlertUpdate as AlertUpdateSchema
@@ -62,7 +60,7 @@ def create_alert(alert: AlertCreateSchema, db: Session = Depends(get_db)):
     district = db.query(DistrictModel).filter_by(id=alert.district_id).first()
     if not district:
         raise HTTPException(status_code=400, detail="Bad district's id!")
-    
+
     # create the new Alert
     db_alert = AlertModel()
     db_alert.observations = alert.observations
