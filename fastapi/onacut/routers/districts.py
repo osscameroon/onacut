@@ -2,10 +2,10 @@ from typing import List
 
 from sqlalchemy.orm import Session
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 
 from ..dependencies import get_db
-from ..models import District as DistrictModel
+from ..models import District as DistrictModel, City as CityModel
 from ..schemas.districts import District as DistrictSchema
 from ..schemas.districts import DistrictCreate as DistrictCreateSchema
 from ..schemas.districts import DistrictUpdate as DistrictUpdateSchema
@@ -43,7 +43,16 @@ def get_district(district_id: int, db: Session = Depends(get_db)):
     responses={403: {"description": "Operation forbidden"}},
 )
 def create_district(district: DistrictCreateSchema, db: Session = Depends(get_db)):
-    return {}
+    # check if the provided city's id exists in the database
+    city = db.query(CityModel).filter_by(id=district.city_id).first()
+    if not city:
+        raise HTTPException(status_code=400, detail="Bad city's id!")
+
+    db_district = DistrictModel(**district.dict())
+    db.add(db_district)
+    db.commit()
+    db.refresh(db_district)
+    return db_district
 
 
 @router.put(
@@ -62,4 +71,9 @@ def update_district(
     responses={403: {"description": "Operation forbidden"}},
 )
 def delete_district(district_id: int, db: Session = Depends(get_db)):
-    return {}
+    district = db.query(DistrictModel).filter_by(id=district_id).first()
+    if not district:
+        raise HTTPException(status_code=400, detail="Bad district's id!")
+
+    db.delete(district)
+    db.commit()

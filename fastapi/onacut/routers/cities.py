@@ -2,10 +2,10 @@ from typing import List
 
 from sqlalchemy.orm import Session
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 
 from ..dependencies import get_db
-from ..models import City as CityModel
+from ..models import City as CityModel, Region as RegionModel
 from ..schemas.city import City as CitySchema
 from ..schemas.city import CityCreate as CityCreateSchema
 from ..schemas.city import CityUpdate as CityUpdateSchema
@@ -43,7 +43,16 @@ def get_city(city_id: int, db: Session = Depends(get_db)):
     responses={403: {"description": "Operation forbidden"}},
 )
 def create_city(city: CityCreateSchema, db: Session = Depends(get_db)):
-    return {}
+    # check if the provided region's id exists in the database
+    region = db.query(RegionModel).filter_by(id=city.region_id).first()
+    if not region:
+        raise HTTPException(status_code=400, detail="Bad region's id!")
+
+    db_city = CityModel(**city.dict())
+    db.add(db_city)
+    db.commit()
+    db.refresh(db_city)
+    return db_city
 
 
 @router.put(
@@ -60,4 +69,9 @@ def update_city(city_id: int, city: CityUpdateSchema, db: Session = Depends(get_
     responses={403: {"description": "Operation forbidden"}},
 )
 def delete_city(city_id: int, db: Session = Depends(get_db)):
-    return {}
+    city = db.query(CityModel).filter_by(id=city_id).first()
+    if not city:
+        raise HTTPException(status_code=400, detail="Bad city's id!")
+
+    db.delete(city)
+    db.commit()
