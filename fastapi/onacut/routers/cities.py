@@ -69,4 +69,9 @@ def update_city(city_id: int, city: CityUpdateSchema, db: Session = Depends(get_
     responses={403: {"description": "Operation forbidden"}},
 )
 def delete_city(city_id: int, db: Session = Depends(get_db)):
-    return {}
+    city = db.query(CityModel).filter_by(id=city_id).first()
+    if not city:
+        raise HTTPException(status_code=400, detail="Bad city's id!")
+
+    db.delete(city)
+    db.commit()
