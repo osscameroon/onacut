@@ -2,7 +2,7 @@ from typing import List
 
 from sqlalchemy.orm import Session
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 
 from ..dependencies import get_db
 from ..models import Region as RegionModel
@@ -67,4 +67,9 @@ def update_region(
     responses={403: {"description": "Operation forbidden"}},
 )
 def delete_region(region_id: int, db: Session = Depends(get_db)):
-    return {}
+    region = db.query(RegionModel).filter_by(id=region_id).first()
+    if not region:
+        raise HTTPException(status_code=400, detail="Bad region's id!")
+
+    db.delete(region)
+    db.commit()
