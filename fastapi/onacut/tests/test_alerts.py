@@ -6,7 +6,7 @@ def test_read_all_alerts():
     assert response.status_code == 200
 
 
-def test_add_add_alert():
+def test_add_alert():
     alert = {
         "observations": "Test Add Alert",
         "type": "electricity",
