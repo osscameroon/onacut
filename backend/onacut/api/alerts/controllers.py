@@ -1,3 +1,5 @@
+import datetime
+
 from flask import request
 from flask_apispec import doc, marshal_with, use_kwargs
 from flask_apispec.views import MethodResource
@@ -7,6 +9,7 @@ from onacut.models import Alert, City, District, Region
 
 from .fields import AlertGetResponseSchema
 from .parsers import AlertGetParser
+from onacut import db
 
 
 class AlertsApi(MethodResource, Resource):
@@ -50,3 +53,28 @@ class AlertsApi(MethodResource, Resource):
             alerts = alerts.filter_by(district_id=district.id)
 
         return alerts.all(), 200
+
+    def post(self):
+
+        alert = Alert(
+            **request.json,
+            **{
+                "date": datetime.datetime.now().date(),
+                "begin_time": datetime.datetime.now().time(),
+                "end_time": datetime.datetime.now().time(),
+            }
+        )
+        db.session.add(alert)
+        db.session.commit()
+        return {
+            "message": "New Alert created",
+        }
+
+    def put(self, alert_id):
+        db.session.query(Alert).filter(Alert.id == alert_id).update(request.json)
+        db.session.commit()
+        return {
+            200: {
+                "message": "Successfully updated the alert"
+            }
+        }

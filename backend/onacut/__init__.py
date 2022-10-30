@@ -21,6 +21,7 @@ cors = CORS(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db, render_as_batch=True)
 
+
 from onacut.api import create_module as api_create_module
 
 api_create_module(app)
