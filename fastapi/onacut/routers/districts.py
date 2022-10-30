@@ -5,7 +5,8 @@ from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException
 
 from ..dependencies import get_db
-from ..models import District as DistrictModel, City as CityModel
+from ..models import City as CityModel
+from ..models import District as DistrictModel
 from ..schemas.districts import District as DistrictSchema
 from ..schemas.districts import DistrictCreate as DistrictCreateSchema
 from ..schemas.districts import DistrictUpdate as DistrictUpdateSchema

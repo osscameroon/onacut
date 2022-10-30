@@ -5,7 +5,8 @@ from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException
 
 from ..dependencies import get_db
-from ..models import City as CityModel, Region as RegionModel
+from ..models import City as CityModel
+from ..models import Region as RegionModel
 from ..schemas.city import City as CitySchema
 from ..schemas.city import CityCreate as CityCreateSchema
 from ..schemas.city import CityUpdate as CityUpdateSchema
