@@ -11,7 +11,7 @@ def test_add_city():
         "name": "region",
         "longitude": 11.124576,
         "lattitude": 4.012475,
-        "region_id": 2
+        "region_id": 2,
     }
 
     response = client.post("/cities/", json=city)

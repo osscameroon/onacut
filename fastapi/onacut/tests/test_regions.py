@@ -25,4 +25,3 @@ def test_delete_region():
         res = client.delete(f"/regions/{len(response.json()) - 1}")
         assert res.status_code == 200
         assert res.json() is None
-

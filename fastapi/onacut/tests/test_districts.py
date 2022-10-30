@@ -7,10 +7,7 @@ def test_read_all_districts():
 
 
 def test_add_district():
-    district = {
-        "name": "region",
-        "city_id": 9
-    }
+    district = {"name": "region", "city_id": 9}
 
     response = client.post("/districts/", json=district)
     assert response.status_code == 200
