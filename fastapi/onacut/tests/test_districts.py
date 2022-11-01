@@ -12,8 +12,8 @@ def test_add_district():
     response = client.post("/districts/", json=district)
     assert response.status_code == 200
     item = response.json()
-    del item["id"]  # delete the id from the response
-    del item["total_alerts"]  # delete the total_alerts from the response
+    item.pop("id", None)  # delete the id from the response
+    item.pop("total_alerts", None)  # delete the total_alerts from the response
     assert item == district
 
 
@@ -30,7 +30,7 @@ def test_add_district_bad_city():
 
 def test_delete_district():
     response = client.get("/districts/")
-    if not len(response.json()) <= 0:
-        res = client.delete(f"/districts/{len(response.json()) - 1}")
-        assert res.status_code == 200
-        assert res.json() is None
+    assert len(response.json())
+    res = client.delete(f"/districts/{len(response.json()) - 1}")
+    assert res.status_code == 200
+    assert res.json() is None

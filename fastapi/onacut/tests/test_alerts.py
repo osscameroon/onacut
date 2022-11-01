@@ -1,15 +1,11 @@
+import pytest
 from . import client
 
 
-def test_read_all_alerts():
-    response = client.get("/alerts/")
-    assert response.status_code == 200
-
-
-def test_add_alert():
-    alert = {
+@pytest.fixture
+def metadata():
+    return {
         "observations": "Test Add Alert",
-        "type": "electricity",
         "date": "2022-10-30",
         "begin_time": "18:00:00",
         "region_id": 4,
@@ -20,26 +16,30 @@ def test_add_alert():
         "end_time": "20:30:00",
     }
 
+
+def test_read_all_alerts():
+    response = client.get("/alerts/")
+    assert response.status_code == 200
+
+
+def test_add_alert(metadata: dict):
+    alert = {
+        "type": "electricity",
+        **metadata
+    }
+
     response = client.post("/alerts/", json=alert)
 
     assert response.status_code == 200
     item = response.json()
-    del item["id"]  # delete the id from the response
+    item.pop("id", None)  # delete the id from the response
     assert item == alert
 
 
-def test_add_alert_bad_region():
+def test_add_alert_bad_region(metadata: dict):
     alert = {
-        "observations": "Test Add Alert",
         "type": "water",
-        "date": "2022-10-30",
-        "begin_time": "18:00:00",
-        "region_id": 0,
-        "longitude": 11.124576,
-        "lattitude": 4.012475,
-        "city_id": 3,
-        "district_id": 1,
-        "end_time": "18:00:00",
+        **metadata
     }
 
     response = client.post("/alerts/", json=alert)
@@ -47,18 +47,10 @@ def test_add_alert_bad_region():
     assert response.json() == {"detail": "Bad region's id!"}
 
 
-def test_add_alert_bad_city():
+def test_add_alert_bad_city(metadata: dict):
     alert = {
-        "observations": "Test Add Alert",
         "type": "water",
-        "date": "2022-10-30",
-        "begin_time": "18:00:00",
-        "region_id": 4,
-        "longitude": 11.124576,
-        "lattitude": 4.012475,
-        "city_id": 0,
-        "district_id": 1,
-        "end_time": "18:00:00",
+        **metadata
     }
 
     response = client.post("/alerts/", json=alert)
@@ -66,18 +58,10 @@ def test_add_alert_bad_city():
     assert response.json() == {"detail": "Bad city's id!"}
 
 
-def test_add_alert_bad_district():
+def test_add_alert_bad_district(metadata: dict):
     alert = {
-        "observations": "Test Add Alert",
         "type": "water",
-        "date": "2022-10-30",
-        "begin_time": "18:00:00",
-        "region_id": 4,
-        "longitude": 11.124576,
-        "lattitude": 4.012475,
-        "city_id": 2,
-        "district_id": 0,
-        "end_time": "18:00:00",
+        **metadata
     }
 
     response = client.post("/alerts/", json=alert)

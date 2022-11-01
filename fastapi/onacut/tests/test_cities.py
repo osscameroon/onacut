@@ -1,4 +1,14 @@
+import pytest
 from . import client
+
+
+@pytest.fixture
+def metadata():
+    return {
+        "longitude": 11.124576,
+        "lattitude": 4.012475,
+        "region_id": 2,
+    }
 
 
 def test_read_all_cities():
@@ -6,28 +16,24 @@ def test_read_all_cities():
     assert response.status_code == 200
 
 
-def test_add_city():
+def test_add_city(metadata: dict):
     city = {
         "name": "region",
-        "longitude": 11.124576,
-        "lattitude": 4.012475,
-        "region_id": 2,
+        **metadata
     }
 
     response = client.post("/cities/", json=city)
     assert response.status_code == 200
     item = response.json()
-    del item["id"]  # delete the id from the response
-    del item["total_alerts"]  # delete the total_alerts from the response
+    item.pop("id", None)  # delete the id from the response
+    item.pop("total_alerts", None)  # delete the total_alerts from the response
     assert item == city
 
 
-def test_add_city_bad_region():
+def test_add_city_bad_region(metadata: dict):
     alert = {
         "name": "bad city",
-        "longitude": 11.124576,
-        "lattitude": 4.012475,
-        "region_id": 0,
+        **metadata
     }
 
     response = client.post("/cities/", json=alert)
@@ -37,7 +43,7 @@ def test_add_city_bad_region():
 
 def test_delete_city():
     response = client.get("/cities/")
-    if not len(response.json()) <= 0:
-        res = client.delete(f"/regions/{len(response.json()) - 1}")
-        assert res.status_code == 200
-        assert res.json() is None
+    assert len(response.json())
+    res = client.delete(f"/regions/{len(response.json()) - 1}")
+    assert res.status_code == 200
+    assert res.json() is None
