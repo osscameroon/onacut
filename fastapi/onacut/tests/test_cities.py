@@ -22,7 +22,7 @@ def test_add_city(metadata: dict):
         **metadata
     }
 
-    response = client.post("/cities/", json=city)
+    response = client.post("/cities", json=city)
     assert response.status_code == 200
     item = response.json()
     item.pop("id", None)  # delete the id from the response
@@ -36,13 +36,13 @@ def test_add_city_bad_region(metadata: dict):
         **metadata
     }
 
-    response = client.post("/cities/", json=alert)
+    response = client.post("/cities", json=alert)
     assert response.status_code == 400
     assert response.json() == {"detail": "Bad region's id!"}
 
 
 def test_delete_city():
-    response = client.get("/cities/")
+    response = client.get("/cities")
     assert len(response.json())
     res = client.delete(f"/regions/{len(response.json()) - 1}")
     assert res.status_code == 200

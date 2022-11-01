@@ -9,7 +9,7 @@ def test_read_all_districts():
 def test_add_district():
     district = {"name": "region", "city_id": 9}
 
-    response = client.post("/districts/", json=district)
+    response = client.post("/districts", json=district)
     assert response.status_code == 200
     item = response.json()
     item.pop("id", None)  # delete the id from the response
@@ -23,13 +23,13 @@ def test_add_district_bad_city():
         "city_id": 0,
     }
 
-    response = client.post("/cities/", json=district)
+    response = client.post("/cities", json=district)
     assert response.status_code == 400
     assert response.json() == {"detail": "Bad city's id!"}
 
 
 def test_delete_district():
-    response = client.get("/districts/")
+    response = client.get("/districts")
     assert len(response.json())
     res = client.delete(f"/districts/{len(response.json()) - 1}")
     assert res.status_code == 200
