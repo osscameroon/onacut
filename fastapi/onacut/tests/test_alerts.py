@@ -18,7 +18,7 @@ def metadata():
 
 
 def test_read_all_alerts():
-    response = client.get("/alerts")
+    response = client.get("/alerts/")
     assert response.status_code == 200
 
 
@@ -28,7 +28,7 @@ def test_add_alert(metadata: dict):
         **metadata
     }
 
-    response = client.post("/alerts", json=alert)
+    response = client.post("/alerts/", json=alert)
 
     assert response.status_code == 200
     item = response.json()
@@ -42,7 +42,7 @@ def test_add_alert_bad_region(metadata: dict):
         **metadata
     }
 
-    response = client.post("/alerts", json=alert)
+    response = client.post("/alerts/", json=alert)
     assert response.status_code == 400
     assert response.json() == {"detail": "Bad region's id!"}
 
@@ -53,7 +53,7 @@ def test_add_alert_bad_city(metadata: dict):
         **metadata
     }
 
-    response = client.post("/alerts", json=alert)
+    response = client.post("/alerts/", json=alert)
     assert response.status_code == 400
     assert response.json() == {"detail": "Bad city's id!"}
 
@@ -64,13 +64,13 @@ def test_add_alert_bad_district(metadata: dict):
         **metadata
     }
 
-    response = client.post("/alerts", json=alert)
+    response = client.post("/alerts/", json=alert)
     assert response.status_code == 400
     assert response.json() == {"detail": "Bad district's id!"}
 
 
 def test_delete_alert():
-    response = client.get("/alerts")
+    response = client.get("/alerts/")
     assert len(response.json())
     res = client.delete(f"/alerts/{len(response.json()) - 1}")
     assert res.status_code == 200

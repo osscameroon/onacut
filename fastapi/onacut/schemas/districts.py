@@ -16,9 +16,7 @@ class DistrictUpdate(DistrictBase):
     city_id: int
 
 
-class District(DistrictBase):
-    id: int
-    city_id: int
+class District(DistrictUpdate, DistrictBase):
     total_alerts: Union[int, None] = None
 
     class Config:
