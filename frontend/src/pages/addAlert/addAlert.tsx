@@ -1,10 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "./addAlert.css";
-import {Link} from "react-router-dom";
-import accueil from "../../assets/img/accueil.png";
 import {useRecoilValue} from "recoil";
 import {MyText} from "../../components/myText/MyText.component";
-import {Footer} from "../../components/footer/Footer.component";
 import {useTranslation} from "react-i18next";
 import {AlertService, CityService} from "../../services/api";
 
