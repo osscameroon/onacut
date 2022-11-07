@@ -1,25 +1,24 @@
 import React, {useState} from "react";
 import {CityDetail} from "../../components/cityDetail/CityDetail.component";
-import {MyDrawer} from "../../components/drawer/Drawer.component";
 import {MyText} from "../../components/myText/MyText.component";
 import home from "../../assets/img/hotel.png";
 import lists from "../../assets/img/list.png";
 import {Search} from "../../components/search/Search.component";
 import {Link} from "react-router-dom";
 import boxImg from "../../assets/img/box.png";
-import {getDetails} from "../../atoms/details";
 import {useRecoilValue} from "recoil";
 import {NotFound} from "../../components/notFound/NotFound.component";
 import {useTranslation} from "react-i18next";
 import ReactPaginate from "react-paginate";
 import {Grid} from "@mui/material";
+import {AlertService} from "../../services/api";
 
 const PER_PAGE = 9;
 
 const Detail = () => {
     const {t} = useTranslation();
     const {search} = window.location;
-    const details: any = useRecoilValue(getDetails);
+    const details: any = useRecoilValue(AlertService.getDetails);
     const query = new URLSearchParams(search).get("s");
     const [searchQuery, setSearchQuery] = useState(query || "");
     const [currentPage, setCurrentPage] = useState(0);
@@ -55,7 +54,6 @@ const Detail = () => {
                     <div className="px-4 md:px-20 pt-5 md:pt-0">
                         <div className="container mx-auto">
                             <header className="site__detail-header flex justify-between items-center">
-                                <MyDrawer/>
                                 <Link to="/lists">
                                     <button className="flex items-center">
                                         <img
@@ -98,7 +96,6 @@ const Detail = () => {
                 <div className="px-4 md:px-20 pt-5 md:pt-0">
                     <div className="container mx-auto">
                         <header className="site__detail-header flex justify-between items-center">
-                            <MyDrawer/>
                             <Link to="/lists">
                                 <button className="flex items-center">
                                     <img

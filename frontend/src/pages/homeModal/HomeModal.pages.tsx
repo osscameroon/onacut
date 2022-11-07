@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useModal } from "react-hooks-use-modal";
 import { useRecoilState } from "recoil";
-import { modalState } from "../../atoms/modal";
 import { MyText } from "../../components/myText/MyText.component";
 import { useTranslation } from "react-i18next";
+import {modalState} from "../../atoms";
 
 const HomeModal = () => {
     const { t } = useTranslation();
