@@ -53,18 +53,20 @@ const Header = (props: HeaderProps) => {
                                 {t("label_map")}
                             </Button>
                         }
+                        {
+                            isHome &&
+                            <Button
+                                startIcon={<List/>}
+                                color={"primary"}
+                                variant={"contained"}
+                                onClick={() => {
+                                    router.push('/app/list');
+                                }}
+                            >
+                                {t("drawer_menu_list_view")}
+                            </Button>
+                        }
 
-                        <Button
-                            startIcon={<List/>}
-                            color={"primary"}
-                            variant={"contained"}
-                            onClick={() => {
-                                router.push('/app/list');
-                            }}
-                        >
-
-                            {t("drawer_menu_list_view")}
-                        </Button>
                         <Button
                             startIcon={<Info/>}
                             color={"primary"}

@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "./addAlert.css";
-import {MyDrawer} from "../../components/drawer/Drawer.component";
 import {Link} from "react-router-dom";
 import accueil from "../../assets/img/accueil.png";
-import {LANGUAGE} from "../../constants/language";
 import {useRecoilValue} from "recoil";
 import {MyText} from "../../components/myText/MyText.component";
 import {Footer} from "../../components/footer/Footer.component";
@@ -39,30 +37,17 @@ export const AddAlert = () => {
         <div className="w-auto h-screen bg-cover">
             <div className="px-4 pt-5 md:px-20 md:pt-0">
                 <div className="container mx-auto">
-                    <div className="flex items-center justify-between site__lists-header">
-                        <MyDrawer justify="start"/>
-                        <Link to="/">
-                            <button className="flex items-center end">
-                                <img
-                                    alt="menu"
-                                    className={`w-8 md:w-12 bg-cover h-auto mt-2 md:mt-4
-                                        md:mr-40 border-ind border-solid px-1 pt-2`}
-                                    src={accueil}
-                                />
-                            </button>
-                        </Link>
-                    </div>
-                    {/*<form method={"post"}>*/}
+
                     <div className="mt-4">
                         <div className="flex flex-col items-center justify-around my-5 md:my-10">
                             <MyText
                                 variant="title"
-                                myText={t(LANGUAGE.home.signalerPanne)}
+                                myText={t("drawer_menu_report")}
                                 myTextColor="text-ind"
                                 textUppercase="uppercase"
                             />
                             <p className="text-sm text-white text-gray-200 md:text-base">
-                                {t(LANGUAGE.home.signalerDescription)}
+                                {t("home_report_description")}
                             </p>
                         </div>
                         <div>
@@ -189,7 +174,6 @@ export const AddAlert = () => {
                     {/*</form>*/}
                 </div>
             </div>
-            <Footer/>
         </div>
     );
 };

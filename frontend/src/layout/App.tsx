@@ -1,5 +1,7 @@
 import React from 'react';
-import {Box} from "@mui/material";
+import {Box, Container} from "@mui/material";
+import {Footer} from "../components/footer/Footer.component";
+import Header from "../components/Header/Header";
 
 interface ApplicationLayoutProps {
     children: React.ReactNode;
@@ -8,9 +10,15 @@ interface ApplicationLayoutProps {
 const ApplicationLayout = (props: ApplicationLayoutProps) => {
     const {children} = props;
     return (
-        <Box>
-            {children}
-        </Box>
+        <>
+            <Header/>
+            <Container maxWidth={"lg"}>
+                <Box sx={{pt: 8, pb: 4}}>
+                    {children}
+                </Box>
+                <Footer/>
+            </Container>
+        </>
     )
 
 }

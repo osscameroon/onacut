@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {CityDetail} from "../../components/cityDetail/CityDetail.component";
-import {MyDrawer} from "../../components/drawer/Drawer.component";
 import {MyText} from "../../components/myText/MyText.component";
 import home from "../../assets/img/hotel.png";
 import lists from "../../assets/img/list.png";
@@ -55,7 +54,6 @@ const Detail = () => {
                     <div className="px-4 md:px-20 pt-5 md:pt-0">
                         <div className="container mx-auto">
                             <header className="site__detail-header flex justify-between items-center">
-                                <MyDrawer/>
                                 <Link to="/lists">
                                     <button className="flex items-center">
                                         <img
@@ -98,7 +96,6 @@ const Detail = () => {
                 <div className="px-4 md:px-20 pt-5 md:pt-0">
                     <div className="container mx-auto">
                         <header className="site__detail-header flex justify-between items-center">
-                            <MyDrawer/>
                             <Link to="/lists">
                                 <button className="flex items-center">
                                     <img
