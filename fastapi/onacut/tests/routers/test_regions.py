@@ -7,7 +7,7 @@ def test_read_all_regions():
 
 
 def test_add_region():
-    region = { "name": "region" }
+    region = {"name": "region"}
 
     response = client.post("/regions/", json=region)
     assert response.status_code == 200

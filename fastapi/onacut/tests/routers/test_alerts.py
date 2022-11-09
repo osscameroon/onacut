@@ -1,4 +1,5 @@
 import pytest
+
 from . import client
 
 
@@ -18,15 +19,12 @@ def metadata():
 
 
 def test_read_all_alerts():
-    response = client.get("/alerts/")
+    response = client.get("/alerts")
     assert response.status_code == 200
 
 
 def test_add_alert(metadata: dict):
-    alert = {
-        "type": "electricity",
-        **metadata
-    }
+    alert = {"type": "electricity", **metadata}
 
     response = client.post("/alerts/", json=alert)
 
@@ -37,10 +35,7 @@ def test_add_alert(metadata: dict):
 
 
 def test_add_alert_bad_region(metadata: dict):
-    alert = {
-        "type": "water",
-        **metadata
-    }
+    alert = {"type": "water", **metadata}
 
     response = client.post("/alerts/", json=alert)
     assert response.status_code == 400
@@ -48,10 +43,7 @@ def test_add_alert_bad_region(metadata: dict):
 
 
 def test_add_alert_bad_city(metadata: dict):
-    alert = {
-        "type": "water",
-        **metadata
-    }
+    alert = {"type": "water", **metadata}
 
     response = client.post("/alerts/", json=alert)
     assert response.status_code == 400
@@ -59,10 +51,7 @@ def test_add_alert_bad_city(metadata: dict):
 
 
 def test_add_alert_bad_district(metadata: dict):
-    alert = {
-        "type": "water",
-        **metadata
-    }
+    alert = {"type": "water", **metadata}
 
     response = client.post("/alerts/", json=alert)
     assert response.status_code == 400

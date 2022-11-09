@@ -1,4 +1,5 @@
 import pytest
+
 from . import client
 
 
@@ -17,10 +18,7 @@ def test_read_all_cities():
 
 
 def test_add_city(metadata: dict):
-    city = {
-        "name": "region",
-        **metadata
-    }
+    city = {"name": "region", **metadata}
 
     response = client.post("/cities/", json=city)
     assert response.status_code == 200
@@ -31,10 +29,7 @@ def test_add_city(metadata: dict):
 
 
 def test_add_city_bad_region(metadata: dict):
-    alert = {
-        "name": "bad city",
-        **metadata
-    }
+    alert = {"name": "bad city", **metadata}
 
     response = client.post("/cities/", json=alert)
     assert response.status_code == 400
