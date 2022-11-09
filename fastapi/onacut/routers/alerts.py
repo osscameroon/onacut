@@ -3,15 +3,14 @@ from typing import List
 from sqlalchemy.orm import Session
 
 from fastapi import APIRouter, Depends, HTTPException
-
-from ..dependencies import get_db
-from ..models import Alert as AlertModel
-from ..models import City as CityModel
-from ..models import District as DistrictModel
-from ..models import Region as RegionModel
-from ..schemas.alert import Alert as AlertSchema
-from ..schemas.alert import AlertCreate as AlertCreateSchema
-from ..schemas.alert import AlertUpdate as AlertUpdateSchema
+from onacut.dependencies import get_db
+from onacut.models import Alert as AlertModel
+from onacut.models import City as CityModel
+from onacut.models import District as DistrictModel
+from onacut.models import Region as RegionModel
+from onacut.schemas.alert import Alert as AlertSchema
+from onacut.schemas.alert import AlertCreate as AlertCreateSchema
+from onacut.schemas.alert import AlertUpdate as AlertUpdateSchema
 
 router = APIRouter(
     prefix="/alerts",

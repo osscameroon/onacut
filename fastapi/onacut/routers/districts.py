@@ -4,12 +4,12 @@ from sqlalchemy.orm import Session
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from ..dependencies import get_db
-from ..models import City as CityModel
-from ..models import District as DistrictModel
-from ..schemas.districts import District as DistrictSchema
-from ..schemas.districts import DistrictCreate as DistrictCreateSchema
-from ..schemas.districts import DistrictUpdate as DistrictUpdateSchema
+from onacut.dependencies import get_db
+from onacut.models import City as CityModel
+from onacut.models import District as DistrictModel
+from onacut.schemas.districts import District as DistrictSchema
+from onacut.schemas.districts import DistrictCreate as DistrictCreateSchema
+from onacut.schemas.districts import DistrictUpdate as DistrictUpdateSchema
 
 router = APIRouter(
     prefix="/districts",

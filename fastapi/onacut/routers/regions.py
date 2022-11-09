@@ -4,11 +4,11 @@ from sqlalchemy.orm import Session
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from ..dependencies import get_db
-from ..models import Region as RegionModel
-from ..schemas.region import Region as RegionSchema
-from ..schemas.region import RegionCreate as RegionCreateSchema
-from ..schemas.region import RegionUpdate as RegionUpdateSchema
+from onacut.dependencies import get_db
+from onacut.models import Region as RegionModel
+from onacut.schemas.region import Region as RegionSchema
+from onacut.schemas.region import RegionCreate as RegionCreateSchema
+from onacut.schemas.region import RegionUpdate as RegionUpdateSchema
 
 router = APIRouter(
     prefix="/regions",
