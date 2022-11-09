@@ -39,7 +39,7 @@ lint: install-dev-deps venv
 
 ##test: test your code
 test: install-dev-deps lint
-	pytest onacut/tests
+	$(PYTHON) -m pytest onacut/tests
 
 clean:
 	rm -rf $(VENVPATH)
