@@ -70,17 +70,6 @@ def test_add_alert_bad_region_city_district(
         assert response.json() == {"detail": f"Bad {bad_element}'s id!"}
 
 
-def test_delete_alert(metadata: dict, region_id: int, city_id: int, district_id: int):
-    alert = {
-        **metadata,
-        **{
-            "type": "electricity",
-            "region_id": region_id,
-            "city_id": city_id,
-            "district_id": district_id,
-        },
-    }
-    response = client.post("/alerts/", json=alert)
-
-    res = client.delete(f"/alerts/{response.json()['id']}")
+def test_delete_alert(metadata: dict, alert_id: int):
+    res = client.delete(f"/alerts/{alert_id}")
     assert res.status_code == 200

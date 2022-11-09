@@ -8,17 +8,16 @@ def metadata():
     return {
         "longitude": 11.124576,
         "lattitude": 4.012475,
-        "region_id": 2,
     }
 
 
 def test_read_all_cities():
-    response = client.get("/cities/")
+    response = client.get("/cities")
     assert response.status_code == 200
 
 
-def test_add_city(metadata: dict):
-    city = {"name": "region", **metadata}
+def test_add_city(random_name: str, metadata: dict, region_id: int):
+    city = {"name": random_name, **metadata, "region_id": region_id}
 
     response = client.post("/cities/", json=city)
     assert response.status_code == 200
@@ -28,17 +27,14 @@ def test_add_city(metadata: dict):
     assert item == city
 
 
-def test_add_city_bad_region(metadata: dict):
-    alert = {"name": "bad city", **metadata}
+def test_add_city_bad_region(random_name: str, metadata: dict):
+    alert = {"name": random_name, **metadata, "region_id": 0000000}
 
     response = client.post("/cities/", json=alert)
     assert response.status_code == 400
     assert response.json() == {"detail": "Bad region's id!"}
 
 
-def test_delete_city():
-    response = client.get("/cities/")
-    assert len(response.json())
-    res = client.delete(f"/regions/{len(response.json()) - 1}")
+def test_delete_city(city_id: int):
+    res = client.delete(f"/regions/{city_id}")
     assert res.status_code == 200
-    assert res.json() is None

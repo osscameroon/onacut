@@ -2,13 +2,12 @@ from onacut.tests import client
 
 
 def test_read_all_districts():
-    response = client.get("/districts/")
+    response = client.get("/districts")
     assert response.status_code == 200
 
 
-def test_add_district():
-    district = {"name": "region", "city_id": 9}
-
+def test_add_district(random_name: str, city_id: int) -> None:
+    district = {"name": random_name, "city_id": city_id}
     response = client.post("/districts/", json=district)
     assert response.status_code == 200
     item = response.json()
@@ -17,20 +16,6 @@ def test_add_district():
     assert item == district
 
 
-def test_add_district_bad_city():
-    district = {
-        "name": "bad city",
-        "city_id": 0,
-    }
-
-    response = client.post("/cities/", json=district)
-    assert response.status_code == 400
-    assert response.json() == {"detail": "Bad city's id!"}
-
-
-def test_delete_district():
-    response = client.get("/districts/")
-    assert len(response.json())
-    res = client.delete(f"/districts/{len(response.json()) - 1}")
+def test_delete_district(district_id: int) -> None:
+    res = client.delete(f"/districts/{district_id}")
     assert res.status_code == 200
-    assert res.json() is None

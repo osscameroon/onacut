@@ -2,12 +2,12 @@ from onacut.tests import client
 
 
 def test_read_all_regions():
-    response = client.get("/regions/")
+    response = client.get("/regions")
     assert response.status_code == 200
 
 
-def test_add_region():
-    region = {"name": "region"}
+def test_add_region(random_name: str):
+    region = {"name": random_name}
 
     response = client.post("/regions/", json=region)
     assert response.status_code == 200
@@ -17,9 +17,6 @@ def test_add_region():
     assert item == region
 
 
-def test_delete_region():
-    response = client.get("/regions/")
-    assert len(response.json())
-    res = client.delete(f"/regions/{len(response.json()) - 1}")
+def test_delete_region(region_id: str):
+    res = client.delete(f"/regions/{region_id}")
     assert res.status_code == 200
-    assert res.json() is None
