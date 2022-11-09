@@ -14,7 +14,7 @@ def model_to_json(data: object) -> object:
     if not isinstance(data, (basic_data_type | dict | list)):
         try:
             del data._sa_instance_state  # type: ignore
-        except:
+        except AttributeError:
             pass
         return data.__dict__
 

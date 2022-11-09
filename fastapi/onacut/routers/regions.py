@@ -3,7 +3,6 @@ from typing import List
 from sqlalchemy.orm import Session
 
 from fastapi import APIRouter, Depends, HTTPException
-
 from onacut.dependencies import get_db
 from onacut.models import Region as RegionModel
 from onacut.schemas.region import Region as RegionSchema

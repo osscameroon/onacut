@@ -8,7 +8,7 @@ class RegionBase(BaseModel):
 
 
 class RegionCreate(RegionBase):
-    pass # why not just use the RegionBase if this class is empty ?
+    pass  # why not just use the RegionBase if this class is empty ?
 
 
 class RegionUpdate(RegionBase):
