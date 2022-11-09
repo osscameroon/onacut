@@ -50,7 +50,6 @@ def test_add_alert_bad_region_city_district(
     for region, city, district in [
         (_BAD_ID, city_id, district_id),
         (region_id, _BAD_ID, district_id),
-        (_BAD_ID, city_id, district_id),
         (region_id, city_id, _BAD_ID),
     ]:
         alert = {
