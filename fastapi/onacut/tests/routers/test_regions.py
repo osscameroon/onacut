@@ -7,7 +7,7 @@ def test_read_all_regions():
 
 
 def test_add_region(random_name: str) -> None:
-    """ Should add region """
+    """Should add region"""
     region = {"name": random_name}
 
     response = client.post("/regions/", json=region)
@@ -19,6 +19,6 @@ def test_add_region(random_name: str) -> None:
 
 
 def test_delete_region(region_id: str) -> None:
-    """ Should delete region """
+    """Should delete region"""
     res = client.delete(f"/regions/{region_id}")
     assert res.status_code == 200

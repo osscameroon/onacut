@@ -70,6 +70,6 @@ def test_add_alert_bad_region_city_district(
 
 
 def test_delete_alert(alert_id: int) -> None:
-    """ Should delete an alert """
+    """Should delete an alert"""
     res = client.delete(f"/alerts/{alert_id}")
     assert res.status_code == 200
