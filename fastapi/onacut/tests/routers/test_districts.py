@@ -1,4 +1,4 @@
-from . import client
+from onacut.tests import client
 
 
 def test_read_all_districts():
