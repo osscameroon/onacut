@@ -6,9 +6,9 @@ _BAD_ID = 0000000
 
 
 @pytest.fixture
-def metadata():
+def metadata() -> dict:
     return {
-        "observations": "Test Add Alert",
+        "observations": "Test on Alert",
         "date": "2022-10-30",
         "begin_time": "18:00:00",
         "longitude": 11.124576,
@@ -17,7 +17,7 @@ def metadata():
     }
 
 
-def test_read_all_alerts():
+def test_read_all_alerts() -> None:
     response = client.get("/alerts")
     assert response.status_code == 200
 
@@ -69,6 +69,7 @@ def test_add_alert_bad_region_city_district(
         assert response.json() == {"detail": f"Bad {bad_element}'s id!"}
 
 
-def test_delete_alert(metadata: dict, alert_id: int):
+def test_delete_alert(alert_id: int) -> None:
+    """ Should delete an alert """
     res = client.delete(f"/alerts/{alert_id}")
     assert res.status_code == 200
