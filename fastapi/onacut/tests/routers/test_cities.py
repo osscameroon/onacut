@@ -39,5 +39,9 @@ def test_add_city_bad_region(random_name: str, metadata: dict) -> None:
 
 def test_delete_city(city_id: int) -> None:
     """Should delete a city"""
-    res = client.delete(f"/regions/{city_id}")
+    res = client.delete(f"/cities/{city_id}")
     assert res.status_code == 200
+
+    # Since it's already deleted
+    res = client.delete(f"/cities/{city_id}")
+    assert res.status_code == 400

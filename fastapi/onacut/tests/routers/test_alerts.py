@@ -2,8 +2,6 @@ import pytest
 
 from onacut.tests import client
 
-_BAD_ID = 0000000
-
 
 @pytest.fixture
 def metadata() -> dict:
@@ -47,10 +45,12 @@ def test_add_alert(
 def test_add_alert_bad_region_city_district(
     metadata: dict, region_id: str, city_id: int, district_id: int
 ) -> None:
+
+    _bad_id = 0000000
     for region, city, district in [
-        (_BAD_ID, city_id, district_id),
-        (region_id, _BAD_ID, district_id),
-        (region_id, city_id, _BAD_ID),
+        (_bad_id, city_id, district_id),
+        (region_id, _bad_id, district_id),
+        (region_id, city_id, _bad_id),
     ]:
         alert = {
             "type": "water",
@@ -61,11 +61,14 @@ def test_add_alert_bad_region_city_district(
         response = client.post("/alerts/", json=alert)
 
         assert response.status_code == 400
-        bad_element = (
-            "region"
-            if region == _BAD_ID
-            else ("city" if city == _BAD_ID else "district")
-        )
+
+        if region == _bad_id:
+            bad_element = "region"
+        elif city == _bad_id:
+            bad_element = "city"
+        else:
+            bad_element = "district"
+
         assert response.json() == {"detail": f"Bad {bad_element}'s id!"}
 
 
@@ -73,3 +76,7 @@ def test_delete_alert(alert_id: int) -> None:
     """Should delete an alert"""
     res = client.delete(f"/alerts/{alert_id}")
     assert res.status_code == 200
+
+    # Since it's already deleted
+    res = client.delete(f"/alerts/{alert_id}")
+    assert res.status_code == 400

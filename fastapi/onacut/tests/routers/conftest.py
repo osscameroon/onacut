@@ -55,14 +55,12 @@ def random_name() -> str:
 
 @pytest.fixture
 def region_id(random_name: str) -> int:
-    # We test the post of a region directly here
     response_region = client.post("/regions/", json={"name": random_name})
     return response_region.json()["id"]
 
 
 @pytest.fixture
 def city_id(region_id: int, random_name: str) -> int:
-    # We test the post of a city directly here
     response_city = client.post(
         "/cities/",
         json={
@@ -77,7 +75,6 @@ def city_id(region_id: int, random_name: str) -> int:
 
 @pytest.fixture
 def district_id(city_id: int, random_name: str) -> int:
-    # We test the post of a district directly here
     response_district = client.post(
         "/districts/", json={"name": random_name, "city_id": city_id}
     )

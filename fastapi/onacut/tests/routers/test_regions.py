@@ -22,3 +22,7 @@ def test_delete_region(region_id: str) -> None:
     """Should delete region"""
     res = client.delete(f"/regions/{region_id}")
     assert res.status_code == 200
+
+    # Since it's already deleted
+    res = client.delete(f"/regions/{region_id}")
+    assert res.status_code == 400

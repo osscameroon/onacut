@@ -8,7 +8,7 @@ class RegionBase(BaseModel):
 
 
 class RegionCreate(RegionBase):
-    pass  # why not just use the RegionBase if this class is empty ?
+    pass
 
 
 class RegionUpdate(RegionBase):
@@ -16,7 +16,7 @@ class RegionUpdate(RegionBase):
 
 
 class Region(RegionBase):
-    id: int
+    id: int | None
     total_alerts: Union[int, None] = None
 
     class Config:

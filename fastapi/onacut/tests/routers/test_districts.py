@@ -21,3 +21,7 @@ def test_delete_district(district_id: int) -> None:
     """Should delete district"""
     res = client.delete(f"/districts/{district_id}")
     assert res.status_code == 200
+
+    # Since it's already deleted
+    res = client.delete(f"/districts/{district_id}")
+    assert res.status_code == 400
