@@ -1,11 +1,15 @@
 from typing import List
-from fastapi import APIRouter, Depends
+
 from sqlalchemy.orm import Session
-from ..schemas.city import (City as CitySchema,
-                            CityCreate as CityCreateSchema,
-                            CityUpdate as CityUpdateSchema)
-from ..models import City as CityModel
+
+from fastapi import APIRouter, Depends, HTTPException
+
 from ..dependencies import get_db
+from ..models import City as CityModel
+from ..models import Region as RegionModel
+from ..schemas.city import City as CitySchema
+from ..schemas.city import CityCreate as CityCreateSchema
+from ..schemas.city import CityUpdate as CityUpdateSchema
 
 router = APIRouter(
     prefix="/cities",
@@ -17,7 +21,7 @@ router = APIRouter(
 @router.get(
     "/",
     response_model=List[CitySchema],
-    responses={403: {"description": "Operation forbidden"}}
+    responses={403: {"description": "Operation forbidden"}},
 )
 def read_cities(db: Session = Depends(get_db)):
     datas = db.query(CityModel).all()
@@ -27,7 +31,7 @@ def read_cities(db: Session = Depends(get_db)):
 @router.get(
     "/{city_id}",
     response_model=CitySchema,
-    responses={403: {"description": "Operation forbidden"}}
+    responses={403: {"description": "Operation forbidden"}},
 )
 def get_city(city_id: int, db: Session = Depends(get_db)):
     data = db.query(CityModel).filter_by(id=city_id).first()
@@ -39,11 +43,17 @@ def get_city(city_id: int, db: Session = Depends(get_db)):
     response_model=CitySchema,
     responses={403: {"description": "Operation forbidden"}},
 )
-def create_city(
-    city: CityCreateSchema,
-    db: Session = Depends(get_db)
-):
-    return {}
+def create_city(city: CityCreateSchema, db: Session = Depends(get_db)):
+    # check if the provided region's id exists in the database
+    region = db.query(RegionModel).filter_by(id=city.region_id).first()
+    if not region:
+        raise HTTPException(status_code=400, detail="Bad region's id!")
+
+    db_city = CityModel(**city.dict())
+    db.add(db_city)
+    db.commit()
+    db.refresh(db_city)
+    return db_city
 
 
 @router.put(
@@ -51,11 +61,7 @@ def create_city(
     response_model=CitySchema,
     responses={403: {"description": "Operation forbidden"}},
 )
-def update_city(
-    city_id: int,
-    city: CityUpdateSchema,
-    db: Session = Depends(get_db)
-):
+def update_city(city_id: int, city: CityUpdateSchema, db: Session = Depends(get_db)):
     return {}
 
 
@@ -64,4 +70,9 @@ def update_city(
     responses={403: {"description": "Operation forbidden"}},
 )
 def delete_city(city_id: int, db: Session = Depends(get_db)):
-    return {}
+    city = db.query(CityModel).filter_by(id=city_id).first()
+    if not city:
+        raise HTTPException(status_code=400, detail="Bad city's id!")
+
+    db.delete(city)
+    db.commit()

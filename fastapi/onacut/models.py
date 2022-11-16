@@ -1,6 +1,6 @@
-from sqlalchemy import Column, ForeignKey, Integer
-from sqlalchemy import String, Float, Text, Date, Time
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy import (Column, Date, Float, ForeignKey, Integer, String, Text,
+                        Time)
+from sqlalchemy.orm import backref, relationship
 
 from .database import Base
 
@@ -8,21 +8,22 @@ from .database import Base
 class RegionLocation(Base):
     __tablename__ = "region_location"
 
-    location_id = Column(Integer, ForeignKey("location.id"), primary_key = True)
-    region_id = Column(Integer, ForeignKey("region.id"), primary_key = True)
+    location_id = Column(Integer, ForeignKey("location.id"), primary_key=True)
+    region_id = Column(Integer, ForeignKey("region.id"), primary_key=True)
+
 
 class CityLocation(Base):
     __tablename__ = "city_location"
 
-    location_id = Column(Integer, ForeignKey("location.id"), primary_key = True)
-    city_id = Column(Integer, ForeignKey("city.id"), primary_key = True)
+    location_id = Column(Integer, ForeignKey("location.id"), primary_key=True)
+    city_id = Column(Integer, ForeignKey("city.id"), primary_key=True)
 
 
 class DistrictLocation(Base):
     __tablename__ = "district_location"
 
-    location_id = Column(Integer, ForeignKey("location.id"), primary_key = True)
-    district_id = Column(Integer, ForeignKey("district.id"), primary_key = True)
+    location_id = Column(Integer, ForeignKey("location.id"), primary_key=True)
+    district_id = Column(Integer, ForeignKey("district.id"), primary_key=True)
 
 
 class Location(Base):

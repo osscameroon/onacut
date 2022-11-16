@@ -1,11 +1,10 @@
-from typing import List, Union
+from typing import Union
+
 from pydantic import BaseModel
 
 
 class RegionBase(BaseModel):
-    id: int
     name: str
-    total_alerts: int
 
 
 class RegionCreate(RegionBase):

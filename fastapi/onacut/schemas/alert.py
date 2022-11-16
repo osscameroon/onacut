@@ -1,6 +1,7 @@
+from datetime import date, time
 from typing import Union
+
 from pydantic import BaseModel
-from datetime import datetime, date, time
 from pydantic_choices import choice
 
 
@@ -19,7 +20,7 @@ class AlertBase(BaseModel):
 class AlertCreate(AlertBase):
     longitude: Union[float, None] = None
     lattitude: Union[float, None] = None
-    end_time: Union[datetime, None] = None
+    end_time: Union[time, None] = None
 
 
 class AlertUpdate(AlertBase):

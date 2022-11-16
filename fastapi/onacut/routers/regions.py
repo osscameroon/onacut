@@ -1,11 +1,14 @@
 from typing import List
-from fastapi import APIRouter, Depends
+
 from sqlalchemy.orm import Session
-from ..schemas.region import (Region as RegionSchema,
-                              RegionCreate as RegionCreateSchema,
-                              RegionUpdate as RegionUpdateSchema)
-from ..models import Region as RegionModel
+
+from fastapi import APIRouter, Depends, HTTPException
+
 from ..dependencies import get_db
+from ..models import Region as RegionModel
+from ..schemas.region import Region as RegionSchema
+from ..schemas.region import RegionCreate as RegionCreateSchema
+from ..schemas.region import RegionUpdate as RegionUpdateSchema
 
 router = APIRouter(
     prefix="/regions",
@@ -17,7 +20,7 @@ router = APIRouter(
 @router.get(
     "/",
     response_model=List[RegionSchema],
-    responses={403: {"description": "Operation forbidden"}}
+    responses={403: {"description": "Operation forbidden"}},
 )
 def read_regions(db: Session = Depends(get_db)):
     data = db.query(RegionModel).all()
@@ -27,7 +30,7 @@ def read_regions(db: Session = Depends(get_db)):
 @router.get(
     "/{region_id}",
     response_model=RegionSchema,
-    responses={403: {"description": "Operation forbidden"}}
+    responses={403: {"description": "Operation forbidden"}},
 )
 def get_region(region_id: int, db: Session = Depends(get_db)):
     data = db.query(RegionModel).filter_by(id=region_id).first()
@@ -37,13 +40,14 @@ def get_region(region_id: int, db: Session = Depends(get_db)):
 @router.post(
     "/",
     response_model=RegionSchema,
-    responses={403: {"description": "Operation forbidden"}}
+    responses={403: {"description": "Operation forbidden"}},
 )
-def create_region(
-    region: RegionCreateSchema,
-    db: Session = Depends(get_db)
-):
-    return {}
+def create_region(region: RegionCreateSchema, db: Session = Depends(get_db)):
+    db_region = RegionModel(**region.dict())
+    db.add(db_region)
+    db.commit()
+    db.refresh(db_region)
+    return db_region
 
 
 @router.put(
@@ -52,9 +56,7 @@ def create_region(
     responses={403: {"description": "Operation forbidden"}},
 )
 def update_region(
-    region_id: int,
-    region: RegionUpdateSchema,
-    db: Session = Depends(get_db)
+    region_id: int, region: RegionUpdateSchema, db: Session = Depends(get_db)
 ):
     return {}
 
@@ -65,4 +67,9 @@ def update_region(
     responses={403: {"description": "Operation forbidden"}},
 )
 def delete_region(region_id: int, db: Session = Depends(get_db)):
-    return {}
+    region = db.query(RegionModel).filter_by(id=region_id).first()
+    if not region:
+        raise HTTPException(status_code=400, detail="Bad region's id!")
+
+    db.delete(region)
+    db.commit()

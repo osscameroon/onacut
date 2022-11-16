@@ -1,11 +1,15 @@
 from typing import List
-from fastapi import APIRouter, Depends
+
 from sqlalchemy.orm import Session
-from ..schemas.districts import (District as DistrictSchema,
-                                 DistrictCreate as DistrictCreateSchema,
-                                 DistrictUpdate as DistrictUpdateSchema)
-from ..models import District as DistrictModel
+
+from fastapi import APIRouter, Depends, HTTPException
+
 from ..dependencies import get_db
+from ..models import City as CityModel
+from ..models import District as DistrictModel
+from ..schemas.districts import District as DistrictSchema
+from ..schemas.districts import DistrictCreate as DistrictCreateSchema
+from ..schemas.districts import DistrictUpdate as DistrictUpdateSchema
 
 router = APIRouter(
     prefix="/districts",
@@ -17,7 +21,7 @@ router = APIRouter(
 @router.get(
     "/",
     response_model=List[DistrictSchema],
-    responses={403: {"description": "Operation forbidden"}}
+    responses={403: {"description": "Operation forbidden"}},
 )
 def read_districts(db: Session = Depends(get_db)):
     data = db.query(DistrictModel).all()
@@ -27,7 +31,7 @@ def read_districts(db: Session = Depends(get_db)):
 @router.get(
     "/{district_id}",
     response_model=DistrictSchema,
-    responses={403: {"description": "Operation forbidden"}}
+    responses={403: {"description": "Operation forbidden"}},
 )
 def get_district(district_id: int, db: Session = Depends(get_db)):
     data = db.query(DistrictModel).filter_by(id=district_id).first()
@@ -39,11 +43,17 @@ def get_district(district_id: int, db: Session = Depends(get_db)):
     response_model=DistrictSchema,
     responses={403: {"description": "Operation forbidden"}},
 )
-def create_district(
-    district: DistrictCreateSchema,
-    db: Session = Depends(get_db)
-):
-    return {}
+def create_district(district: DistrictCreateSchema, db: Session = Depends(get_db)):
+    # check if the provided city's id exists in the database
+    city = db.query(CityModel).filter_by(id=district.city_id).first()
+    if not city:
+        raise HTTPException(status_code=400, detail="Bad city's id!")
+
+    db_district = DistrictModel(**district.dict())
+    db.add(db_district)
+    db.commit()
+    db.refresh(db_district)
+    return db_district
 
 
 @router.put(
@@ -52,9 +62,7 @@ def create_district(
     responses={403: {"description": "Operation forbidden"}},
 )
 def update_district(
-    district_id: int,
-    district: DistrictUpdateSchema,
-    db: Session = Depends(get_db)
+    district_id: int, district: DistrictUpdateSchema, db: Session = Depends(get_db)
 ):
     return {}
 
@@ -63,8 +71,10 @@ def update_district(
     "/{district_id}",
     responses={403: {"description": "Operation forbidden"}},
 )
-def delete_district(
-    district_id: int,
-    db: Session = Depends(get_db)
-):
-    return {}
+def delete_district(district_id: int, db: Session = Depends(get_db)):
+    district = db.query(DistrictModel).filter_by(id=district_id).first()
+    if not district:
+        raise HTTPException(status_code=400, detail="Bad district's id!")
+
+    db.delete(district)
+    db.commit()
