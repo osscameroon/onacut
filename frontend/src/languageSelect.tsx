@@ -6,7 +6,7 @@ const LanguageSelector = () => {
 
     const {i18n} = useTranslation();
     const changeLanguage = () => {
-        i18n.changeLanguage( i18n.language == "en" ? "fr" : "en").then();
+        i18n.changeLanguage(i18n.language == "en" ? "fr" : "en").then();
     };
 
     return (
@@ -28,7 +28,7 @@ const LanguageSelector = () => {
                 color: "#000"
             }}
         >
-            {i18n.language.toUpperCase()}
+            {i18n.language.toLowerCase() == "fr" ? "En" : "Fr"}
         </Box>
     );
 };
