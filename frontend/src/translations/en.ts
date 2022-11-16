@@ -44,6 +44,7 @@ export default {
       "report_field_description": "Describe your failure",
       "report_btn_submit": "Submit alert",
       "global_label_select_placeholder": "Select an option",
-      "menu_item_advice": "Advices"
+      "menu_item_advice": "Advices",
+      "label_map": "Map"
   }
 };
