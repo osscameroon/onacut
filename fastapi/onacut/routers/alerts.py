@@ -2,10 +2,13 @@ from typing import List
 
 from sqlalchemy.orm import Session
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 
 from ..dependencies import get_db
 from ..models import Alert as AlertModel
+from ..models import City as CityModel
+from ..models import District as DistrictModel
+from ..models import Region as RegionModel
 from ..schemas.alert import Alert as AlertSchema
 from ..schemas.alert import AlertCreate as AlertCreateSchema
 from ..schemas.alert import AlertUpdate as AlertUpdateSchema
@@ -43,7 +46,28 @@ def get_alert(alert_id: int, db: Session = Depends(get_db)):
     responses={403: {"description": "Operation forbidden"}},
 )
 def create_alert(alert: AlertCreateSchema, db: Session = Depends(get_db)):
-    return {}
+    # check if the provided region exists in db
+    region = db.query(RegionModel).filter_by(id=alert.region_id).first()
+    if not region:
+        raise HTTPException(status_code=400, detail="Bad region's id!")
+
+    # check if the provided city exists in db
+    city = db.query(CityModel).filter_by(id=alert.city_id).first()
+    if not city:
+        raise HTTPException(status_code=400, detail="Bad city's id!")
+
+    # check if the provided districk exists in db
+    district = db.query(DistrictModel).filter_by(id=alert.district_id).first()
+    if not district:
+        raise HTTPException(status_code=400, detail="Bad district's id!")
+
+    # create the new Alert
+    db_alert = AlertModel(**alert.dict())
+
+    db.add(db_alert)
+    db.commit()
+    db.refresh(db_alert)
+    return db_alert
 
 
 @router.put(
@@ -62,4 +86,9 @@ def update_alert(
     responses={403: {"description": "Operation forbidden"}},
 )
 def delete_alert(alert_id: int, db: Session = Depends(get_db)):
-    return {}
+    alert = db.query(AlertModel).filter_by(id=alert_id).first()
+    if not alert:
+        raise HTTPException(status_code=400, detail="Bad alert's id!")
+
+    db.delete(alert)
+    db.commit()

@@ -17,7 +17,7 @@ export const City = (props: any) => {
                     <img src={lighting} className="w-6 h-6 mr-4" alt="" />
                     <Link
                         onClick={props.myClick}
-                        to={`/details/${props.region}`}
+                        to={`/app/details/${props.region}`}
                     >
                         <MyText
                             variant="normal"

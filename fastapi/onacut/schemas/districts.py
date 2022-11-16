@@ -5,19 +5,20 @@ from pydantic import BaseModel
 
 class DistrictBase(BaseModel):
     name: str
-    city_id: int
 
 
 class DistrictCreate(DistrictBase):
-    pass
+    city_id: int
 
 
 class DistrictUpdate(DistrictBase):
     id: int
+    city_id: int
 
 
 class District(DistrictBase):
     id: int
+    city_id: int
     total_alerts: Union[int, None] = None
 
     class Config:
