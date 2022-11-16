@@ -107,6 +107,38 @@ export const AddAlert = () => {
 
                             <div className="flex flex-col items-center justify-around">
                                 <p className="w-full text-sm font-normal text-left text-gray-200 md:text-lg md:w-3/4">
+                                    {t('report_field_city')}
+                                </p>
+                                <select
+                                    className="w-full mt-2 mb-4 border border-grayC rounded-md md:mb-16 md:w-3/4"
+                                    style={{height: "61px"}}
+                                    onChange={(e: any) =>
+                                        setUserChoice(e.target.value)
+                                    }
+                                >
+                                    <option
+                                        value="0"
+                                        disabled
+                                        selected
+                                        hidden
+                                    >
+                                        {t("global_label_select_placeholder")}
+                                    </option>
+                                    {stateOptions.map(
+                                        (region: any, index) => (
+                                            <option
+                                                value={region.name}
+                                                key={region.id}
+                                            >
+                                                {region.name}
+                                            </option>
+                                        )
+                                    )}
+                                </select>
+                            </div>
+
+                            <div className="flex flex-col items-center justify-around">
+                                <p className="w-full text-sm font-normal text-left text-gray-200 md:text-lg md:w-3/4">
                                     {t('report_field_neighborhood')}
                                 </p>
                                 <select
