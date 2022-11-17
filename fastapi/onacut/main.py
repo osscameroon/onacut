@@ -4,12 +4,12 @@ from fastapi import FastAPI
 
 load_dotenv()
 
-from .database import engine
-from .models import Base
-from .routers.alerts import router as alerts_router
-from .routers.cities import router as cities_router
-from .routers.districts import router as districts_router
-from .routers.regions import router as regions_router
+from onacut.database import engine
+from onacut.models import Base
+from onacut.routers.alerts import router as alerts_router
+from onacut.routers.cities import router as cities_router
+from onacut.routers.districts import router as districts_router
+from onacut.routers.regions import router as regions_router
 
 Base.metadata.create_all(bind=engine)
 app = FastAPI()

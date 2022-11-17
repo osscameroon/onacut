@@ -1,0 +1,31 @@
+name: FastApi-CI
+
+on:
+  push:
+    paths:
+      - .github/workflows/fastapi-ci.yaml
+      - fastapi/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+
+    defaults:
+      run:
+        working-directory: ./fastapi
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python 3.10.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.10.8
+
+    - name: Install system dependencies
+      run: pip install virtualenv && make install-dev-deps
+
+    - name: Run test on the CI
+      run: make test

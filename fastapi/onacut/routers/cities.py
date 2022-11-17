@@ -3,13 +3,12 @@ from typing import List
 from sqlalchemy.orm import Session
 
 from fastapi import APIRouter, Depends, HTTPException
-
-from ..dependencies import get_db
-from ..models import City as CityModel
-from ..models import Region as RegionModel
-from ..schemas.city import City as CitySchema
-from ..schemas.city import CityCreate as CityCreateSchema
-from ..schemas.city import CityUpdate as CityUpdateSchema
+from onacut.dependencies import get_db
+from onacut.models import City as CityModel
+from onacut.models import Region as RegionModel
+from onacut.schemas.city import City as CitySchema
+from onacut.schemas.city import CityCreate as CityCreateSchema
+from onacut.schemas.city import CityUpdate as CityUpdateSchema
 
 router = APIRouter(
     prefix="/cities",
