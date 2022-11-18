@@ -1,5 +1,3 @@
-/* eslint-disable react/no-multi-comp */
-/* eslint-disable react/display-name */
 import React, {Fragment, lazy, Suspense} from "react";
 import {RouteConfig} from "react-router-config";
 import {Redirect, Route, Switch} from "react-router-dom";
