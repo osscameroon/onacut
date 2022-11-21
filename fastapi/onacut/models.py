@@ -99,3 +99,21 @@ class Alert(Base):
     lattitude = Column(Float)
     city_id = Column(Integer, ForeignKey("city.id"))
     district_id = Column(Integer, ForeignKey("district.id"))
+
+    def to_dict(self) ->dict:
+        return {
+            "id": self.id,
+            "observations": self.observations,
+            "type": self.type,
+            "date": self.date, 
+            "begin_time": self.begin_time,
+            "end_time": self.end_time,
+            "longitude": self.longitude,
+            "lattitude": self.lattitude,
+            "region": self.region.name,
+            "region_id": self.region_id,
+            "city": self.city.name,
+            "city_id": self.city_id,
+            "district": self.district.name,
+            "district_id": self.district_id
+        }

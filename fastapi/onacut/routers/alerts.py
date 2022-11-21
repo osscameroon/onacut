@@ -25,8 +25,9 @@ router = APIRouter(
     responses={403: {"description": "Operation forbidden"}},
 )
 def read_alerts(db: Session = Depends(get_db)):
-    data = db.query(AlertModel).all()
-    return data
+    alerts = db.query(AlertModel).all()
+
+    return list(map(lambda alert: alert.to_dict(), alerts))
 
 
 @router.get(
@@ -35,8 +36,8 @@ def read_alerts(db: Session = Depends(get_db)):
     responses={403: {"description": "Operation forbidden"}},
 )
 def get_alert(alert_id: int, db: Session = Depends(get_db)):
-    data = db.query(AlertModel).filter_by(id=alert_id).first()
-    return data
+    alert = db.query(AlertModel).filter_by(id=alert_id).first()
+    return alert.to_dict()
 
 
 @router.post(
