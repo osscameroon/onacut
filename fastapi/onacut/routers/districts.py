@@ -18,7 +18,7 @@ router = APIRouter(
 
 
 @router.get(
-    "/",
+    "",
     response_model=List[DistrictSchema],
     responses={403: {"description": "Operation forbidden"}},
 )

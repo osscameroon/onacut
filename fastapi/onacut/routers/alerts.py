@@ -1,8 +1,8 @@
-from typing import List
+from typing import List, Union
 
 from sqlalchemy.orm import Session
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from onacut.dependencies import get_db
 from onacut.models import Alert as AlertModel
 from onacut.models import City as CityModel
@@ -20,14 +20,28 @@ router = APIRouter(
 
 
 @router.get(
-    "/",
+    "",
     response_model=List[AlertSchema],
     responses={403: {"description": "Operation forbidden"}},
 )
-def read_alerts(db: Session = Depends(get_db)):
-    alerts = db.query(AlertModel).all()
+def read_alerts(
+    db: Session = Depends(get_db),
+    region: Union[str, None] = Query(default=None),
+    city: Union[str, None] = Query(default=None),
+    district: Union[str, None] = Query(default=None),
+):
+    alerts = db.query(AlertModel)
 
-    return list(map(lambda alert: alert.to_dict(), alerts))
+    if region and len(region) > 1:
+        alerts = alerts.filter_by(region_id=int(region.id))
+
+    if city and len(city) > 1:
+        alerts = alerts.filter_by(city_id=int(city))
+
+    if district and len(district) > 1:
+        alerts = alerts.filter_by(district_id=int(district))
+
+    return list(map(lambda alert: alert.to_dict(), alerts.all()))
 
 
 @router.get(
