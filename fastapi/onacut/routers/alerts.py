@@ -67,7 +67,7 @@ def create_alert(alert: AlertCreateSchema, db: Session = Depends(get_db)):
     db.add(db_alert)
     db.commit()
     db.refresh(db_alert)
-    return db_alert
+    return db_alert.to_dict()
 
 
 @router.put(

@@ -100,12 +100,12 @@ class Alert(Base):
     city_id = Column(Integer, ForeignKey("city.id"))
     district_id = Column(Integer, ForeignKey("district.id"))
 
-    def to_dict(self) ->dict:
+    def to_dict(self) -> dict:
         return {
             "id": self.id,
             "observations": self.observations,
             "type": self.type,
-            "date": self.date, 
+            "date": self.date,
             "begin_time": self.begin_time,
             "end_time": self.end_time,
             "longitude": self.longitude,
@@ -115,5 +115,5 @@ class Alert(Base):
             "city": self.city.name,
             "city_id": self.city_id,
             "district": self.district.name,
-            "district_id": self.district_id
+            "district_id": self.district_id,
         }
