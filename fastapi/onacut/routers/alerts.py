@@ -33,13 +33,22 @@ def read_alerts(
     alerts = db.query(AlertModel)
 
     if region and len(region) > 1:
-        alerts = alerts.filter_by(region_id=int(region.id))
+        region_ = db.query(RegionModel).filter(RegionModel.name.like(region)).first()
+        if region_:
+            alerts = alerts.filter_by(region_id=region_.id)
 
     if city and len(city) > 1:
-        alerts = alerts.filter_by(city_id=int(city))
+        city_ = db.query(CityModel).filter(CityModel.name.like(city)).first()
+        if city_:
+            alerts = alerts.filter_by(city_id=city_.id)
 
     if district and len(district) > 1:
-        alerts = alerts.filter_by(district_id=int(district))
+        district_ = (
+            db.query(DistrictModel).filter(DistrictModel.name.like(district)).first()
+        )
+
+        if district_:
+            alerts = alerts.filter_by(district_id=district_.id)
 
     return list(map(lambda alert: alert.to_dict(), alerts.all()))
 
