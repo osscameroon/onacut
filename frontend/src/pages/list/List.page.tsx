@@ -1,18 +1,18 @@
-import React, {useEffect, useState} from "react";
-import {useRecoilState, useRecoilValue} from "recoil";
-import {City} from "../../components/city/City.component";
-import {Search} from "../../components/search/Search.component";
-import {useTranslation} from "react-i18next";
+import React, { useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { City } from "../../components/city/City.component";
+import { Search } from "../../components/search/Search.component";
+import { useTranslation } from "react-i18next";
 import ReactPaginate from "react-paginate";
-import CityService, {regionState} from "../../services/api/CityService";
-import {alertsState} from "../../services/api/AlertService";
-import {Box} from "@mui/material";
+import CityService, { regionState } from "../../services/api/CityService";
+import { alertsState } from "../../services/api/AlertService";
+import { Box } from "@mui/material";
 
 const PER_PAGE = 5;
 
 const List = () => {
-    const {t} = useTranslation();
-    const {search} = window.location;
+    const { t } = useTranslation();
+    const { search } = window.location;
     const query = new URLSearchParams(search).get("s");
     const [searchQuery, setSearchQuery] = useState(query || "");
     const myRegions: any = useRecoilValue(CityService.getRegions);
@@ -47,7 +47,7 @@ const List = () => {
     }, []);
     const filteredRegions = filteRegions(region, searchQuery);
 
-    function handlePageClick({selected: selectedPage}: any) {
+    function handlePageClick({ selected: selectedPage }: any) {
         setCurrentPage(selectedPage);
     }
 
@@ -59,7 +59,6 @@ const List = () => {
 
     const pageCount = Math.ceil(filteredRegions.length / PER_PAGE);
 
-
     return (
         <div>
             <Search
@@ -67,25 +66,25 @@ const List = () => {
                 searchQuery={searchQuery}
                 setSearchQuery={setSearchQuery}
             />
-            <Box sx={{pt: 6}}>
+            <Box sx={{ pt: 6 }}>
                 {currentPageData.map((item: any) => {
-                        return (
-                            <City
-                                key={item}
-                                myClick={() => {
-                                    setAlert(printByRegion(item?.name));
-                                    localStorage.setItem(
-                                        "myRegionName",
-                                        item?.name
-                                    );
-                                }}
-                                region={item?.name}
-                                myMb="border-b"
-                                country={item?.name}
-                                alert_count={item?.num_alerts}
-                            />
-                        )
-                    }
+                    return (
+                        <City
+                            key={item}
+                            myClick={() => {
+                                setAlert(printByRegion(item?.name));
+                                localStorage.setItem(
+                                    "myRegionName",
+                                    item?.name
+                                );
+                            }}
+                            region={item?.name}
+                            myMb="border-b"
+                            country={item?.name}
+                            alert_count={item?.total_alerts}
+                        />
+                    )
+                }
                 )}
             </Box>
 
