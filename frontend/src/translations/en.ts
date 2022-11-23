@@ -40,6 +40,7 @@ export default {
       "home_report_title": "Where is the current power failure? Network Operators Map",
       "report_field_type": "Type of outage",
       "report_field_region": "Region",
+      "report_field_city": "City",
       "report_field_neighborhood": "Enter your neighborhood",
       "report_field_description": "Describe your failure",
       "report_btn_submit": "Submit alert",

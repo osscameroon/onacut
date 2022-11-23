@@ -40,6 +40,7 @@ export default {
         "home_report_title": "Où est la panne de courant actuelle? Carte des opérateurs de réseau",
         "report_field_type": "Type de panne",
         "report_field_region": "Région",
+        "report_field_city": "Ville",
         "report_field_neighborhood": "Entrez votre quartier",
         "report_field_description": "Decrivez votre panne",
         "report_btn_submit": "Soummettre l'alerte",
