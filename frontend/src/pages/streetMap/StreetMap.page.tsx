@@ -14,7 +14,7 @@ import {
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Modal } from "../../modals/Modals";
 import LanguageSelect from "../../languageSelect";
-import {panneBtnState, zoomLevelState} from "../../atoms";
+import { panneBtnState, zoomLevelState } from "../../atoms";
 import AlertService from "../../services/api/AlertService";
 import CityService from "../../services/api/CityService";
 
@@ -53,13 +53,13 @@ const StreetMap = (props: any) => {
     const lat = queryParams.get("lat");
     const long = queryParams.get("long");
     const myCities: any = useRecoilValue(CityService.getCities)?.data;
-    let centerOn: any = [myCities[7]['locations'][0]['longitude'], myCities[7]['locations'][0]['lattitude']];
-    if (lat && long ){
+    let centerOn: any = [myCities[7]['longitude'], myCities[7]['lattitude']];
+    if (lat && long) {
         const lat_f = parseFloat(lat)
         const long_f = parseFloat(long)
-        if (lat_f > 80 || long_f > 80){
+        if (lat_f > 80 || long_f > 80) {
             alert("these coordinates are not exact !")
-        }else{
+        } else {
             centerOn = [lat_f, long_f]
         }
     }
@@ -73,11 +73,11 @@ const StreetMap = (props: any) => {
 
     const qCount = new Map();
     myQuarters.forEach((quarter: any) => {
-        const quarterName = quarter['district'];
+        const quarterName = quarter['district_id'];
         if (qCount.has(quarterName)) {
             qCount.get(quarterName)['occurrence'] += 1;
         } else {
-            qCount.set(quarterName, {...quarter, 'occurrence': 1 });
+            qCount.set(quarterName, { ...quarter, 'occurrence': 1 });
         }
     });
 
@@ -93,12 +93,12 @@ const StreetMap = (props: any) => {
                 zoomControl={false}
                 scrollWheelZoom={true}
             >
-                   <LanguageSelect  />
+                <LanguageSelect />
                 <MyComponent />
                 <TileLayer
                     url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
                 />
-                {newQuartier.map((item: any, index: any) => (
+                {newQuartier.map((item: any, index: any) => {
                     <Marker
                         eventHandlers={{
                             click: () => {
@@ -126,11 +126,12 @@ const StreetMap = (props: any) => {
                                 }}
                                 className="text-xs"
                             >
-                                { item.occurrence }
+                                {item.occurrence}
                             </span>
                         </Tooltip>
                     </Marker>
-                ))}
+                }
+                )}
                 <ZoomControl position="bottomright" />
             </MapContainer>
         );
@@ -155,14 +156,14 @@ const StreetMap = (props: any) => {
                         eventHandlers={{
                             click: () => {
                                 setVille(() => (villi = item.name));
-                                setNumAlert(() => (numAlert = item.num_alerts));
+                                setNumAlert(() => (numAlert = item.total_alerts));
                                 setPanneBtn(() => (panneBtn = 0));
                                 setListQuartier(
                                     () =>
-                                        (listQuartier =
-                                            item.alert_districts.length === 0
-                                                ? "Vide"
-                                                : item.alert_districts)
+                                    (listQuartier =
+                                        item.alert_districts.length === 0
+                                            ? "Vide"
+                                            : item.alert_districts)
                                 );
                                 setShow(true);
                             },
@@ -197,7 +198,7 @@ const StreetMap = (props: any) => {
                                 }}
                                 className="text-xs"
                             >
-                                {item.num_alerts}
+                                {item.total_alerts}
                             </span>
                         </Tooltip>
                     </Marker>
