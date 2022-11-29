@@ -29,6 +29,9 @@ class AlertUpdate(AlertCreate, AlertBase):
 class Alert(AlertBase, BaseModel):
     id: int
     end_time: Union[time, None] = None
+    region: str
+    city: str
+    district: str
 
     class Config:
         orm_mode = True

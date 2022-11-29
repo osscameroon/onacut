@@ -39,6 +39,9 @@ def test_add_alert(
     assert response.status_code == 200
     item = response.json()
     item.pop("id", None)  # delete the id from the response
+    item.pop("region", None)  # delete the region from the response
+    item.pop("city", None)  # delete the id city the response
+    item.pop("district", None)  # delete the district from the response
     assert item == alert
 
 
