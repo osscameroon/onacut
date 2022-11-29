@@ -21,7 +21,7 @@ jobs:
           node-version: "14"
 
       - name: Build website
-        run: yarn install && yarn build
+        run: npm install && npm run build
 
       - name: Create archive
         run: |
