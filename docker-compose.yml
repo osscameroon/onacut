@@ -1,14 +1,14 @@
 ---
 
-version: '3.7'
+version: '3.8'
 
 services:
 
-    backend:
+    fastapi:
         container_name: onacut_back
-        build: ./backend
+        build: ./fastapi
         ports:
-          - 5000:5000
+          - 8002:8000
         stdin_open: true 
 
     frontend:
@@ -18,4 +18,4 @@ services:
           - 3000:80
         stdin_open: true 
         depends_on:
-            - backend
+            - fastapi
