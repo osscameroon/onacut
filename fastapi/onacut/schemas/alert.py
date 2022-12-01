@@ -5,13 +5,13 @@ from pydantic import BaseModel
 
 
 class AlertBase(BaseModel):
-    observations: str
+    observations: Union[str, None] = None
     type: Literal["electricity", "water", "internet"]
     date: date
     begin_time: time
     region_id: int
-    longitude: float
-    lattitude: float
+    longitude: Union[float, None] = None
+    lattitude: Union[float, None] = None
     city_id: int
     district_id: int
 
