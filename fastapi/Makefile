@@ -30,7 +30,7 @@ docker-build:
 	docker build --tag onacut_back:latest -f Dockerfile .
 
 docker-run: docker-build
-	docker run -p 8000:8000 -it onacut_back:latest
+	docker run -ti -p 8002:8000 -v data:/app/data --rm onacut_back:latest
 
 lint: install-dev-deps venv
 	$(PYTHON) -m black onacut
@@ -48,4 +48,4 @@ clean:
 help : Makefile
 	@sed -n 's/^##//p' $<
 
-.PHONY : help venv install-deps test lint
+.PHONY : help venv install-dev-deps install-deps test lint docker-run docker-build run
