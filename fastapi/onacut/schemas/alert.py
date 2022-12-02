@@ -9,6 +9,7 @@ class AlertBase(BaseModel):
     type: Literal["electricity", "water", "internet"]
     date: date
     begin_time: time
+    end_time: Union[time, None] = None
     region_id: int
     longitude: Union[float, None] = None
     lattitude: Union[float, None] = None
@@ -17,9 +18,7 @@ class AlertBase(BaseModel):
 
 
 class AlertCreate(AlertBase):
-    longitude: Union[float, None] = None
-    lattitude: Union[float, None] = None
-    end_time: Union[time, None] = None
+    pass
 
 
 class AlertUpdate(AlertCreate, AlertBase):
@@ -28,7 +27,6 @@ class AlertUpdate(AlertCreate, AlertBase):
 
 class Alert(AlertBase, BaseModel):
     id: int
-    end_time: Union[time, None] = None
     region: str
     city: str
     district: str

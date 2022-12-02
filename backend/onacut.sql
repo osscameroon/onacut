@@ -66,7 +66,7 @@ CREATE TABLE alert (
 	type VARCHAR(50) NOT NULL, 
 	date DATE NOT NULL, 
 	begin_time TIME NOT NULL, 
-	end_time TIME NOT NULL, 
+	end_time TIME,
 	region_id INTEGER, 
 	longitude FLOAT, 
 	lattitude FLOAT, 
