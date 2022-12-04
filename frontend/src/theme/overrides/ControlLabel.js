@@ -19,7 +19,7 @@ export default function ControlLabel(theme) {
     MuiFormLabel: {
       styleOverrides: {
         root: {
-          color: '#ffffff',
+          color: 'rgb(38, 38, 38)',
           // opacity: .35,
         },
       },

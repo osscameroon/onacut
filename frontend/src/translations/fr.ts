@@ -46,6 +46,10 @@ export default {
         "report_btn_submit": "Soummettre l'alerte",
         "global_label_select_placeholder": "Selectionner une option",
         "label_map": "Carte",
-        "menu_item_advice": "Conseil"
+        "menu_item_advice": "Conseil",
+        "create_report_modal_title": "Ajouter une panne",
+        "global_label_cancel": "Annuler",
+        "global_label_save": "Enregistrer",
+        'global_field_require': 'Ce champ est requis',
     }
 };
