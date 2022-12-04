@@ -93,7 +93,7 @@ class Alert(Base):
     type = Column(String(50), nullable=False)
     date = Column(Date(), nullable=False)
     begin_time = Column(Time(), nullable=False)
-    end_time = Column(Time(), nullable=False)
+    end_time = Column(Time())
     region_id = Column(Integer, ForeignKey("region.id"))
     longitude = Column(Float)
     lattitude = Column(Float)

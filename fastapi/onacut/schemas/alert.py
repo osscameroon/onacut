@@ -5,21 +5,20 @@ from pydantic import BaseModel
 
 
 class AlertBase(BaseModel):
-    observations: str
+    observations: Union[str, None] = None
     type: Literal["electricity", "water", "internet"]
     date: date
     begin_time: time
+    end_time: Union[time, None] = None
     region_id: int
-    longitude: float
-    lattitude: float
+    longitude: Union[float, None] = None
+    lattitude: Union[float, None] = None
     city_id: int
     district_id: int
 
 
 class AlertCreate(AlertBase):
-    longitude: Union[float, None] = None
-    lattitude: Union[float, None] = None
-    end_time: Union[time, None] = None
+    pass
 
 
 class AlertUpdate(AlertCreate, AlertBase):
@@ -28,7 +27,6 @@ class AlertUpdate(AlertCreate, AlertBase):
 
 class Alert(AlertBase, BaseModel):
     id: int
-    end_time: Union[time, None] = None
     region: str
     city: str
     district: str
