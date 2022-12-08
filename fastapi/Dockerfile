@@ -5,7 +5,7 @@ WORKDIR /app
 # We create our env file for the database path
 RUN echo "SQLALCHEMY_DATABASE_URL=sqlite:///onacut.data" > /app/.env
 
-COPY data requirements.txt Makefile ./
+COPY onacut.data requirements.txt Makefile ./
 
 RUN pip install -U pip && \
     pip install --no-cache-dir -r requirements.txt
