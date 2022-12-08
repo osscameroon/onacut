@@ -2,8 +2,12 @@ import React, {useRef} from 'react';
 import {useTranslation} from "react-i18next";
 import {Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Typography} from "@mui/material";
 import {Form, Formik} from "formik";
-import {FormikTextField} from "../../form/FormikTextField";
 import * as Yup from "yup";
+import {FormikDatePickerField} from "../../form/FormikDatePickerField";
+import moment from "moment";
+import {useRecoilValue} from "recoil";
+import {CityService} from "../../services/api";
+import {FormikSelectField} from "../../form/FormikSelectField";
 
 interface CreateReportModalProps {
     open: boolean,
@@ -11,17 +15,19 @@ interface CreateReportModalProps {
 }
 
 const CreateReportModal = (props: CreateReportModalProps) => {
-    const {t} = useTranslation();
+    const {t, i18n: {language}} = useTranslation();
+    moment.locale(language);
     const {open, onClose} = props;
     const submitBtnRef = useRef(null);
-
+    const regions: any = useRecoilValue(CityService.getRegions);
+    const theRegions = regions.data;
     const validations = {
         type: Yup.string().required(t("global_field_require")),
         date: Yup.string().required(t("global_field_require")),
-
     }
 
     const initialValue = {password: "", conf_password: "", old_password: ""};
+
 
     return (
         <Dialog
@@ -52,19 +58,55 @@ const CreateReportModal = (props: CreateReportModalProps) => {
                           }) =>
                             <Form onSubmit={handleSubmit} className={'form'}>
                                 <Grid container spacing={2}>
-                                    <FormikTextField
+                                    <FormikSelectField
                                         xs={12}
-                                        type={'text'}
                                         variant={'outlined'}
                                         label={t('report_field_type')}
                                         name={'type'}
+                                        option={
+                                            [
+                                                {
+                                                    label: t("label_alert_type_electricity"),
+                                                    value: "electricity"
+                                                },
+                                                {
+                                                    label: t("label_alert_type_internet"),
+                                                    value: "internet"
+                                                },
+                                                {
+                                                    label: t("label_alert_type_water"),
+                                                    value: "water"
+                                                },
+                                            ]
+                                        }
                                     />
-                                    <FormikTextField
+                                    <FormikDatePickerField
+                                        value={moment(new Date()).format("YYYY-MM-DD")}
                                         xs={12}
-                                        type={'text'}
                                         variant={'outlined'}
-                                        label={t('report_field_type')}
+                                        label={t('report_field_date')}
                                         name={'date'}
+                                    />
+                                    <FormikDatePickerField
+                                        value={moment(new Date()).format("YYYY-MM-DD")}
+                                        xs={12}
+                                        variant={'outlined'}
+                                        label={t('report_field_region')}
+                                        name={'region_id'}
+                                    />
+                                    <FormikDatePickerField
+                                        value={moment(new Date()).format("YYYY-MM-DD")}
+                                        xs={12}
+                                        variant={'outlined'}
+                                        label={t('report_field_city')}
+                                        name={'city_id'}
+                                    />
+                                    <FormikDatePickerField
+                                        value={moment(new Date()).format("YYYY-MM-DD")}
+                                        xs={12}
+                                        variant={'outlined'}
+                                        label={t('report_field_district')}
+                                        name={'district_id'}
                                     />
                                     <Grid item xs={12}>
                                         <Button
