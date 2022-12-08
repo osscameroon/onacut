@@ -26,7 +26,7 @@ class AlertService {
                 return null
             }
             return axios.get(globalUrls.GET_ALERTS);
-        }
+        },
     });
 
     static getDetails = selector({
@@ -38,15 +38,6 @@ class AlertService {
             }
             return axios.get(
                 globalUrls.GET_REGION_ALERTS(localStorage.getItem("myRegionName") ?? "")
-                // globalUrls.GET_REGION_ALERTS("2"),
-                // {
-                //     headers: {
-                //         authorization: ' xxxxxxxxxx',
-                //         'Content-Type': 'application/json'
-                //     }
-                // }).then(function (response) {
-                //     console.log(response);
-                // }
             );
         }
     })

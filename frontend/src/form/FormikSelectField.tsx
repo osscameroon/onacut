@@ -6,8 +6,8 @@ import {useField} from "formik";
 import {SelectInputProps} from "@mui/material/Select/SelectInput";
 
 interface SelectOption {
-    label: string | null,
-    value: string
+    label: string,
+    value: string | number
 }
 
 interface FormikSelectFieldProps extends Partial<SelectProps>, FormikFieldWrapperProps {

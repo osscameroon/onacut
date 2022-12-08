@@ -44,7 +44,6 @@ const Detail = () => {
 
     const pageCount = Math.ceil(filteredCities.length / PER_PAGE);
 
-    console.log("Current Data Page =====>", currentPageData);
 
     if (details?.status === 200) {
         if (details?.data.length === 0) {

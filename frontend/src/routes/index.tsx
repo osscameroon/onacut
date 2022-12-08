@@ -39,11 +39,6 @@ const routesConfig: RouteConfig[] = [
                 component: lazy(() => import("pages/list/List.page")),
             },
             {
-                path: "/app/add-alert",
-                exact: true,
-                component: lazy(() => import("pages/addAlert/addAlert")),
-            },
-            {
                 path: "/app/details/:region",
                 exact: true,
                 component: lazy(() => import("pages/detail/Detail.page")),

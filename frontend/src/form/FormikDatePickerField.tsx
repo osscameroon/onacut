@@ -47,8 +47,7 @@ export const FormikDatePickerField = (props: FormikDatePickerFieldProps) => {
                     onChange={(newValue) => {
                         setValue(newValue);
                         if (props.onChange)
-                            props.onChange(moment(newValue).format("YYYY-MM-DD"));
-
+                            props.onChange(moment(newValue).format("YYYY-MM-DD HH:mm"));
                     }}
                     maxDate={props.maxDate}
                     renderInput={

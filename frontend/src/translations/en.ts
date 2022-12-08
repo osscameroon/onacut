@@ -51,5 +51,6 @@ export default {
         "global_label_cancel": "Cancel",
         "global_label_save": "Save",
         "global_field_require": "This field is required",
+        "add_alert_success_message": "Alert added successfully"
     }
 };

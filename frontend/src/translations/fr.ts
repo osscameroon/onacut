@@ -56,5 +56,6 @@ export default {
         "label_alert_type_electricity": "Electricité",
         "label_alert_type_internet": "Internet",
         "label_alert_type_water": "Eau",
+        "add_alert_success_message": "Alerte ajouté avec succès"
     }
 };
