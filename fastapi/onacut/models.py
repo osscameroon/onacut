@@ -52,11 +52,7 @@ class Region(Base):
     )
 
     def to_dict(self) -> dict:
-        return {
-            "id": self.id,
-            "name": self.name,
-            "num_alerts": len(self.alerts)
-        }
+        return {"id": self.id, "name": self.name, "num_alerts": len(self.alerts)}
 
 
 class City(Base):
@@ -83,7 +79,7 @@ class City(Base):
             "longitude": self.longitude,
             "lattitude": self.lattitude,
             "region_id": self.region_id,
-            "num_alerts": len(self.alerts)
+            "num_alerts": len(self.alerts),
         }
 
 
@@ -106,9 +102,8 @@ class District(Base):
             "id": self.id,
             "name": self.name,
             "city_id": self.city_id,
-            "num_alerts": len(self.alerts)
+            "num_alerts": len(self.alerts),
         }
-
 
 
 class Alert(Base):

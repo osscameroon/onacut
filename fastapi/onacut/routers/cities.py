@@ -23,8 +23,8 @@ router = APIRouter(
     responses={403: {"description": "Operation forbidden"}},
 )
 def read_cities(db: Session = Depends(get_db)):
-    datas = db.query(CityModel).all()
-    return datas
+    cities = db.query(CityModel)
+    return list(map(lambda city: city.to_dict(), cities.all()))
 
 
 @router.get(
@@ -33,8 +33,8 @@ def read_cities(db: Session = Depends(get_db)):
     responses={403: {"description": "Operation forbidden"}},
 )
 def get_city(city_id: int, db: Session = Depends(get_db)):
-    data = db.query(CityModel).filter_by(id=city_id).first()
-    return data
+    city = db.query(CityModel).filter_by(id=city_id).first()
+    return city.to_dict()
 
 
 @router.post(
