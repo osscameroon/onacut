@@ -22,8 +22,8 @@ router = APIRouter(
     responses={403: {"description": "Operation forbidden"}},
 )
 def read_regions(db: Session = Depends(get_db)):
-    data = db.query(RegionModel).all()
-    return data
+    regions = db.query(RegionModel)
+    return list(map(lambda region: region.to_dict(), regions.all()))
 
 
 @router.get(
@@ -32,8 +32,8 @@ def read_regions(db: Session = Depends(get_db)):
     responses={403: {"description": "Operation forbidden"}},
 )
 def get_region(region_id: int, db: Session = Depends(get_db)):
-    data = db.query(RegionModel).filter_by(id=region_id).first()
-    return data
+    region = db.query(RegionModel).filter_by(id=region_id).first()
+    return region.to_dict()
 
 
 @router.post(

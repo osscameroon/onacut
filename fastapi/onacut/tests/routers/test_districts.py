@@ -13,7 +13,7 @@ def test_add_district(random_name: str, city_id: int) -> None:
     assert response.status_code == 200
     item = response.json()
     item.pop("id", None)  # delete the id from the response
-    item.pop("total_alerts", None)  # delete the total_alerts from the response
+    item.pop("num_alerts", None)  # delete the total_alerts from the response
     assert item == district
 
 
