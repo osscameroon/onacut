@@ -22,7 +22,7 @@ class CityUpdate(CityBase):
 
 class City(CityBase):
     id: int
-    total_alerts: Union[int, None] = None
+    num_alerts: Union[int, None] = None
 
     class Config:
         orm_mode = True
