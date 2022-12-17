@@ -1,5 +1,5 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {useTranslation} from "react-i18next";
+import React, { useEffect, useRef, useState } from 'react';
+import { useTranslation } from "react-i18next";
 import {
     Box,
     Button,
@@ -11,17 +11,17 @@ import {
     Grid,
     Typography
 } from "@mui/material";
-import {Form, Formik} from "formik";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import {FormikDatePickerField} from "../../form/FormikDatePickerField";
+import { FormikDatePickerField } from "../../form/FormikDatePickerField";
 import moment from "moment";
-import {useRecoilValue} from "recoil";
-import {CityService} from "../../services/api";
-import {FormikSelectField} from "../../form/FormikSelectField";
-import {CityType, DistrictType, PostAlertPayload, RegionType} from "../../types";
-import axios, {AxiosError} from "axios";
-import {globalUrls} from "../../services/api/urls";
-import {useSnackbar} from "notistack";
+import { useRecoilValue } from "recoil";
+import { CityService } from "../../services/api";
+import { FormikSelectField } from "../../form/FormikSelectField";
+import { CityType, DistrictType, PostAlertPayload, RegionType } from "../../types";
+import axios, { AxiosError } from "axios";
+import { globalUrls } from "../../services/api/urls";
+import { useSnackbar } from "notistack";
 
 interface CreateReportModalProps {
     open: boolean,
@@ -38,12 +38,12 @@ interface FormState {
 }
 
 const CreateReportModal = (props: CreateReportModalProps) => {
-    const {t, i18n: {language}} = useTranslation();
+    const { t, i18n: { language } } = useTranslation();
     moment.locale(language);
-    const {open, onClose} = props;
+    const { open, onClose } = props;
     const submitBtnRef = useRef(null);
     const [loading, setLoading] = useState(false);
-    const {enqueueSnackbar} = useSnackbar();
+    const { enqueueSnackbar } = useSnackbar();
 
     const [formState, setFormState] = useState<FormState>({
         region_id: null,
@@ -90,6 +90,7 @@ const CreateReportModal = (props: CreateReportModalProps) => {
                 enqueueSnackbar(t("add_alert_success_message"), {
                     variant: "success",
                 });
+                axios.get(globalUrls.GET_ALERTS)
                 onClose();
             })
             .catch((error: AxiosError) => {
@@ -116,7 +117,7 @@ const CreateReportModal = (props: CreateReportModalProps) => {
                 </Typography>
             </DialogTitle>
             <DialogContent>
-                <Box sx={{pt: 2}}>
+                <Box sx={{ pt: 2 }}>
                     <Formik
                         initialValues={initialValue}
                         validationSchema={Yup.object().shape(validations)}
@@ -132,11 +133,11 @@ const CreateReportModal = (props: CreateReportModalProps) => {
                             handleSubmit(payload);
                         }}>
                         {({
-                              setFieldTouched,
-                              handleSubmit,
-                              setFieldValue,
-                              errors
-                          }) =>
+                            setFieldTouched,
+                            handleSubmit,
+                            setFieldValue,
+                            errors
+                        }) =>
                             <Form onSubmit={handleSubmit} className={'form'}>
                                 <Grid container spacing={2}>
                                     <FormikSelectField
@@ -177,7 +178,7 @@ const CreateReportModal = (props: CreateReportModalProps) => {
                                         label={t('report_field_region')}
                                         name={'region_id'}
                                         onChange={(value: any) => {
-                                            setFormState({...formState, region_id: value})
+                                            setFormState({ ...formState, region_id: value })
                                             localStorage.setItem("myRegionName", value.toString());
                                         }}
                                         option={
@@ -194,7 +195,7 @@ const CreateReportModal = (props: CreateReportModalProps) => {
                                         variant={'outlined'}
                                         label={t('report_field_city')}
                                         name={'city_id'}
-                                        onChange={(value: any) => setFormState({...formState, city_id: value})}
+                                        onChange={(value: any) => setFormState({ ...formState, city_id: value })}
                                         option={
                                             cities.map((city, index) => {
                                                 return {
@@ -229,7 +230,7 @@ const CreateReportModal = (props: CreateReportModalProps) => {
                                                         setFieldTouched(field, true);
                                                     });
                                             }}
-                                            sx={{display: "none"}}
+                                            sx={{ display: "none" }}
                                         />
                                     </Grid>
                                 </Grid>
@@ -257,7 +258,7 @@ const CreateReportModal = (props: CreateReportModalProps) => {
                     }}
                 >
                     {
-                        loading ? <CircularProgress/> : t('global_label_save')
+                        loading ? <CircularProgress /> : t('global_label_save')
                     }
                 </Button>
             </DialogActions>
