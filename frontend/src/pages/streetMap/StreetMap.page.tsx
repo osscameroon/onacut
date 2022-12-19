@@ -1,20 +1,12 @@
-import React, { useRef, useState, useEffect } from "react";
-import L, { latLng } from "leaflet";
+import React, {useRef, useState} from "react";
+import L from "leaflet";
 import bolt from "../../assets/img/electricity.png";
 import "./StreetMap.css";
-import {
-    MapContainer,
-    TileLayer,
-    useMapEvent,
-    ZoomControl,
-    Tooltip,
-    Marker,
-    useMapEvents,
-} from "react-leaflet";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { Modal } from "../../modals/Modals";
+import {MapContainer, Marker, TileLayer, Tooltip, useMapEvent, useMapEvents, ZoomControl,} from "react-leaflet";
+import {useRecoilState, useRecoilValue} from "recoil";
+import {Modal} from "../../modals/Modals";
 import LanguageSelect from "../../languageSelect";
-import { panneBtnState, zoomLevelState } from "../../atoms";
+import {panneBtnState, zoomLevelState} from "../../atoms";
 import AlertService from "../../services/api/AlertService";
 import CityService from "../../services/api/CityService";
 
@@ -53,7 +45,8 @@ const StreetMap = (props: any) => {
     const lat = queryParams.get("lat");
     const long = queryParams.get("long");
     const myCities: any = useRecoilValue(CityService.getCities)?.data;
-    let centerOn: any = [myCities[7]['longitude'], myCities[7]['lattitude']];
+    // Is myCities is empty, center the map on Yaoundé
+    let centerOn: any = myCities.length > 0 ? [myCities[7]['longitude'], myCities[7]['lattitude']] : [3.854859686578735, 11.500525735864192];
     if (lat && long) {
         const lat_f = parseFloat(lat)
         const long_f = parseFloat(long)
@@ -77,7 +70,7 @@ const StreetMap = (props: any) => {
         if (qCount.has(quarterName)) {
             qCount.get(quarterName)['occurrence'] += 1;
         } else {
-            qCount.set(quarterName, { ...quarter, 'occurrence': 1 });
+            qCount.set(quarterName, {...quarter, 'occurrence': 1});
         }
     });
 
@@ -87,36 +80,36 @@ const StreetMap = (props: any) => {
         return (
             <MapContainer
                 className="z-0"
-                style={{ height: "100vh" }}
+                style={{height: "100vh"}}
                 center={centerOn}
                 zoom={v}
                 zoomControl={false}
                 scrollWheelZoom={true}
             >
-                <LanguageSelect />
-                <MyComponent />
+                <LanguageSelect/>
+                <MyComponent/>
                 <TileLayer
                     url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
                 />
                 {newQuartier.map((item: any, index: any) => {
-                    <Marker
-                        eventHandlers={{
-                            click: () => {
-                                setShow(true);
-                            },
-                        }}
-                        position={[item.lattitude, item.longitude]}
-                        icon={lightBolt}
-                        key={index}
-                    >
-                        <Modal show={show} onClose={() => setShow(false)} />
-                        <Tooltip
-                            direction="right"
-                            className="Tooltip"
-                            offset={[2, -40]}
-                            permanent
-                            opacity={1}
+                        <Marker
+                            eventHandlers={{
+                                click: () => {
+                                    setShow(true);
+                                },
+                            }}
+                            position={[item.lattitude, item.longitude]}
+                            icon={lightBolt}
+                            key={index}
                         >
+                            <Modal show={show} onClose={() => setShow(false)}/>
+                            <Tooltip
+                                direction="right"
+                                className="Tooltip"
+                                offset={[2, -40]}
+                                permanent
+                                opacity={1}
+                            >
                             <span
                                 style={{
                                     fontSize: "8px",
@@ -128,24 +121,24 @@ const StreetMap = (props: any) => {
                             >
                                 {item.occurrence}
                             </span>
-                        </Tooltip>
-                    </Marker>
-                }
+                            </Tooltip>
+                        </Marker>
+                    }
                 )}
-                <ZoomControl position="bottomright" />
+                <ZoomControl position="bottomright"/>
             </MapContainer>
         );
     } else {
         return (
             <MapContainer
                 className="z-0"
-                style={{ height: "100vh" }}
+                style={{height: "100vh"}}
                 center={centerOn}
                 zoom={v}
                 zoomControl={false}
                 scrollWheelZoom={true}
             >
-                <MyComponent />
+                <MyComponent/>
                 <TileLayer
                     attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>
                      &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
@@ -160,10 +153,10 @@ const StreetMap = (props: any) => {
                                 setPanneBtn(() => (panneBtn = 0));
                                 setListQuartier(
                                     () =>
-                                    (listQuartier =
-                                        item.alert_districts.length === 0
-                                            ? "Vide"
-                                            : item.alert_districts)
+                                        (listQuartier =
+                                            item.alert_districts.length === 0
+                                                ? "Vide"
+                                                : item.alert_districts)
                                 );
                                 setShow(true);
                             },
@@ -203,7 +196,7 @@ const StreetMap = (props: any) => {
                         </Tooltip>
                     </Marker>
                 ))}
-                <ZoomControl position="bottomright" />
+                <ZoomControl position="bottomright"/>
             </MapContainer>
         );
     }

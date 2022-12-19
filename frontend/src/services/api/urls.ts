@@ -7,4 +7,6 @@ export const globalUrls = {
     GET_REGION_ALERTS: (region: string) => `${prefixer}/alerts?region=${region}`,
     GET_CITIES: `${prefixer}/cities`,
     GET_REGION: `${prefixer}/regions`,
+    GET_DISTRICT: `${prefixer}/districts`,
+    POST_ALERT: `${prefixer}/alerts/`,
 }

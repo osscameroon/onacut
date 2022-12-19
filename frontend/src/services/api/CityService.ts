@@ -13,6 +13,11 @@ export const regionState = atom({
     default: []
 })
 
+export const districtState = atom({
+    key: "district-state",
+    default: []
+})
+
 
 class CityService {
     static getCities = selector({
@@ -25,7 +30,7 @@ class CityService {
             return axios.get(
                 globalUrls.GET_CITIES
             );
-        }
+        },
     })
 
     static getRegions = selector({
@@ -37,6 +42,19 @@ class CityService {
             }
             return axios.get(
                 globalUrls.GET_REGION
+            );
+        }
+    })
+
+    static getDistricts = selector({
+        key: 'get-districts',
+        get: ({get}) => {
+            const {data}: any = get(districtState)
+            if (data === null) {
+                return null
+            }
+            return axios.get(
+                globalUrls.GET_DISTRICT
             );
         }
     })
