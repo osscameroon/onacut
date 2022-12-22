@@ -23,8 +23,8 @@ router = APIRouter(
     responses={403: {"description": "Operation forbidden"}},
 )
 def read_districts(db: Session = Depends(get_db)):
-    data = db.query(DistrictModel).all()
-    return data
+    districts = db.query(DistrictModel)
+    return list(map(lambda district: district.to_dict(), districts.all()))
 
 
 @router.get(
@@ -33,8 +33,8 @@ def read_districts(db: Session = Depends(get_db)):
     responses={403: {"description": "Operation forbidden"}},
 )
 def get_district(district_id: int, db: Session = Depends(get_db)):
-    data = db.query(DistrictModel).filter_by(id=district_id).first()
-    return data
+    district = db.query(DistrictModel).filter_by(id=district_id).first()
+    return district.to_dict()
 
 
 @router.post(

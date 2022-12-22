@@ -51,6 +51,9 @@ class Region(Base):
         lazy="dynamic",
     )
 
+    def to_dict(self) -> dict:
+        return {"id": self.id, "name": self.name, "num_alerts": len(self.alerts)}
+
 
 class City(Base):
     __tablename__ = "city"
@@ -69,6 +72,16 @@ class City(Base):
         lazy="dynamic",
     )
 
+    def to_dict(self) -> dict:
+        return {
+            "id": self.id,
+            "name": self.name,
+            "longitude": self.longitude,
+            "lattitude": self.lattitude,
+            "region_id": self.region_id,
+            "num_alerts": len(self.alerts),
+        }
+
 
 class District(Base):
     __tablename__ = "district"
@@ -83,6 +96,14 @@ class District(Base):
         backref=backref("districts", lazy="dynamic"),
         lazy="dynamic",
     )
+
+    def to_dict(self) -> dict:
+        return {
+            "id": self.id,
+            "name": self.name,
+            "city_id": self.city_id,
+            "num_alerts": len(self.alerts),
+        }
 
 
 class Alert(Base):

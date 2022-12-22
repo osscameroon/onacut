@@ -17,7 +17,7 @@ class RegionUpdate(RegionBase):
 
 class Region(RegionBase):
     id: int | None
-    total_alerts: Union[int, None] = None
+    num_alerts: Union[int, None] = None
 
     class Config:
         orm_mode = True
