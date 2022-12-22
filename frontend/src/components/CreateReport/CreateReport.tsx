@@ -22,15 +22,13 @@ import { CityType, DistrictType, PostAlertPayload, RegionType } from "../../type
 import axios, { AxiosError } from "axios";
 import { globalUrls } from "../../services/api/urls";
 import { useSnackbar } from "notistack";
+import capitalizeFirstLetter from "../../utils/string";
 
 interface CreateReportModalProps {
     open: boolean,
     onClose: any
 }
 
-function capitalizeFirstLetter(text: string) {
-    return text.charAt(0).toUpperCase() + text.slice(1);
-}
 
 interface FormState {
     region_id: number | null,

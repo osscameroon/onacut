@@ -56,6 +56,12 @@ export default {
         "label_alert_type_electricity": "Electricité",
         "label_alert_type_internet": "Internet",
         "label_alert_type_water": "Eau",
-        "add_alert_success_message": "Alerte ajouté avec succès"
+        "add_alert_success_message": "Alerte ajouté avec succès",
+        "alert_detail_modal_title": "Détails de l'alerte",
+        "detail_alert_field_type": "Type d'alerte",
+        "detail_alert_field_start_time": "Date de début",
+        "detail_alert_field_end_time": "Date de fin",
+        "detail_alert_field_description": "Description",
+        "global_label_at": "à",
     }
 };

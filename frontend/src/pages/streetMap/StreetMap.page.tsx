@@ -6,11 +6,11 @@ import "./StreetMap.css";
 import {MapContainer, Marker, TileLayer, Tooltip, useMapEvent, useMapEvents, ZoomControl,} from "react-leaflet";
 import {useRecoilState, useRecoilValue} from "recoil";
 import {Modal} from "../../modals/Modals";
-import LanguageSelect from "../../languageSelect";
 import {panneBtnState, zoomLevelState} from "../../atoms";
 import AlertService from "../../services/api/AlertService";
 import CityService from "../../services/api/CityService";
-import {AlertType} from "../../types";
+import {AlertType, CityType} from "../../types";
+import AlertDetailModal from "./components/AlertDetailModal";
 
 function MyComponent() {
     const [zoomLevel, setZoomLevel] = useRecoilState(zoomLevelState); // initial zoom level provided for MapContainer
@@ -43,6 +43,15 @@ const lightBolt = L.icon({
 
 const nrjBolt = L.icon({
     iconUrl: nrj,
+    shadowSize: [30, 30],
+    iconAnchor: [10, 45],
+    shadowAnchor: [10, 45],
+    popupAnchor: [-0, -0],
+    iconSize: [30, 30],
+});
+
+const alertIcon = L.icon({
+    iconUrl: "/alert-triangle.svg",
     shadowSize: [30, 30],
     iconAnchor: [10, 45],
     shadowAnchor: [10, 45],
@@ -87,34 +96,118 @@ const StreetMap = (props: any) => {
 
     const newQuartier = [...qCount.values()];
 
-    if (v > 9) {
-        return (
-            <MapContainer
-                className="z-0"
-                style={{height: "100vh"}}
-                center={centerOn}
-                zoom={v}
-                zoomControl={false}
-                scrollWheelZoom={true}
-            >
-                <LanguageSelect/>
-                <MyComponent/>
-                <TileLayer
-                    url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
+    const [selectedAlert, setSelectedAlert] = useState<AlertType | undefined>(undefined);
+
+    console.log(newQuartier);
+
+    return (
+        <>
+            {
+                !!selectedAlert &&
+                <AlertDetailModal
+                    open={!!selectedAlert}
+                    alert={selectedAlert}
+                    onClose={() => setSelectedAlert(undefined)}
                 />
-                {newQuartier.map((item: AlertType, index: any) => {
-                        return (
+            }
+            {
+                v > 9 ? (
+                    <MapContainer
+                        className="z-0"
+                        style={{height: "100vh"}}
+                        center={centerOn}
+                        zoom={v}
+                        zoomControl={false}
+                        scrollWheelZoom={true}
+                    >
+                        <MyComponent/>
+                        <TileLayer
+                            url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
+                        />
+                        {newQuartier.map((item: AlertType, index: any) => {
+                                return (
+                                    <Marker
+                                        eventHandlers={{
+                                            click: () => {
+                                                setSelectedAlert(item);
+                                            },
+                                        }}
+                                        position={[item.lattitude ?? 0.0, item.longitude ?? 0.0]}
+                                        icon={item.type !== "electricity" ? lightBolt : nrjBolt}
+                                        key={item?.id ?? `alert-${index}`}
+                                    >
+
+                                        <Tooltip
+                                            direction="right"
+                                            className="Tooltip"
+                                            offset={[2, -40]}
+                                            permanent
+                                            opacity={1}
+                                        >
+                            <span
+                                style={{
+                                    fontSize: "8px",
+                                    fontWeight: "bold",
+                                    fontFamily: "sans-serif",
+                                    padding: "5px",
+                                }}
+                                className="text-xs"
+                            >
+                                1
+                            </span>
+                                        </Tooltip>
+                                    </Marker>
+                                )
+                            }
+                        )}
+                        <ZoomControl position="bottomright"/>
+                    </MapContainer>
+                ) : (
+                    <MapContainer
+                        className="z-0"
+                        style={{height: "100vh"}}
+                        center={centerOn}
+                        zoom={v}
+                        zoomControl={false}
+                        scrollWheelZoom={true}
+                    >
+                        <MyComponent/>
+                        <TileLayer
+                            attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>
+                     &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+                            url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
+                        />
+                        {myCities.map((item: CityType, index: number) => (
                             <Marker
                                 eventHandlers={{
                                     click: () => {
+                                        setVille(() => (villi = item.name));
+                                        setNumAlert(() => (numAlert = item.total_alerts));
+                                        setPanneBtn(() => (panneBtn = 0));
+                                        /* setListQuartier(
+                                             () =>
+                                                 (listQuartier =
+                                                     item.alert_districts.length === 0
+                                                         ? "Vide"
+                                                         : item.alert_districts)
+                                         );*/
                                         setShow(true);
                                     },
                                 }}
-                                position={[item.lattitude ?? 0.0, item.longitude ?? 0.0]}
-                                icon={item.type !== "electricity" ? lightBolt : nrjBolt}
+                                position={[item?.lattitude ?? 0.0, item.longitude ?? 0.0]}
+                                icon={alertIcon}
                                 key={index}
                             >
-                                <Modal show={show} onClose={() => setShow(false)}/>
+                                <Modal
+                                    ville={villi}
+                                    numberOfAlerts={numAlert}
+                                    quartiers={listQuartier}
+                                    onClose={() => {
+                                        setShow(false);
+                                        setPanneBtn(() => (panneBtn = 10));
+                                    }}
+                                    show={show}
+                                />
                                 <Tooltip
                                     direction="right"
                                     className="Tooltip"
@@ -131,88 +224,17 @@ const StreetMap = (props: any) => {
                                 }}
                                 className="text-xs"
                             >
-                                1
+                                {item.total_alerts ?? 0}
                             </span>
                                 </Tooltip>
                             </Marker>
-                        )
-                    }
-                )}
-                <ZoomControl position="bottomright"/>
-            </MapContainer>
-        );
-    } else {
-        return (
-            <MapContainer
-                className="z-0"
-                style={{height: "100vh"}}
-                center={centerOn}
-                zoom={v}
-                zoomControl={false}
-                scrollWheelZoom={true}
-            >
-                <MyComponent/>
-                <TileLayer
-                    attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>
-                     &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-                    url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
-                />
-                {myCities.map((item: any, index: any) => (
-                    <Marker
-                        eventHandlers={{
-                            click: () => {
-                                setVille(() => (villi = item.name));
-                                setNumAlert(() => (numAlert = item.total_alerts));
-                                setPanneBtn(() => (panneBtn = 0));
-                                setListQuartier(
-                                    () =>
-                                        (listQuartier =
-                                            item.alert_districts.length === 0
-                                                ? "Vide"
-                                                : item.alert_districts)
-                                );
-                                setShow(true);
-                            },
-                        }}
-                        position={[item.lattitude, item.longitude]}
-                        icon={item.type !== "electricity" ? lightBolt : nrjBolt}
-                        key={index}
-                    >
-                        <Modal
-                            ville={villi}
-                            numberOfAlerts={numAlert}
-                            quartiers={listQuartier}
-                            onClose={() => {
-                                setShow(false);
-                                setPanneBtn(() => (panneBtn = 10));
-                            }}
-                            show={show}
-                        />
-                        <Tooltip
-                            direction="right"
-                            className="Tooltip"
-                            offset={[2, -40]}
-                            permanent
-                            opacity={1}
-                        >
-                            <span
-                                style={{
-                                    fontSize: "8px",
-                                    fontWeight: "bold",
-                                    fontFamily: "sans-serif",
-                                    padding: "5px",
-                                }}
-                                className="text-xs"
-                            >
-                                {item.total_alerts}
-                            </span>
-                        </Tooltip>
-                    </Marker>
-                ))}
-                <ZoomControl position="bottomright"/>
-            </MapContainer>
-        );
-    }
+                        ))}
+                        <ZoomControl position="bottomright"/>
+                    </MapContainer>
+                )
+            }
+        </>
+    )
 };
 
 export default StreetMap;
