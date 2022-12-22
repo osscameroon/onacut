@@ -1,6 +1,7 @@
 import React, {useRef, useState} from "react";
 import L from "leaflet";
 import bolt from "../../assets/img/electricity.png";
+import nrj from "../../assets/img/energy.png";
 import "./StreetMap.css";
 import {MapContainer, Marker, TileLayer, Tooltip, useMapEvent, useMapEvents, ZoomControl,} from "react-leaflet";
 import {useRecoilState, useRecoilValue} from "recoil";
@@ -9,6 +10,7 @@ import LanguageSelect from "../../languageSelect";
 import {panneBtnState, zoomLevelState} from "../../atoms";
 import AlertService from "../../services/api/AlertService";
 import CityService from "../../services/api/CityService";
+import {AlertType} from "../../types";
 
 function MyComponent() {
     const [zoomLevel, setZoomLevel] = useRecoilState(zoomLevelState); // initial zoom level provided for MapContainer
@@ -32,6 +34,15 @@ const SetViewOnClick = (animateRef: any) => {
 
 const lightBolt = L.icon({
     iconUrl: bolt,
+    shadowSize: [30, 30],
+    iconAnchor: [10, 45],
+    shadowAnchor: [10, 45],
+    popupAnchor: [-0, -0],
+    iconSize: [30, 30],
+});
+
+const nrjBolt = L.icon({
+    iconUrl: nrj,
     shadowSize: [30, 30],
     iconAnchor: [10, 45],
     shadowAnchor: [10, 45],
@@ -91,25 +102,26 @@ const StreetMap = (props: any) => {
                 <TileLayer
                     url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
                 />
-                {newQuartier.map((item: any, index: any) => {
-                        <Marker
-                            eventHandlers={{
-                                click: () => {
-                                    setShow(true);
-                                },
-                            }}
-                            position={[item.lattitude, item.longitude]}
-                            icon={lightBolt}
-                            key={index}
-                        >
-                            <Modal show={show} onClose={() => setShow(false)}/>
-                            <Tooltip
-                                direction="right"
-                                className="Tooltip"
-                                offset={[2, -40]}
-                                permanent
-                                opacity={1}
+                {newQuartier.map((item: AlertType, index: any) => {
+                        return (
+                            <Marker
+                                eventHandlers={{
+                                    click: () => {
+                                        setShow(true);
+                                    },
+                                }}
+                                position={[item.lattitude ?? 0.0, item.longitude ?? 0.0]}
+                                icon={item.type !== "electricity" ? lightBolt : nrjBolt}
+                                key={index}
                             >
+                                <Modal show={show} onClose={() => setShow(false)}/>
+                                <Tooltip
+                                    direction="right"
+                                    className="Tooltip"
+                                    offset={[2, -40]}
+                                    permanent
+                                    opacity={1}
+                                >
                             <span
                                 style={{
                                     fontSize: "8px",
@@ -119,10 +131,11 @@ const StreetMap = (props: any) => {
                                 }}
                                 className="text-xs"
                             >
-                                {item.occurrence}
+                                1
                             </span>
-                            </Tooltip>
-                        </Marker>
+                                </Tooltip>
+                            </Marker>
+                        )
                     }
                 )}
                 <ZoomControl position="bottomright"/>
@@ -162,7 +175,7 @@ const StreetMap = (props: any) => {
                             },
                         }}
                         position={[item.lattitude, item.longitude]}
-                        icon={lightBolt}
+                        icon={item.type !== "electricity" ? lightBolt : nrjBolt}
                         key={index}
                     >
                         <Modal

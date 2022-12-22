@@ -14,41 +14,41 @@ export interface RegionType {
 }
 
 export interface DistrictType {
-    name?:         string;
-    id?:           number;
-    city_id?:      number;
+    name?: string;
+    id?: number;
+    city_id?: number;
     total_alerts?: number;
 }
 
 
 export interface PostAlertPayload {
     observations?: string;
-    type?:         string;
-    date?:         Date;
-    begin_time?:   string;
-    region_id?:    number;
-    longitude?:    number;
-    lattitude?:    number;
-    city_id?:      number;
-    district_id?:  number;
-    end_time?:     string;
+    type?: string;
+    date?: Date;
+    begin_time?: string;
+    region_id?: number;
+    longitude?: number;
+    lattitude?: number;
+    city_id?: number;
+    district_id?: number;
+    end_time?: string;
 }
 
 export interface AlertType {
     observations?: string;
-    type?:         string;
-    date?:         Date;
-    begin_time?:   string;
-    region_id?:    number;
-    longitude?:    number;
-    lattitude?:    number;
-    city_id?:      number;
-    district_id?:  number;
-    id?:           number;
-    end_time?:     string;
-    region?:       string;
-    city?:         string;
-    district?:     string;
+    type?: "electricity" | "water" | "internet";
+    date?: Date;
+    begin_time?: string;
+    region_id?: number;
+    longitude?: number;
+    lattitude?: number;
+    city_id?: number;
+    district_id?: number;
+    id?: number;
+    end_time?: string;
+    region?: string;
+    city?: string;
+    district?: string;
 }
 
 
