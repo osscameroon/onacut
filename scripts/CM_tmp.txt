@@ -1,0 +1,4 @@
+2220645	Emini-Pabela	Emini-Pabela	Emini-Pabela,Pabela	4.9	12.95	P	PPL	CM		11				0		684	Africa/Douala	2012-01-16
+2220646	Zuime	Zuime		4.18333	12.95	P	PPL	CM		04				0		683	Africa/Douala	2011-03-06
+2220647	Zouzouï	Zouzoui		10.33574	14.29403	P	PPL	CM		12				0		425	Africa/Douala	2008-03-12
+2220648	Zouvoul	Zouvoul	Souboul,Zouvoul	10.18333	14.03333	H	STM	CM		12				0		417	Africa/Douala	2012-01-16

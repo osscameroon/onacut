@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Emini-Pabela",
+    "city": "Africa/Douala",
+    "asciiname": "Emini-Pabela",
+    "alternativenames": "Emini-Pabela,Pabela",
+    "lat": "4.9",
+    "long": "12.95"
+  },
+  {
+    "name": "Zuime",
+    "city": "Africa/Douala",
+    "asciiname": "Zuime",
+    "alternativenames": "4.18333",
+    "lat": "12.95",
+    "long": "P"
+  },
+  {
+    "name": "Zouzouï",
+    "city": "Africa/Douala",
+    "asciiname": "Zouzoui",
+    "alternativenames": "10.33574",
+    "lat": "14.29403",
+    "long": "P"
+  },
+  {
+    "name": "Zouvoul",
+    "city": "Africa/Douala",
+    "asciiname": "Zouvoul",
+    "alternativenames": "Souboul,Zouvoul",
+    "lat": "10.18333",
+    "long": "14.03333"
+  }
+]
