@@ -26,9 +26,11 @@ install-dev-deps: install-deps $(CONFIG_FILE)
 run: install-deps
 	uvicorn onacut.main:app --reload
 
+##docker-build: build the docker image
 docker-build:
 	docker build --tag onacut_back:latest -f Dockerfile .
 
+##docker-run: run the docker image
 docker-run: docker-build
 	docker run -ti -p 8002:8000 -v data:/app/data --rm onacut_back:latest
 
