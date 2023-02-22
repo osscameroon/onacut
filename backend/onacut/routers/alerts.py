@@ -1,8 +1,8 @@
 from typing import List, Union
 
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
-from fastapi import APIRouter, Depends, HTTPException, Query
 from onacut.dependencies import get_db
 from onacut.models import Alert as AlertModel
 from onacut.models import City as CityModel
