@@ -1,10 +1,10 @@
-name: FastApi-CI
+name: Backend-ci
 
 on:
   push:
     paths:
-      - .github/workflows/fastapi-ci.yaml
-      - fastapi/**
+      - .github/workflows/backend-ci.yaml
+      - backend/**
 
 jobs:
   build:
@@ -14,7 +14,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./fastapi
+        working-directory: ./backend
 
     steps:
     - uses: actions/checkout@v3
