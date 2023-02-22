@@ -1,46 +1,71 @@
-## ONACUT-FASTAPI-BACKEND
+### ONACUT BACKEND
 
-## REQUIREMENTS
+#### REQUIREMENTS
 
 - python (3.x recommended) & pip (>= 22 recommended)
 - docker
 - make (a command line tool to run Makefile commands)
 
-### HOW TO SET UP
+#### How to run ?
 
-```
-# Put appropriate parameters inside .env after this copy
-cp .env.example .env
-
-# Install dependencies
-make install-deps
-
-# For dev dependencies :
-make install-dev-deps
+```console
+$ make run
 ```
 
-### HOW TO LAUNCH
+With a Dockerfile:
 
-#### DEV
-
-```
-# This will install all requirements and start locally the backend
-make run
-
-# To run tests
-make test
-
-# formating and lint the code 
-make lint
+```console
+$ make docker-build && make docker-run
 ```
 
-#### PROD
+Manually:
 
-Or Using Docker
 
+#### Manual setup
+
+Put the appropriate parameters inside .env after this copy
+```console
+$ cp .env.example .env
 ```
-# This will install and run your project on port 5000
-make docker-run
-# should start building first the service
+
+Create a venv folder:
+```console
+$ python3 -m venv venv
 ```
 
+Activate the venv:
+```console
+$ source venv/bin/activate
+```
+
+Install requirements:
+```console
+$ pip install -r requirements.txt
+```
+
+Run the server:
+```console
+$ uvicorn onacut.main:app --reload --host 0.0.0.0 --port 8002
+```
+
+Don't forget to deactivate the venv when you're done:
+```console
+$ deactivate
+```
+
+#### More make file commands
+
+You can run `make` to see all available commands.
+```console
+$ make
+venv: setUp the virtualenv (this step is integrated with the instal-xxx target
+install-deps: setup your prod environment
+install-dev-deps: setup your dev environment
+run: run the api locally
+docker-build: using docker to build the back image
+docker-run: using docker to run the back image
+lint: the source code using black, isort, flake8
+test: test your code
+clean: clean the virtualenv
+help: show help
+```
