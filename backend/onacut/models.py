@@ -1,94 +1,140 @@
-from onacut import db
+from sqlalchemy import (Column, Date, Float, ForeignKey, Integer, String, Text,
+                        Time)
+from sqlalchemy.orm import backref, relationship
 
-RegionLocation = db.Table(
-    "region_location",
-    db.Column("location_id", db.Integer, db.ForeignKey("location.id")),
-    db.Column("region_id", db.Integer, db.ForeignKey("region.id")),
-)
-
-CityLocation = db.Table(
-    "city_location",
-    db.Column("location_id", db.Integer, db.ForeignKey("location.id")),
-    db.Column("city_id", db.Integer, db.ForeignKey("city.id")),
-)
-
-DistrictLocation = db.Table(
-    "district_location",
-    db.Column("location_id", db.Integer, db.ForeignKey("location.id")),
-    db.Column("district_id", db.Integer, db.ForeignKey("district.id")),
-)
+from onacut.database import Base
 
 
-class Location(db.Model):
+class RegionLocation(Base):
+    __tablename__ = "region_location"
+
+    location_id = Column(Integer, ForeignKey("location.id"), primary_key=True)
+    region_id = Column(Integer, ForeignKey("region.id"), primary_key=True)
+
+
+class CityLocation(Base):
+    __tablename__ = "city_location"
+
+    location_id = Column(Integer, ForeignKey("location.id"), primary_key=True)
+    city_id = Column(Integer, ForeignKey("city.id"), primary_key=True)
+
+
+class DistrictLocation(Base):
+    __tablename__ = "district_location"
+
+    location_id = Column(Integer, ForeignKey("location.id"), primary_key=True)
+    district_id = Column(Integer, ForeignKey("district.id"), primary_key=True)
+
+
+class Location(Base):
     __tablename__ = "location"
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255))
-    asciiname = db.Column(db.String(255))
-    alternativenames = db.Column(db.Text)
-    longitude = db.Column(db.Float)
-    lattitude = db.Column(db.Float)
+    id = Column(Integer, primary_key=True)
+    name = Column(String(255))
+    asciiname = Column(String(255))
+    alternativenames = Column(Text)
+    longitude = Column(Float)
+    lattitude = Column(Float)
 
 
-class Region(db.Model):
+class Region(Base):
     __tablename__ = "region"
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), unique=True)
-    cities = db.relationship("City", backref="region", lazy=True)
-    alerts = db.relationship("Alert", backref="region", lazy=True)
-    locations = db.relationship(
-        "Location",
-        secondary=RegionLocation,
-        backref=db.backref("regions", lazy="dynamic"),
+    id = Column(Integer, primary_key=True)
+    name = Column(String(255), unique=True)
+    cities = relationship("City", backref="region", lazy=True)
+    alerts = relationship("Alert", backref="region", lazy=True)
+    locations = relationship(
+        Location,
+        secondary="region_location",
+        backref=backref("regions", lazy="dynamic"),
         lazy="dynamic",
     )
 
+    def to_dict(self) -> dict:
+        return {"id": self.id, "name": self.name, "num_alerts": len(self.alerts)}
 
-class City(db.Model):
+
+class City(Base):
     __tablename__ = "city"
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255))
-    region_id = db.Column(db.Integer, db.ForeignKey("region.id"))
-    longitude = db.Column(db.Float)
-    lattitude = db.Column(db.Float)
-    districts = db.relationship("District", backref="city", lazy=True)
-    alerts = db.relationship("Alert", backref="city", lazy=True)
-    locations = db.relationship(
-        "Location",
-        secondary=CityLocation,
-        backref=db.backref("cities", lazy="dynamic"),
+    id = Column(Integer, primary_key=True)
+    name = Column(String(255))
+    region_id = Column(Integer, ForeignKey("region.id"))
+    longitude = Column(Float)
+    lattitude = Column(Float)
+    districts = relationship("District", backref="city", lazy=True)
+    alerts = relationship("Alert", backref="city", lazy=True)
+    locations = relationship(
+        Location,
+        secondary="city_location",
+        backref=backref("cities", lazy="dynamic"),
         lazy="dynamic",
     )
 
+    def to_dict(self) -> dict:
+        return {
+            "id": self.id,
+            "name": self.name,
+            "longitude": self.longitude,
+            "lattitude": self.lattitude,
+            "region_id": self.region_id,
+            "num_alerts": len(self.alerts),
+        }
 
-class District(db.Model):
+
+class District(Base):
     __tablename__ = "district"
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), unique=True)
-    city_id = db.Column(db.Integer, db.ForeignKey("city.id"))
-    alerts = db.relationship("Alert", backref="district", lazy=True)
-    locations = db.relationship(
-        "Location",
-        secondary=DistrictLocation,
-        backref=db.backref("districts", lazy="dynamic"),
+    id = Column(Integer, primary_key=True)
+    name = Column(String(255), unique=True)
+    city_id = Column(Integer, ForeignKey("city.id"))
+    alerts = relationship("Alert", backref="district", lazy=True)
+    locations = relationship(
+        Location,
+        secondary="district_location",
+        backref=backref("districts", lazy="dynamic"),
         lazy="dynamic",
     )
 
+    def to_dict(self) -> dict:
+        return {
+            "id": self.id,
+            "name": self.name,
+            "city_id": self.city_id,
+            "num_alerts": len(self.alerts),
+        }
 
-class Alert(db.Model):
+
+class Alert(Base):
     __tablename__ = "alert"
 
-    id = db.Column(db.Integer, primary_key=True)
-    observations = db.Column(db.String(255))
-    type = db.Column(db.String(50), nullable=False)
-    date = db.Column(db.Date(), nullable=False)
-    begin_time = db.Column(db.Time(), nullable=False)
-    end_time = db.Column(db.Time(), nullable=False)
-    region_id = db.Column(db.Integer, db.ForeignKey("region.id"))
-    longitude = db.Column(db.Float)
-    lattitude = db.Column(db.Float)
-    city_id = db.Column(db.Integer, db.ForeignKey("city.id"))
-    district_id = db.Column(db.Integer, db.ForeignKey("district.id"))
+    id = Column(Integer, primary_key=True)
+    observations = Column(String(255))
+    type = Column(String(50), nullable=False)
+    date = Column(Date(), nullable=False)
+    begin_time = Column(Time(), nullable=False)
+    end_time = Column(Time())
+    region_id = Column(Integer, ForeignKey("region.id"))
+    longitude = Column(Float)
+    lattitude = Column(Float)
+    city_id = Column(Integer, ForeignKey("city.id"))
+    district_id = Column(Integer, ForeignKey("district.id"))
+
+    def to_dict(self) -> dict:
+        return {
+            "id": self.id,
+            "observations": self.observations,
+            "type": self.type,
+            "date": self.date,
+            "begin_time": self.begin_time,
+            "end_time": self.end_time,
+            "longitude": self.longitude,
+            "lattitude": self.lattitude,
+            "region": self.region.name,
+            "region_id": self.region_id,
+            "city": self.city.name,
+            "city_id": self.city_id,
+            "district": self.district.name,
+            "district_id": self.district_id,
+        }
