@@ -3,6 +3,7 @@
 CONFIG_FILE=./.env
 VENVPATH=venv
 PYTHON=$(VENVPATH)/bin/python3
+UVICORN=$(VENVPATH)/bin/uvicorn
 
 ##venv: setUp the virtualenv (this step is integrated with the instal-xxx target
 venv: $(VENVPATH)/bin/activate
@@ -26,7 +27,7 @@ install-dev-deps: install-deps $(CONFIG_FILE)
 
 ##run: run the api locally
 run: install-deps
-	uvicorn onacut.main:app --reload
+	$(UVICORN) onacut.main:app --reload
 
 ##docker-build: using docker to build the back image
 docker-build:
