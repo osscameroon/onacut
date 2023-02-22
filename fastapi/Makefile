@@ -7,7 +7,7 @@ PYTHON=$(VENVPATH)/bin/python3
 ##venv: setUp the virtualenv (this step is integrated with the instal-xxx target
 venv: $(VENVPATH)/bin/activate
 $(VENVPATH)/bin/activate: requirements.txt
-	test -d $(VENVPATH) || virtualenv -p python3 $(VENVPATH); \
+	test -d $(VENVPATH) || python3 -m venv $(VENVPATH); \
 	. $(VENVPATH)/bin/activate; \
 	pip install -U pip; \
 	pip install -r requirements.txt; \
