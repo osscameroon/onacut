@@ -35,20 +35,17 @@ make lint
 Or Using Docker
 
 ```
-# This will install and run your project on port 5000
+# This will install and run your project on port 8000
 make docker-run
 ```
 
-### To run the backend, we need `python3` and `pip`
+### To run the backend [fastapi]
 
-- Install the dependencies
-```
-pip install -r requirements.txt
-```
+- Install the virtualenv
 
 - Run the backend
 ```
-python3 server.py
+make run
 ```
 
 
@@ -98,21 +95,21 @@ npm run serve
 make docker-run
 
 ```
-### To launch the frontend, we need `Node` installed and `npm/yarn`
+### To launch the frontend, we need `Node` installed and `npm`
 
 - Install the dependencies
 ```
-npm install or yarn
+npm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-npm run start or yarn start
+npm run start 
 ```
 
 ### Compiles and minifies for production
 ```
-npm run build or yarn build
+npm run build
 ```
 
 NB: To launch the `frontend`, you should launch the `backend` first.
